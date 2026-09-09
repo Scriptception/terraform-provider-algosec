@@ -27,8 +27,15 @@ func aceJiraPayloadSize(m aceJiraModel, token types.String) error {
 	addKnownString(payload, "projectKey", m.ProjectKey)
 	addKnownString(payload, "defaultIssueType", m.IssueType)
 	addKnownString(payload, "defaultPriority", m.Priority)
-	if !token.IsNull() && !token.IsUnknown() && !m.UserName.IsUnknown() && !m.UserName.IsNull() {
-		payload["apiToken"] = base64.StdEncoding.EncodeToString([]byte(m.UserName.ValueString() + ":" + token.ValueString()))
+	if !token.IsNull() && !token.IsUnknown() {
+		user := ""
+		if !m.UserName.IsUnknown() && !m.UserName.IsNull() {
+			user = m.UserName.ValueString()
+		}
+		// A known token must contribute to the lower bound even when a
+		// sibling username is unresolved. Any eventual username can only
+		// increase the serialized user:token value.
+		payload["apiToken"] = base64.StdEncoding.EncodeToString([]byte(user + ":" + token.ValueString()))
 	}
 	return client.ValidateACESerializedPayload(payload)
 }

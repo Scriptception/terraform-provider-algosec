@@ -68,3 +68,17 @@ class ReconciledInventoryTests(unittest.TestCase):
             overlay_path.write_text(json.dumps(overlay))
             result = subprocess.run([sys.executable, '-B', 'scripts/coverage_check.py'], cwd=target, capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0, 'A consistently incorrect route and regenerated overlay passed')
+
+    def test_ace_method_binding_rejected(self):
+        import shutil, subprocess, sys, tempfile
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory(prefix='algosec-ace-method-regression-') as directory:
+            target = Path(directory)
+            for folder in ['scripts', 'docs', 'internal']:
+                shutil.copytree(root/folder, target/folder)
+            source_path = target/'internal/client/ace_jira.go'
+            source = source_path.read_text()
+            source_path.write_text(source.replace('c.request(ctx, "DELETE", aceJiraPath', 'c.request(ctx, "POST", aceJiraPath', 1))
+            result = subprocess.run([sys.executable, '-B', 'scripts/coverage_check.py'], cwd=target, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0, 'A changed ACE HTTP method passed coverage validation')

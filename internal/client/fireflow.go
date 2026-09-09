@@ -103,7 +103,7 @@ func (c *FireFlowClient) request(ctx context.Context, method, path string, q url
 	if err != nil {
 		return nil, errors.New("cannot read FireFlow response")
 	}
-	if len(raw) > maxBody || !json.Valid(raw) || trustedJSON(raw) != nil {
+	if len(raw) > maxBody || !json.Valid(raw) || trustedJSON(raw) != nil || jsonFieldCollision(raw) != nil {
 		return nil, ErrContract
 	}
 	var out fireFlowEnvelope

@@ -26,8 +26,12 @@ assert collections.Counter(o['version_scope'] for o in ops) == {'a32.60': 12, 'a
 def validate_request_binding(o):
     source = (root/o['source_file']).read_text()
     if o.get('product') == 'ACE':
-        assert o['source_route_expression'] in re.sub(r'\s+', '', source)
-        assert re.search(r'func \(c \*ACEClient\) ' + re.escape(o['client_function']) + r'\(', source)
+        start = source.index('func (c *ACEClient) ' + o['client_function'] + '(')
+        body = re.sub(r'\s+', '', source[start:].split('\nfunc ', 1)[0])
+        method = json.dumps(o['method'])
+        expression = re.sub(r'\s+', '', o['source_route_expression'])
+        caller = 'c.requestCode' if 'c.requestCode(ctx,' + method + ',' in body else 'c.request'
+        assert caller + '(ctx,' + method + ',' + expression in body, (o['client_function'], method, expression)
         return
     name = o['client_function'].split('/')[0]
     match = re.search(r'func \(\w+ \*\w+\) '+re.escape(name)+r'\(', source)

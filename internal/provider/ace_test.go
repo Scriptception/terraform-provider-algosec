@@ -311,6 +311,17 @@ func TestACEPlanRejectsSerializedPayloadAndUnresolvedBootstrap(t *testing.T) {
 		}
 	})
 
+	t.Run("jira known token is counted with unknown username", func(t *testing.T) {
+		r := &aceJiraResource{}
+		var sr resource.SchemaResponse
+		r.Schema(ctx, resource.SchemaRequest{}, &sr)
+		m := aceJiraModel{ServerURL: types.StringValue("https://jira.example.invalid"), UserName: types.StringUnknown(), ProjectKey: types.StringValue("TEST"), IssueType: types.StringValue("Task"), Priority: types.StringValue("High"), Token: types.StringValue(strings.Repeat("x", 7*1024*1024)), Version: types.StringValue("1")}
+		resp := aceModifyPlan(t, r, sr.Schema, m, m)
+		if !resp.Diagnostics.HasError() || !strings.Contains(resp.Diagnostics.Errors()[0].Detail(), "8 MiB") {
+			t.Fatalf("expected conservative serialized-size diagnostic, got %v", resp.Diagnostics)
+		}
+	})
+
 	t.Run("jira unknown token is rejected for fresh creation", func(t *testing.T) {
 		r := &aceJiraResource{}
 		var sr resource.SchemaResponse

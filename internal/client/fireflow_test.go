@@ -64,7 +64,7 @@ func TestFireFlowMemberDelta(t *testing.T) {
 }
 func TestFireFlowMutationAcknowledgements(t *testing.T) {
 	for _, family := range []string{"member", "permission"} {
-		for _, body := range []string{`{}`, `null`, `{"status":"Failure","messages":[],"data":null}`, `{"status":"PartiallySuccess","messages":[],"data":null}`, `{"status":"Success","messages":[{"code":"USER_DISABLED"}],"data":null}`, `{"status":"Success","data":null}`, `{"status":"Success","messages":[],"data":null}`, `{"status":"Success","messages":[],"data":{}}`} {
+		for _, body := range []string{`{}`, `null`, `{"status":"Failure","messages":[],"data":null}`, `{"status":"Failure","ſtatus":"Success","messages":[],"data":null}`, `{"status":"PartiallySuccess","messages":[],"data":null}`, `{"status":"Success","messages":[{"code":"USER_DISABLED"}],"data":null}`, `{"status":"Success","data":null}`, `{"status":"Success","messages":[],"data":null}`, `{"status":"Success","messages":[],"data":{}}`} {
 			t.Run(family+body, func(t *testing.T) {
 				writes := 0
 				c := fireFlowFixture(t, func(w http.ResponseWriter, r *http.Request) { writes++; fmt.Fprint(w, body) })

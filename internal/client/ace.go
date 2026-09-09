@@ -121,16 +121,16 @@ func (c *ACEClient) requestCode(ctx context.Context, method, path string, q url.
 func aceDecode(raw []byte, out any) error {
 	d := json.NewDecoder(bytes.NewReader(raw))
 	d.DisallowUnknownFields()
-	if !utf8.Valid(raw) || !json.Valid(raw) || trustedJSON(raw) != nil || aceJSONFieldCollision(raw) != nil || d.Decode(out) != nil {
+	if !utf8.Valid(raw) || !json.Valid(raw) || trustedJSON(raw) != nil || jsonFieldCollision(raw) != nil || d.Decode(out) != nil {
 		return ErrContract
 	}
 	return nil
 }
 
 // encoding/json matches struct fields case-insensitively and with Unicode
-// simple-folding. Reject those aliases before decoding so a contradictory
-// acknowledgement cannot be reduced to whichever key appeared last.
-func aceJSONFieldCollision(raw []byte) error {
+// simple-folding. Reject those aliases before decoding so contradictory fields
+// cannot be reduced to whichever key appeared last.
+func jsonFieldCollision(raw []byte) error {
 	dec := json.NewDecoder(bytes.NewReader(raw))
 	var walk func() error
 	walk = func() error {
