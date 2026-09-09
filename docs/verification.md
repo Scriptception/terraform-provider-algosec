@@ -1,4 +1,30 @@
-# 0.1.3 candidate verification
+# Release verification
+
+## v0.1.4: public Registry installation verified
+
+Published [v0.1.4](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
+from commit `172f6e77cb0476a981b3cbb08ace3d2975ecbd3b` after
+[exact-commit CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34309853152)
+passed. Provider code and dependencies are unchanged from v0.1.3.
+
+- Full local `make generate release-check` passed; clean tagged GoReleaser v2.18.1
+  build produced eight platform archives.
+- Signed with shared Vault-held key `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`,
+  matching Registry key `11617`; detached signature independently verified.
+- All 12 GitHub assets were downloaded and SHA256-compared before publication;
+  downloaded Linux archive passed mirror-backed init, validate and schema loading.
+- Registry indexed v0.1.4. Its Linux archive hash matches the downloaded release.
+- Fresh direct-only init, with isolated HOME/data/config and no mirror or plugin
+  cache, verified signature key `AB71E7968334DF52` on Terraform 1.11.0 and 1.16.1.
+  Validate and schema loading passed: 2 resources, 12 data sources. Lockfiles include
+  the matching Registry ZIP checksum. No appliance calls or live acceptance.
+- Evidence under the maintainer's work directory: `registry-0.1.4-verification.json`,
+  `release-download-0.1.4-verification.json`, `signed-release-0.1.4-report.json`,
+  `release-0.1.4-gates.log`, direct-init logs and lockfiles.
+- v0.1.3 tag/assets remain unchanged. Historical onboarding limitations below
+  describe that earlier release, not current v0.1.4 availability.
+
+## Historical 0.1.3 candidate verification
 
 Prepared on 2026-09-09 from clean main
 `c659b5eb24f5ab5aeb662c50c7c1eb5299de509d`. Changes remain uncommitted for maintainer

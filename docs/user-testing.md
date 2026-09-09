@@ -1,15 +1,22 @@
-# Testing the signed 0.1.3 release
+# Testing the signed 0.1.4 release
 
-Status: [published on GitHub](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3),
-not yet available through Terraform Registry and not live-appliance tested. Scope
+Status: [published on GitHub](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4),
+available through [Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4), but not live-appliance tested. Scope
 remains 2 resources and 12 data sources. Start with [read-only quickstart](../examples/quickstart).
 
-## Install a release ZIP without Registry availability
+## Install from Terraform Registry
+
+Use the pinned read-only quickstart and run `terraform init` followed by
+`terraform validate`. Direct installation and signature verification passed on
+Terraform 1.11.0 and 1.16.1 without mirrors or plugin caches. A subsequent plan
+requires your appliance credentials and contacts the appliance.
+
+## Optional offline release ZIP installation
 
 Obtain the maintainer-reviewed ZIP for your OS/architecture and independently
 verify its SHA256 against the supplied checksum file. Verify the detached signature
 against the maintainer's trusted public key. The release signing-key fingerprint is
-`71B43325624199D6C4339C17EE5515CFD4999B22`; the private key is Vault-held. Obtain the
+`BB831B4CD32200DD15EDF4E9AB71E7968334DF52`; the private key is Vault-held. Obtain the
 public `.asc` key from the GitHub release and compare its fingerprint before trusting
 it. Verify `gpg --verify <SHA256SUMS.sig> <SHA256SUMS>` after importing that public key.
 Do not treat an unsigned local candidate as an authenticated release.
@@ -18,7 +25,7 @@ Terraform supports a packed filesystem mirror with the original Registry source
 address. For example, put the Linux amd64 archive at:
 
 ```text
-/absolute/private/mirror/registry.terraform.io/scriptception/algosec/terraform-provider-algosec_0.1.3_linux_amd64.zip
+/absolute/private/mirror/registry.terraform.io/scriptception/algosec/terraform-provider-algosec_0.1.4_linux_amd64.zip
 ```
 
 Create a private `testing.tfrc` with:
@@ -49,7 +56,7 @@ documents this layout. `make package-smoke` packages the local binary and verifi
 real init/validate/schema against an isolated mirror. For a final archive, run:
 
 ```sh
-python3 scripts/package_smoke.py --archive /path/to/terraform-provider-algosec_0.1.3_linux_amd64.zip
+python3 scripts/package_smoke.py --archive /path/to/terraform-provider-algosec_0.1.4_linux_amd64.zip
 ```
 
 This offline check never plans data sources or calls an appliance, and does not
@@ -104,27 +111,16 @@ acceptance has been run.
 - Sessions are not refreshed or logged out automatically. Writes are not replayed,
   redirects are refused, and authentication/HTTP errors are not treated as absence.
 
-## Remaining Registry onboarding
+## Registry publication verified
 
-The signed GitHub release, tag, eight platform archives, manifest, checksums,
-public-key signature verification and downloaded Linux archive smoke are complete.
-Private signing material remains in Vault, not GitHub secrets. The hosted signing
-job is deliberately opt-in; this release used the Vault-backed maintainer process.
+Version 0.1.4 is indexed. The private key remains in Vault; the shared public key
+matches Registry key `11617`. Clean direct init accepted key `AB71E7968334DF52`,
+validate passed, and schema loading found 2 resources and 12 data sources on both
+supported Terraform test versions. No appliance was contacted.
 
-1. Sign into [Terraform Registry](https://registry.terraform.io/) using the GitHub
-   account with access to `Scriptception/terraform-provider-algosec`.
-2. In **User Settings > Signing Keys**, add the release asset
-   [`terraform-provider-signing-key.asc`](https://github.com/Scriptception/terraform-provider-algosec/releases/download/v0.1.3/terraform-provider-signing-key.asc)
-   to the `Scriptception` namespace. Confirm the fingerprint above. This is the
-   public key only; never upload or share the Vault-held private key/passphrase.
-3. Open [Publish > Provider](https://registry.terraform.io/publish/provider),
-   select `Scriptception/terraform-provider-algosec`, and complete onboarding.
-   This creates the Registry GitHub release webhook for future versions.
-4. Confirm indexing, then from a fresh directory with direct installation and no
-   overrides/mirror verify `terraform init` with `= 0.1.3`, then validate. The
-   pre-onboarding direct-init check correctly failed with provider-not-found.
-5. Run authorized appliance tests separately and record actual platform/version/
-   operation results. Synthetic tests are not live compatibility evidence.
+The signed GitHub release contains eight platform archives plus manifest,
+checksums, detached signature and public key. All 12 uploaded assets were downloaded
+and hash-compared before publishing. v0.1.3 and its assets remain unchanged.
 
-[HashiCorp publication requirements](https://developer.hashicorp.com/terraform/registry/providers/publishing)
-are the external checklist reference. No CI job makes live appliance calls.
+Run authorized appliance tests separately; synthetic and install tests do not
+prove live compatibility. See [verification evidence](verification.md).

@@ -3,7 +3,7 @@
 ## 0.1.4
 
 - Release-signing alignment: use the maintainer's shared Terraform GPG key already registered for Scriptception. No provider code, API, schema, or dependency changes.
-- Update example version pins. Keep the v0.1.3 tag and published assets unchanged; Registry ingestion is verified separately after publication.
+- Update example version pins. Keep the v0.1.3 tag and published assets unchanged; Registry ingestion and clean direct signature-verified installation passed on Terraform 1.11.0 and 1.16.1.
 
 ## 0.1.3
 

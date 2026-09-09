@@ -7,8 +7,8 @@ endorsed by AlgoSec.
 
 This initial implementation includes **2 resources and 12 data sources**, typed
 Go clients and schemas, import/drift handling, generated Registry docs, synthetic
-Terraform lifecycle tests, and a [signed v0.1.3 GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3).
-**Terraform Registry onboarding and live-appliance testing remain pending.** Read the
+Terraform lifecycle tests, and a [signed v0.1.4 release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4).
+**[Published in Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4); live-appliance testing remains pending.** Read the
 [API coverage and contract limitations](docs/api-coverage.md) before using it.
 
 ## Implemented scope
@@ -87,8 +87,8 @@ operation. Login and all administration writes are never replayed automatically.
 
 ## Local build and use
 
-This repository has not been published to the Terraform Registry. Build the
-binary and use a CLI development override:
+For normal use, install from Terraform Registry with the configuration above and
+`terraform init`. For local development, build the binary and use a CLI override:
 
 ```sh
 make build
@@ -178,7 +178,7 @@ initial build.
 builds the tested commit with GoReleaser, signs checksums using the key held in
 Vault, verifies the exact archives, then publishes the GitHub release. The private
 key is never stored in this repository or copied to GitHub Secrets. The public
-signing-key fingerprint is `71B43325624199D6C4339C17EE5515CFD4999B22`.
+signing-key fingerprint for v0.1.4 onward is `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`.
 
 The alternative tag-triggered GitHub signing workflow is disabled unless
 `RELEASE_SIGNING_MODE=github-secrets` is explicitly configured together with
@@ -199,12 +199,11 @@ Start with the [read-only quickstart](https://github.com/Scriptception/terraform
 pinned to `= 0.1.4`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
 Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
-Before Registry availability, use the release ZIP filesystem mirror described in
-[user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md);
-real init works with this source without Registry lookup. That guide also covers
-CA trust, category prerequisites, disposable mutations, import/destroy, exact known
-limitations and the remaining Registry onboarding checklist. The signed v0.1.3
-GitHub release contains eight platform archives, manifest, checksums, detached
-signature and public key; uploaded bytes were downloaded and verified. Registry
-publication/direct installation and appliance testing remain pending.
+[v0.1.4 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4).
+Clean direct installation, Registry signature verification, validate and schema
+loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
+`BB831B4CD32200DD15EDF4E9AB71E7968334DF52`. All 12 GitHub release assets were
+downloaded and hash-verified. No live-appliance acceptance has been performed.
+See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
+for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
 Scope is unchanged at 2 resources / 12 data sources.
