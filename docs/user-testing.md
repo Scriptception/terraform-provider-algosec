@@ -1,15 +1,18 @@
-# Testing the signed 0.1.4 release
+# Testing release candidate 0.2.0
 
-Status: [published on GitHub](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4),
-available through [Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4), but not live-appliance tested. Scope
-remains 2 resources and 12 data sources. Start with [read-only quickstart](../examples/quickstart).
+Status: publication and Registry verification are pending. Candidate scope is
+3 resources, 12 data sources and 20 method/route operations. No live-appliance
+acceptance has been performed. Start with the [read-only quickstart](../examples/quickstart).
+Device groups and trusted rules retain separate experimental opt-in flags.
 
 ## Install from Terraform Registry
 
-Use the pinned read-only quickstart and run `terraform init` followed by
-`terraform validate`. Direct installation and signature verification passed on
-Terraform 1.11.0 and 1.16.1 without mirrors or plugin caches. A subsequent plan
-requires your appliance credentials and contacts the appliance.
+After 0.2.0 publication and clean Registry verification, use the pinned read-only
+quickstart and run `terraform init` followed by `terraform validate`. Until then,
+use a reviewed local candidate via the mirror below or the README development
+override. A subsequent plan requires credentials and contacts the appliance.
+Historical v0.1.4 direct installation and signature verification passed on
+Terraform 1.11.0 and 1.16.1; those results do not verify 0.2.0.
 
 ## Optional offline release ZIP installation
 
@@ -25,7 +28,7 @@ Terraform supports a packed filesystem mirror with the original Registry source
 address. For example, put the Linux amd64 archive at:
 
 ```text
-/absolute/private/mirror/registry.terraform.io/scriptception/algosec/terraform-provider-algosec_0.1.4_linux_amd64.zip
+/absolute/private/mirror/registry.terraform.io/scriptception/algosec/terraform-provider-algosec_0.2.0_linux_amd64.zip
 ```
 
 Create a private `testing.tfrc` with:
@@ -56,7 +59,7 @@ documents this layout. `make package-smoke` packages the local binary and verifi
 real init/validate/schema against an isolated mirror. For a final archive, run:
 
 ```sh
-python3 scripts/package_smoke.py --archive /path/to/terraform-provider-algosec_0.1.4_linux_amd64.zip
+python3 scripts/package_smoke.py --archive /path/to/terraform-provider-algosec_0.2.0_linux_amd64.zip
 ```
 
 This offline check never plans data sources or calls an appliance, and does not
@@ -93,10 +96,16 @@ Groups own all nonempty membership; rename replaces, additions precede removals,
 and deletion leaves devices intact. Import uses exact display name. No live group
 acceptance has been run.
 
+Trusted-rule assignments require A33.20 and `experimental_trusted_rules = true`,
+separate from group opt-in, plus write opt-in for mutation. All input changes
+replace. See the [contract and expiry limitations](trusted-rule-contract.md);
+no live trusted-rule acceptance has been run.
+
 ## Exact known limitations
 
 - Public documentation contracts only: A32.60 base and separately gated A33.20 EA
-  groups, with no appliance compatibility certification.
+  groups and separately gated experimental A33.20 trusted-rule assignments,
+  with no appliance compatibility certification.
 - Category casing/wrapper examples conflict. Create requires exact acknowledged
   name/URL/IP membership; rename requires old absence/new presence with unchanged membership; delete uses the
   response-table categories map. Malformed nested delete examples fail closed.
@@ -106,7 +115,7 @@ acceptance has been run.
 - URL/IP changes replace; granular updates are excluded. A33.20 IP deletion exists
   but is not implemented. Trusted traffic may omit zero-hit entries; network-object
   queries use the documented IPv4 default.
-- No general devices, users, roles, settings, trusted-rules or operational workflow
+- No general devices, users, roles, settings or operational workflow
   management. See the [complete version-scoped inventory](api-coverage.md).
 - Sessions are not refreshed or logged out automatically. Writes are not replayed,
   redirects are refused, and authentication/HTTP errors are not treated as absence.
@@ -130,10 +139,14 @@ replacement/drift/recovery behavior. No live group test currently exists.
   verified cleanup. Check the documented delete-envelope conflict and consistency.
 - [ ] Separately authorized A33.20 EA group inventory/lifecycle, exact membership,
   import/replacement and partial-failure recovery; keep EA opt-in explicit.
+- [ ] Separately authorized A33.20 trusted-rule auth/base-path, complete visibility,
+  metadata defaults, expiry/timezone, concurrency and disposable lifecycle recovery.
 - [ ] Record sanitized appliance/version/operation evidence, not credentials, raw
   captures, inventory dumps, plans or state in Git/shared logs.
 
 ## Registry publication verified
+
+The following is historical v0.1.4 evidence. 0.2.0 verification is pending.
 
 Version 0.1.4 is indexed. The private key remains in Vault; the shared public key
 matches Registry key `11617`. Clean direct init accepted key `AB71E7968334DF52`,

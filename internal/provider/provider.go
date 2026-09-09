@@ -18,6 +18,7 @@ import (
 
 type AlgoSecProvider struct{ version string }
 type providerModel struct {
+	ExperimentalTrustedRules types.Bool   `tfsdk:"experimental_trusted_rules"`
 	ExperimentalDeviceGroups types.Bool   `tfsdk:"experimental_device_groups"`
 	URL                      types.String `tfsdk:"url"`
 	Username                 types.String `tfsdk:"username"`
@@ -36,7 +37,8 @@ func (p *AlgoSecProvider) Metadata(_ context.Context, _ provider.MetadataRequest
 	r.Version = p.version
 }
 func (p *AlgoSecProvider) Schema(_ context.Context, _ provider.SchemaRequest, r *provider.SchemaResponse) {
-	r.Schema = schema.Schema{Description: "Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.", Attributes: map[string]schema.Attribute{
+	r.Schema = schema.Schema{Description: "Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.", Attributes: map[string]schema.Attribute{
+		"experimental_trusted_rules": schema.BoolAttribute{Optional: true, Description: "Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups."},
 		"experimental_device_groups": schema.BoolAttribute{Optional: true, Description: "EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility."},
 		"url":                        schema.StringAttribute{Optional: true, Description: "HTTPS appliance origin, without a path. Environment: ALGOSEC_URL.", Validators: []validator.String{originValidator{}}},
 		"username":                   schema.StringAttribute{Optional: true, Description: "ASMS login username. Environment: ALGOSEC_USERNAME. Mutually exclusive with session_id."},
@@ -58,7 +60,7 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 			r.Diagnostics.AddAttributeError(path.Root(n), "Unknown provider configuration", "Provider settings must be known before configuring the client.")
 		}
 	}
-	if m.ExperimentalDeviceGroups.IsUnknown() || m.Insecure.IsUnknown() || m.ReadOnly.IsUnknown() || m.Timeout.IsUnknown() {
+	if m.ExperimentalTrustedRules.IsUnknown() || m.ExperimentalDeviceGroups.IsUnknown() || m.Insecure.IsUnknown() || m.ReadOnly.IsUnknown() || m.Timeout.IsUnknown() {
 		r.Diagnostics.AddError("Unknown provider configuration", "Safety and timeout settings must be known before configuring the client.")
 	}
 	if r.Diagnostics.HasError() {
@@ -82,7 +84,7 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 	if !m.ReadOnly.IsNull() {
 		readOnly = m.ReadOnly.ValueBool()
 	}
-	c, err := client.New(client.Options{URL: str(m.URL, "ALGOSEC_URL"), Username: str(m.Username, "ALGOSEC_USERNAME"), Password: str(m.Password, "ALGOSEC_PASSWORD"), SessionID: str(m.SessionID, "ALGOSEC_SESSION_ID"), Timeout: time.Duration(timeout) * time.Second, Insecure: m.Insecure.ValueBool(), ReadOnly: readOnly, ExperimentalDeviceGroups: m.ExperimentalDeviceGroups.ValueBool()})
+	c, err := client.New(client.Options{URL: str(m.URL, "ALGOSEC_URL"), Username: str(m.Username, "ALGOSEC_USERNAME"), Password: str(m.Password, "ALGOSEC_PASSWORD"), SessionID: str(m.SessionID, "ALGOSEC_SESSION_ID"), Timeout: time.Duration(timeout) * time.Second, Insecure: m.Insecure.ValueBool(), ReadOnly: readOnly, ExperimentalTrustedRules: m.ExperimentalTrustedRules.ValueBool(), ExperimentalDeviceGroups: m.ExperimentalDeviceGroups.ValueBool()})
 	if err != nil {
 		r.Diagnostics.AddError("Invalid AlgoSec configuration", err.Error())
 		return
@@ -91,7 +93,7 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 	r.DataSourceData = c
 }
 func (p *AlgoSecProvider) Resources(context.Context) []func() resource.Resource {
-	return []func() resource.Resource{NewURLCategoryResource, NewDeviceGroupResource}
+	return []func() resource.Resource{NewURLCategoryResource, NewDeviceGroupResource, NewTrustedRuleResource}
 }
 func (p *AlgoSecProvider) DataSources(context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{

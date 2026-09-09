@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Reject known expired trusted-rule creation/replacement dates during planning, before deletion; preserve unchanged expired assignments and destroy.
+- Add experimental A33.20 `algosec_trusted_rule` single-assignment management with explicit import, metadata replacement, positive per-rule acknowledgements, strict readback and recoverable state. Separate opt-in from EA device groups; no live appliance acceptance.
+- Add three typed operations, synthetic client/Framework/protocol tests and version-scoped coverage mappings (3 resources, 12 data sources, 20 operations). Published v0.1.4 remains unchanged.
+
 ## 0.1.4
 
 - Release-signing alignment: use the maintainer's shared Terraform GPG key already registered for Scriptception. No provider code, API, schema, or dependency changes.

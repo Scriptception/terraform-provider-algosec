@@ -2,13 +2,14 @@
 
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
 Firewall Analyzer / ASMS A32.60**, with explicitly experimental A33.20 device
-groups, built from public API documentation. It is not affiliated with or
+groups and trusted-rule assignments, built from public API documentation. It is not affiliated with or
 endorsed by AlgoSec.
 
-This initial implementation includes **2 resources and 12 data sources**, typed
-Go clients and schemas, import/drift handling, generated Registry docs, synthetic
-Terraform lifecycle tests, and a [signed v0.1.4 release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4).
-**[Published in Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4); live-appliance testing remains pending.** Read the
+Release candidate `0.2.0` includes **3 resources and 12 data sources**, typed
+Go clients and schemas, **20 method/route operations**, import/drift handling, generated Registry docs, synthetic
+Terraform lifecycle tests. The published baseline remains 2 resources and 12 data
+sources in the [signed v0.1.4 release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4).
+**0.2.0 publication and Registry verification are pending; live-appliance testing remains pending.** Historical [v0.1.4 Registry evidence](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4) does not verify this candidate. Read the
 [API coverage and contract limitations](docs/api-coverage.md) before using it.
 
 Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/maintainer-handoff.md).
@@ -19,6 +20,7 @@ Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/m
 |---|---|
 | `algosec_url_category` | One Panorama URL-category override and its complete URL/IP map. Rename in place; URL/IP changes replace; destroy deletes. |
 | `algosec_device_group` | EXPERIMENTAL A33.20 EA: authoritative nonempty membership; add before remove with confirmed readback and recoverable partial state; rename replaces. |
+| `algosec_trusted_rule` | Release candidate 0.2.0, experimental A33.20: one trust assignment; explicit import, all input changes replace, exact per-rule acknowledgements and recoverable state. Requires `experimental_trusted_rules=true`. See [contract and limits](docs/trusted-rule-contract.md). |
 
 | Data sources | Purpose |
 |---|---|
@@ -66,7 +68,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.1.4"
+      version = "= 0.2.0"
     }
   }
 }
@@ -89,8 +91,9 @@ operation. Login and all administration writes are never replayed automatically.
 
 ## Local build and use
 
-For normal use, install from Terraform Registry with the configuration above and
-`terraform init`. For local development, build the binary and use a CLI override:
+After 0.2.0 publication and Registry verification, install with the configuration
+above and `terraform init`. Until then, use a reviewed local candidate via the
+[ZIP mirror instructions](docs/user-testing.md) or build with a CLI override:
 
 ```sh
 make build
@@ -196,12 +199,16 @@ MPL-2.0. AlgoSec documentation is linked as evidence, not bundled as upstream HT
 
 Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.
 
-## First user test: 0.1.4
+## First user test: release candidate 0.2.0
 
 Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
-pinned to `= 0.1.4`, with environment-based authentication and TLS verification.
+pinned to `= 0.2.0`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
-Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
+0.2.0 publication and Registry verification are pending. Use the local candidate
+installation instructions in user testing until publication is verified. Then run
+`terraform init`, `terraform validate`, and an authorized `terraform plan`.
+
+Historical v0.1.4 evidence:
 [v0.1.4 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4).
 Clean direct installation, Registry signature verification, validate and schema
 loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
@@ -209,4 +216,5 @@ loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
 downloaded and hash-verified. No live-appliance acceptance has been performed.
 See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
 for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
-Scope is unchanged at 2 resources / 12 data sources.
+Published v0.1.4 has 2 resources / 12 data sources. The trusted-rule addition
+is part of the 0.2.0 release candidate.

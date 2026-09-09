@@ -1,14 +1,17 @@
 ---
 page_title: "algosec Provider"
 description: |-
-  Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+  Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
 ---
 
 # algosec Provider
 
-Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
 
-The final surface is **2 resources and 12 data sources**. The base targets ASMS
+The release candidate `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
+`algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
+`experimental_trusted_rules=true` gate; all input changes replace. See the
+[contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/trusted-rule-contract.md). The base targets ASMS
 A32.60. Device-group resource and data sources separately target **A33.20 Early
 Availability** and require `experimental_device_groups=true` (default false).
 AlgoSec does not recommend these APIs for production:
@@ -24,14 +27,14 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.1.4"
+      version = "= 0.2.0"
     }
   }
 }
 
 provider "algosec" {
   # Set ALGOSEC_URL and ALGOSEC_SESSION_ID, or ALGOSEC_USERNAME/ALGOSEC_PASSWORD.
-  # This initial provider is not published. See docs/user-testing.md for ZIP mirror installation.
+  # Release candidate 0.2.0: publication pending. See docs/user-testing.md for ZIP mirror installation.
   # A33.20 EA groups only: experimental_device_groups = true.
   # AlgoSec does not recommend these group APIs for production.
   read_only = true
@@ -45,6 +48,7 @@ provider "algosec" {
 ### Optional
 
 - `experimental_device_groups` (Boolean) EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility.
+- `experimental_trusted_rules` (Boolean) Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups.
 - `insecure` (Boolean) Disable TLS verification explicitly. Defaults to false. Install the appliance CA in the system trust store instead when possible.
 - `password` (String, Sensitive) ASMS login password. Prefer ALGOSEC_PASSWORD to avoid configuration/plan persistence.
 - `read_only` (Boolean) Refuse all administration writes. Defaults to true; set false to manage resources. Authentication may establish an API session.
@@ -53,12 +57,16 @@ provider "algosec" {
 - `url` (String) HTTPS appliance origin, without a path. Environment: ALGOSEC_URL.
 - `username` (String) ASMS login username. Environment: ALGOSEC_USERNAME. Mutually exclusive with session_id.
 
-## First user test: 0.1.4
+## First user test: release candidate 0.2.0
 
 Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
-pinned to `= 0.1.4`, with environment-based authentication and TLS verification.
+pinned to `= 0.2.0`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
-Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
+0.2.0 publication and Registry verification are pending. Use the local candidate
+installation instructions in user testing until publication is verified. Then run
+`terraform init`, `terraform validate`, and an authorized `terraform plan`.
+
+Historical v0.1.4 evidence:
 [v0.1.4 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4).
 Clean direct installation, Registry signature verification, validate and schema
 loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
@@ -66,4 +74,5 @@ loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
 downloaded and hash-verified. No live-appliance acceptance has been performed.
 See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
 for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
-Scope is unchanged at 2 resources / 12 data sources.
+The published v0.1.4 scope is 2 resources / 12 data sources; the trusted-rule
+addition is part of the 0.2.0 release candidate.

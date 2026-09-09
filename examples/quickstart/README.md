@@ -1,10 +1,10 @@
-# Read-only first user test (0.1.4)
+# Read-only first user test (release candidate 0.2.0)
 
 This configuration queries devices and risk-profile names. It does not require
-Panorama category preparation or enable experimental groups. Version 0.1.4 is
-[published in Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
-and direct installation/signature verification has passed. Live-appliance
-compatibility remains unverified; see the root README for release evidence.
+Panorama category preparation or enable experimental groups or trusted rules.
+Version 0.2.0 publication and Registry verification are pending. Live-appliance
+compatibility remains unverified. Historical v0.1.4 installation evidence does
+not verify this candidate; see the root README.
 
 Use Terraform 1.11+ and an administrator with complete inventory visibility.
 Inject `ALGOSEC_URL` (HTTPS origin) and either `ALGOSEC_SESSION_ID` or both
@@ -18,8 +18,10 @@ Unix platforms, `SSL_CERT_FILE` / `SSL_CERT_DIR` can select your CA bundle/direc
 Keep hostname verification valid and `insecure = false`; do not bypass TLS to make
 the test pass. The provider has no custom CA-file attribute.
 
-Copy this directory into a private working directory and use normal Registry
-installation (or the optional [filesystem mirror](../../docs/user-testing.md)).
+Copy this directory into a private working directory. Until 0.2.0 publication
+and Registry verification, use a reviewed local candidate through the
+[filesystem mirror](../../docs/user-testing.md). Normal Registry installation
+is available only after those release steps complete.
 With authorization to query your appliance, run:
 
 ```sh

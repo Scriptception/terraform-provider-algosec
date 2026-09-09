@@ -1,6 +1,14 @@
 # Release verification
 
-## v0.1.4: public Registry installation verified
+## Release candidate 0.2.0: publication pending
+
+The candidate contains 3 resources, 12 data sources and 20 method/route operations.
+Final release gates, signing, publication and Registry installation verification
+remain pending. [Historical implementation verification](public-expansion-verification.md)
+records synthetic tests of the preceding development candidate, not live acceptance.
+No live appliance acceptance has been performed.
+
+## Historical v0.1.4: public Registry installation verified
 
 Published [v0.1.4](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
 from commit `172f6e77cb0476a981b3cbb08ace3d2975ecbd3b` after
@@ -22,7 +30,7 @@ passed. Provider code and dependencies are unchanged from v0.1.3.
   `release-download-0.1.4-verification.json`, `signed-release-0.1.4-report.json`,
   `release-0.1.4-gates.log`, direct-init logs and lockfiles.
 - v0.1.3 tag/assets remain unchanged. Historical onboarding limitations below
-  describe that earlier release, not current v0.1.4 availability.
+  describe that earlier release, not the verified historical v0.1.4 availability or pending 0.2.0 release.
 
 ## Historical 0.1.3 candidate verification
 

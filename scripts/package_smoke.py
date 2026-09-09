@@ -41,7 +41,12 @@ with tempfile.TemporaryDirectory(prefix='package-smoke-', dir=root / '.local') a
     config = work / 'config'
     config.mkdir()
     # Real quickstart validates provider version, output attributes and read-only config.
-    shutil.copyfile(root / 'examples/quickstart/main.tf', config / 'main.tf')
+    quickstart = (root / 'examples/quickstart/main.tf').read_text()
+    # Install this local candidate while preserving the published quickstart pin.
+    import re
+    quickstart, replacements = re.subn(r'version\s*=\s*"= [^"]+"', 'version = "= ' + version + '"', quickstart)
+    assert replacements == 1
+    (config / 'main.tf').write_text(quickstart)
     env = {k: v for k, v in os.environ.items() if not k.startswith(('ALGOSEC_', 'TF_', 'TFE_'))}
     env.update(TF_CLI_CONFIG_FILE=str(cli), TF_IN_AUTOMATION='1', CHECKPOINT_DISABLE='1')
     terraform = os.environ.get('TERRAFORM', 'terraform')
@@ -52,7 +57,7 @@ with tempfile.TemporaryDirectory(prefix='package-smoke-', dir=root / '.local') a
     run('validate', '-no-color')
     schema = json.loads(run('providers', 'schema', '-json', capture=True).stdout)
     p = schema['provider_schemas']['registry.terraform.io/scriptception/algosec']
-    assert len(p['resource_schemas']) == 2 and len(p['data_source_schemas']) == 12
+    assert len(p['resource_schemas']) == 3 and len(p['data_source_schemas']) == 12
     lock = (config / '.terraform.lock.hcl').read_text()
     assert f'"{version}"' in lock
     print(f'ZIP mirror init/validate/schema passed: {archive_name}; no live calls or signature verification.')
