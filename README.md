@@ -1,5 +1,10 @@
 # Terraform Provider for AlgoSec
 
+**v0.3.0 is published:** [Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.3.0)
+and [signed release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.3.0).
+Direct signed installation passed on Terraform 1.11.0 and 1.16.1.
+See [release verification](docs/release-0.3.0-verification.md) for migration scope and limits.
+
 > Version `0.3.0` adds separately gated AppViz role,
 > A33.30 tag, A33.20 URL/IP membership, A33.30 FireFlow direct bindings and
 > rolling ACE configuration: 12 resources, 12 data sources and 53 selected

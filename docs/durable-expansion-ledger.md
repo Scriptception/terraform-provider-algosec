@@ -1,5 +1,10 @@
 # Durable expansion ledger and continuation
 
+Publication update: the implemented subset is released as v0.3.0; see
+[verified release evidence](release-0.3.0-verification.md). Unreleased descriptions
+below preserve earlier development checkpoints. Unassessed families remain future
+work and are not claimed as implemented or evidence-blocked by publication.
+
 Active branch: `feat/durable-api-expansion`, based on clean
 `c0ffbdb5bbda0b762acf37ebaf0cae66c481c924`. Sole implementation writer.
 Development candidate: **0.3.0-dev**, unpublished. Published 0.2.0 pins and release

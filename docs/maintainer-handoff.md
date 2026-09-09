@@ -1,5 +1,13 @@
 # Maintainer handoff
 
+## Current published release: v0.3.0
+
+GitHub publication and direct Registry installation are verified on Terraform
+1.11.0 and 1.16.1. See [release evidence](release-0.3.0-verification.md) for the
+immutable tag/commit, exact-source CI, asset verification, migration scope and
+remaining live-acceptance limits. The preparation and v0.2.0 sections below are
+historical checkpoints. Do not replay their release scripts or move existing tags.
+
 ## Authorized v0.3.0 release preparation
 
 The user authorized publication of the implemented 12-resource, 12-data-source,
@@ -29,7 +37,7 @@ operations. No publication or live acceptance is authorized by this handoff.
 3. Choose the next task explicitly. A new session is not authorization to publish
    a release, change signing credentials, or contact an appliance.
 
-## Current published baseline: v0.2.0
+## Historical published baseline: v0.2.0
 
 Historical release `VERSION` and retained installation pins select published `0.2.0`;
 the current repository `VERSION` is the unpublished `0.3.0-dev` candidate:
