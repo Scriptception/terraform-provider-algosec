@@ -1,0 +1,23 @@
+---
+page_title: "{{.ProviderName}} Provider"
+description: |-
+  {{.Description | plainmarkdown}}
+---
+
+# {{.ProviderName}} Provider
+
+{{.Description}}
+
+The final surface is **2 resources and 12 data sources**. The base targets ASMS
+A32.60. Device-group resource and data sources separately target **A33.20 Early
+Availability** and require `experimental_device_groups=true` (default false).
+AlgoSec does not recommend these APIs for production:
+[vendor warning](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/managing-devices-and-groups.htm).
+No live appliance acceptance is claimed. File-device management is excluded
+because the public API does not establish existingFile readback.
+
+## Example Usage
+
+{{tffile .ExampleFile}}
+
+{{.SchemaMarkdown | trimspace}}

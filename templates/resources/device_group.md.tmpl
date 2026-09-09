@@ -1,0 +1,38 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: "Experimental"
+description: |-
+  {{.Description | plainmarkdown}}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{.Description}}
+
+## Experimental contract and limitations
+
+Only ASMS **A33.20 Early Availability** REST contracts are targeted. AlgoSec explicitly does not recommend production use of these group APIs because full validation and extensive testing are outstanding: [vendor warning](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/managing-devices-and-groups.htm).
+
+The provider option `experimental_device_groups` defaults to false; `read_only` remains true by default. Enable both experimental access and writes explicitly to manage groups. Use an administrator with complete inventory visibility.
+
+Membership is authoritative. Acknowledged creates and existing-owned membership writes are followed by complete inventory read-back and exact membership verification. Updates add new members before removing old ones, never delete/recreate, and retain the latest valid observed state on partial failure. Refresh and plan again after errors. The APIs provide no documented conditional-write token: preflight checks detect observed concurrency, but cannot eliminate a race between a check and a write. No mutation is retried automatically. Delayed visibility produces an error, not polling or a success assumption.
+
+Create refuses an existing display name; import instead. Identity is persisted before the create request so an uncertain outcome can be refreshed. Rename replaces the group. Delete removes only the exact group and its associations, leaving devices intact. Endpoint errors, malformed inventories, duplicate identities, and partial object records never prove absence. An apparently valid but server-filtered inventory cannot be detected; complete administrator visibility is required.
+
+REST uses case-sensitive display names; `internal_name` is separately computed. Names are not trimmed or case-folded. The SOAP-only alphanumeric restriction is not imposed. Unsafe URL dot segments/control characters are rejected for group identifiers. Membership inputs use device display names, not internal names.
+
+Official contracts: [inventory](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_list_dev_get.htm), [single-group read (not used)](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_contents_get.htm), [create](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_create_post.htm), [add](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-add-device-post.htm), [remove](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-devices-delete.htm), [delete](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-existing-delete.htm). Success acknowledgments are conservatively checked against the documented examples, then verified through inventory.
+
+Verification is synthetic HTTPS and local Terraform protocol testing only, **not live appliance acceptance**. Appliance compatibility, visibility, response wording, and consistency remain unverified.
+
+## Example Usage
+
+{{tffile .ExampleFile}}
+
+{{.SchemaMarkdown | trimspace}}
+
+## Import
+
+{{codefile "shell" .ImportFile}}
+
+Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.

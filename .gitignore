@@ -1,0 +1,13 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.lock.hcl
+.env
+.env.*
+dist/
+bin/
+.local/
+coverage.out
+terraform-provider-algosec
+crash.log

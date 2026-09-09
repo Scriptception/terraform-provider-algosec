@@ -1,0 +1,1172 @@
+[
+  {
+    "page": "advancedsearch_full.htm",
+    "title": "Rules Advanced Search - full",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/rule/advancedsearch/full/{treeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/advancedsearch_full.htm"
+  },
+  {
+    "page": "afa-ret-parent-obj.htm",
+    "title": "Retrieve parent device",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/afa-ret-parent-obj.htm"
+  },
+  {
+    "page": "afa-search-rule-fields.htm",
+    "title": "AFA search rule fields",
+    "methods": [],
+    "documented_paths": [],
+    "status": "Reference",
+    "reason": "Shared response types/search field definitions, not a standalone operation.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/afa-search-rule-fields.htm"
+  },
+  {
+    "page": "api-import-vuln.htm",
+    "title": "Import vulnerability data",
+    "methods": [
+      "POST",
+      "POST",
+      "DELETE"
+    ],
+    "documented_paths": [],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/api-import-vuln.htm"
+  },
+  {
+    "page": "assigning-zone-types-to-interfaces.htm",
+    "title": "Assign zone types to interfaces",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/interfaces"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded mutation: resource path says /api/v1/interfaces but example uses /fa/server/interfaces/update; display-name identity and clear/reset lifecycle unresolved.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/assigning-zone-types-to-interfaces.htm"
+  },
+  {
+    "page": "awskeys-bulkchange.htm",
+    "title": "Bulk update keys of AWS cloud accounts",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/firewallData/bulkUpdateCloudAccounts"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/awskeys-bulkchange.htm"
+  },
+  {
+    "page": "calculate-risk-check_post .htm",
+    "title": "Run a Risk Check",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/riskcheck/calculate"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/calculate-risk-check_post .htm"
+  },
+  {
+    "page": "coveredrules_exportcsv.htm",
+    "title": "Export covered rules to a CSV",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/covered/csv/{reportId}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/coveredrules_exportcsv.htm"
+  },
+  {
+    "page": "data-types_1.htm",
+    "title": "EntitiesResponse type",
+    "methods": [],
+    "documented_paths": [],
+    "status": "Reference",
+    "reason": "Shared response types/search field definitions, not a standalone operation.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/data-types_1.htm"
+  },
+  {
+    "page": "device-add_edit.htm",
+    "title": "Add/Edit a device",
+    "methods": [
+      "POST",
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/devices/"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded: no documented existingFile readback for reliable file-device drift/import; other brands need separate typed contracts.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device-add_edit.htm"
+  },
+  {
+    "page": "device-delete.htm",
+    "title": "Delete a device",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/api/v1/devices/{device-name}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded: no managed device lifecycle is shipped; device deletion is not exposed.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device-delete.htm"
+  },
+  {
+    "page": "device-details.htm",
+    "title": "Get details for a specified device",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/devices/{deviceName}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: no example response shape; exact lookup uses documented full device inventory instead.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device-details.htm"
+  },
+  {
+    "page": "device-examples-by-brand.htm",
+    "title": "View device parameter templates",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/devices/examples/<brandName>"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Onboarding utility. Templates may contain secret slots and do not represent managed state.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device-examples-by-brand.htm"
+  },
+  {
+    "page": "device-exportxls.htm",
+    "title": "Export list of device changes to XLS file",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/device/exportChanges/xls"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device-exportxls.htm"
+  },
+  {
+    "page": "device_getparents.htm",
+    "title": "Get a list of parents for specified list of child devices",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/device/getParents"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/device_getparents.htm"
+  },
+  {
+    "page": "devices-list.htm",
+    "title": "Get a list of devices",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/devices/"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_devices and algosec_device read-only administrator inventory. Password fields discarded.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/devices-list.htm"
+  },
+  {
+    "page": "devicezones_data.htm",
+    "title": "Get zones data from a device",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/deviceZones"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_device_zones; rejects additionalInformation partial failures.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/devicezones_data.htm"
+  },
+  {
+    "page": "enable-processes.htm",
+    "title": "Enable processes after relocation",
+    "methods": [
+      "PUT",
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/device/relocation/enableDevices",
+      "/api/v1/device/relocation/enableDevicesOnRemoteAgent"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/enable-processes.htm"
+  },
+  {
+    "page": "getting_risk_profiles_list.htm",
+    "title": "Retrieve a risk profile list",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/security_zones/get_profiles_list"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_risk_profile_files; accepts documented bare array or successful status/data envelope.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/getting_risk_profiles_list.htm"
+  },
+  {
+    "page": "getting_security_zones.htm",
+    "title": "Retrieve security zones",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/security_zones/<risk_profile_excel_filename>/get_zones"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_security_zones; accepts documented bare array or successful status/data envelope.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/getting_security_zones.htm"
+  },
+  {
+    "page": "identifying-missing-routers.htm",
+    "title": "Identify missing routers",
+    "methods": [
+      "POST",
+      "GET",
+      "GET",
+      "POST",
+      "GET"
+    ],
+    "documented_paths": [
+      "/ms-mapDiagnostics/v1/api/mapCompleteness/execute*/",
+      "ms-mapDiagnostics/v1/api/mapCompleteness/missingStubRouters",
+      "ms-mapDiagnostics/v1/api/mapCompleteness/lastExecution*/",
+      "ms-mapDiagnostics/v1/api/mapCompleteness/abort*/",
+      "ms-mapDiagnostics/v1/api/mapCompleteness/defaultValues*/"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/identifying-missing-routers.htm"
+  },
+  {
+    "page": "import-risk-csv.htm",
+    "title": "Import risk profile from spreadsheet",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/riskcheck/import/{profile}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred durable profile import: file workflow lacks documented matching delete lifecycle; no profile resource is claimed.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/import-risk-csv.htm"
+  },
+  {
+    "page": "logging-in.htm",
+    "title": "Log in to ASMS",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/fa/server/connection/login"
+    ],
+    "status": "Implemented",
+    "reason": "Authentication helper; JSON username/password, boolean status and SessionID; PHPSESSID cookie only.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/logging-in.htm"
+  },
+  {
+    "page": "logging-out.htm",
+    "title": "Log out of ASMS",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/fa/server/connection/logout"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Not called: provider does not own externally supplied sessions; Framework has no reliable per-instance shutdown callback. Login sessions expire per appliance policy.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/logging-out.htm"
+  },
+  {
+    "page": "management-device-retrieve.htm",
+    "title": "Get device info about  managed devices",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "Brand"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/management-device-retrieve.htm"
+  },
+  {
+    "page": "managing-issues.htm",
+    "title": "Manage AFA notifications",
+    "methods": [
+      "POST",
+      "POST",
+      "POST"
+    ],
+    "documented_paths": [
+      "/ms-watchdog/v1/api/issues-center/issues",
+      "/ms-watchdog/v1/api/issues-center/issues/acknowledge",
+      "/ms-watchdog/v1/api/issues-center/issues/activate"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/managing-issues.htm"
+  },
+  {
+    "page": "merging-routers.htm",
+    "title": "Merge routers",
+    "methods": [],
+    "documented_paths": [],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/merging-routers.htm"
+  },
+  {
+    "page": "nat-rules_get.htm",
+    "title": "Get  NAT\u00a0rules information",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/rule/natRulesInfo/\u00e2\u0080\u008b"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/nat-rules_get.htm"
+  },
+  {
+    "page": "network-object_bydevice_get.htm",
+    "title": "Get network objects by Device",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/{deviceTreeName}/objects"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/network-object_bydevice_get.htm"
+  },
+  {
+    "page": "networkobject_search_get.htm",
+    "title": "Get a list of network objects",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/findByOriginalNameContaining"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_network_objects; typed allowlist, bounded complete pagination, no raw JSON state.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/networkobject_search_get.htm"
+  },
+  {
+    "page": "policyrest-tightenpermissiverules-get.htm",
+    "title": "Get a list of permissive rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/tightenPermissive/{entityTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest-tightenpermissiverules-get.htm"
+  },
+  {
+    "page": "policyrest_consolidatedrules.htm",
+    "title": "Get a list of consolidated rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/consolidated/{deviceTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_consolidatedrules.htm"
+  },
+  {
+    "page": "policyrest_coveredrules.htm",
+    "title": "Get a list of covered rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/covered/{entityTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_coveredrules.htm"
+  },
+  {
+    "page": "policyrest_disabledrules.htm",
+    "title": "Get a list of disabled rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/rule/policy-optimization/{deviceTreeName}/disabledrules"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_disabledrules.htm"
+  },
+  {
+    "page": "policyrest_redundantspecialcaserules.htm",
+    "title": "Get a list of redundant special case rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/specialCase/{deviceTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_redundantspecialcaserules.htm"
+  },
+  {
+    "page": "policyrest_ruleswithoutlogging.htm",
+    "title": "Get a list of rules without logging",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rule/policy-optimization/{deviceTreeName}/withoutlogging"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_ruleswithoutlogging.htm"
+  },
+  {
+    "page": "policyrest_unnattachedrules.htm",
+    "title": "Get a list of unattached objects",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/objects/unattached/{entityTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_unnattachedrules.htm"
+  },
+  {
+    "page": "policyrest_unusedrules.htm",
+    "title": "Get a list of unused rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/unused/{entityTreeName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_unusedrules.htm"
+  },
+  {
+    "page": "policyrest_withoutcomment.htm",
+    "title": "Get a list of rules with empty comments",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/rule/policy-optimization/{deviceTreeName}/withoutcomment"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/policyrest_withoutcomment.htm"
+  },
+  {
+    "page": "post_byoriginalorcanonizednamesanddevicesmapping.htm",
+    "title": "Retrieve network objects in device",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/findByOriginalOrCanonizedNamesAndDevicesMapping"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/post_byoriginalorcanonizednamesanddevicesmapping.htm"
+  },
+  {
+    "page": "post_containingfqdn.htm",
+    "title": "Retrieve Network Objects Containing All FQDNs",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/containingAllFqdns"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/post_containingfqdn.htm"
+  },
+  {
+    "page": "post_findbyoriginalorcanonizedname.htm",
+    "title": "Retrieve matching network objects by original or canonized name",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/findByOriginalOrCanonizedName"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/post_findbyoriginalorcanonizedname.htm"
+  },
+  {
+    "page": "post_searchfqdn.htm",
+    "title": "Retrieve a mapping between FQDNs and network objects",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/networkObject/search/byFqdns"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/post_searchfqdn.htm"
+  },
+  {
+    "page": "relocate-devices-between-nodes.htm",
+    "title": "Relocate devices between nodes",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/device/relocation"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/relocate-devices-between-nodes.htm"
+  },
+  {
+    "page": "relocate-devices-cancel.htm",
+    "title": "Cancel device relocation",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/api/v1/device/relocation"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/relocate-devices-cancel.htm"
+  },
+  {
+    "page": "relocate-devices-check-progress.htm",
+    "title": "Check device relocation progress",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/device/relocation"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/relocate-devices-check-progress.htm"
+  },
+  {
+    "page": "reports_getall.htm",
+    "title": "Get all reports",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/report/findAllReports"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/reports_getall.htm"
+  },
+  {
+    "page": "reports_getlastcompleted.htm",
+    "title": "Retrieve last completed report of specified devices",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/report/findLastCompletedReport"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/reports_getlastcompleted.htm"
+  },
+  {
+    "page": "retrieving-an-analysis-status.htm",
+    "title": "Retrieve an analysis status",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/analysis/status"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-an-analysis-status.htm"
+  },
+  {
+    "page": "retrieving-interfaces.htm",
+    "title": "Retrieve interfaces",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/interfaces"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-interfaces.htm"
+  },
+  {
+    "page": "retrieving-network-objects.htm",
+    "title": "Retrieve network objects and IPs",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/fa/server/network_objects/read"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-network-objects.htm"
+  },
+  {
+    "page": "retrieving-risky-rules.htm",
+    "title": "Get risky rules",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/risks/riskyRules"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-risky-rules.htm"
+  },
+  {
+    "page": "retrieving-rules.htm",
+    "title": "Retrieves all the rules in a device's or group's policy",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rules"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-rules.htm"
+  },
+  {
+    "page": "retrieving-service-objects.htm",
+    "title": "Retrieve service objects",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/network_services"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving-service-objects.htm"
+  },
+  {
+    "page": "retrieving_a_base_compliance_report.htm",
+    "title": "Retrieve a baseline compliance report",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving_a_base_compliance_report.htm"
+  },
+  {
+    "page": "retrieving_roles.htm",
+    "title": "Retrieve role data",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/users/Roles"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: collection envelope, field spelling and session-in-query authentication are incomplete/inconsistent; no REST mutation.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving_roles.htm"
+  },
+  {
+    "page": "retrieving_users.htm",
+    "title": "Retrieve user data",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/users"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: single-object example for plural user inventory leaves collection envelope unspecified; REST mutations absent.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/retrieving_users.htm"
+  },
+  {
+    "page": "riskprofile-get_downloadriskprofile.htm",
+    "title": "Download Risk Profile File",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/risks/profiles/{profileName}/download"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Operational file download; no durable Terraform object.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/riskprofile-get_downloadriskprofile.htm"
+  },
+  {
+    "page": "riskprofile-get_riskprofiledata.htm",
+    "title": "Get Custom Risk Profile Data",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/risks/profiles/{profileName}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred typed detail expansion: nested rule variants, string/boolean mismatch and optional per-rule structures; profile names are implemented.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/riskprofile-get_riskprofiledata.htm"
+  },
+  {
+    "page": "riskprofile_get_list.htm",
+    "title": "Get a list of user defined risk profiles",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/risks/profiles"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_risk_profiles; string array.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/riskprofile_get_list.htm"
+  },
+  {
+    "page": "routing-info_get.htm",
+    "title": "Get  devices routing information",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/interfaces/routingInformation/\u00e2\u0080\u008b"
+    ],
+    "status": "Deferred read-only",
+    "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/routing-info_get.htm"
+  },
+  {
+    "page": "rule_editdocumentation.htm",
+    "title": "Add to or edit a rule's documentation",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/rule/createDocumentation"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: rule-id vs rule_id spelling conflicts and clearing/deletion behavior is not explicitly defined.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/rule_editdocumentation.htm"
+  },
+  {
+    "page": "rule_getdocumentationdata.htm",
+    "title": "Get a rule's documentation data",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/rule/ruleDocumentation"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: rule-id/page vs ruleId/pageNumber conflicts; documentation mutation lacks clear/delete semantics.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/rule_getdocumentationdata.htm"
+  },
+  {
+    "page": "rules-hit-count.htm",
+    "title": "Rules hit count",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/rules/hit-count"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/rules-hit-count.htm"
+  },
+  {
+    "page": "running-the-query-troubleshooting.htm",
+    "title": "Running the Query Troubleshooting Tool",
+    "methods": [
+      "POST",
+      "POST"
+    ],
+    "documented_paths": [
+      "/ms-watchdog/v1/api/issues-center/issues/acknowledge"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/running-the-query-troubleshooting.htm"
+  },
+  {
+    "page": "starting-an-analysis.htm",
+    "title": "Start an analysis",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/analysis/start"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/starting-an-analysis.htm"
+  },
+  {
+    "page": "traffic-simulation-query.htm",
+    "title": "Traffic Simulation Query",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/query/"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/traffic-simulation-query.htm"
+  },
+  {
+    "page": "trusted-traffic_addnew.htm",
+    "title": "Add a new trusted traffic request",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/trustedTraffic"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded mutation: no create response identifier contract, service/request type table conflicts with examples, and read may omit zero-hit rows.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_addnew.htm"
+  },
+  {
+    "page": "trusted-traffic_deletedata.htm",
+    "title": "Delete trusted traffic data",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/api/v1/ trustedTraffic/{trustedTrafficId}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded mutation: standalone deletion of trusted traffic is not a desired-state resource lifecycle.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_deletedata.htm"
+  },
+  {
+    "page": "trusted-traffic_editdata.htm",
+    "title": "Edit trusted traffic data",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/trustedTraffic/{trustedTrafficId}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded mutation: no reliable complete drift source; same object/request typing conflicts as create.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_editdata.htm"
+  },
+  {
+    "page": "trusted-traffic_exportdata.htm",
+    "title": "Export trusted traffic to a CSV or JSON file",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1//trustedTraffic/firewalls/{firewallName}"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_exportdata.htm"
+  },
+  {
+    "page": "trusted-traffic_getdata.htm",
+    "title": "Get trusted traffic data",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/trustedTraffic/firewalls/{firewallName}"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_trusted_traffic data source only; paginated advertised inventory. Zero-hit omission makes it unsuitable as a resource drift source.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_getdata.htm"
+  },
+  {
+    "page": "trusted-traffic_importfile.htm",
+    "title": "Import trusted traffic rule from XLS",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/trustedTraffic/uploadTrustedTrafficFile"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_importfile.htm"
+  },
+  {
+    "page": "trusted-traffic_trustrule.htm",
+    "title": "Trust an existing rule",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/trustedTraffic/trustRiskyRule"
+    ],
+    "status": "Operational",
+    "reason": "Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/trusted-traffic_trustrule.htm"
+  },
+  {
+    "page": "update-risk-definition_post.htm",
+    "title": "Update Risk Definitions",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/api/v1/risks/profiles"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: updates existing definitions, but create/delete/reset lifecycle is not documented; would require explicit adopt/forget semantics.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/update-risk-definition_post.htm"
+  },
+  {
+    "page": "url-categories_delete.htm",
+    "title": "Delete URL categories",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLCategory/"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_url_category deletion; JSON array of names; complete-list read-back.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_delete.htm"
+  },
+  {
+    "page": "url-categories_delete_url.htm",
+    "title": "Remove URL(s) from a specified URL Category",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}/URL"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred granular mutation: API exists but a complete URL membership/update resource also needs the ambiguous add contract. Full category content changes replace.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_delete_url.htm"
+  },
+  {
+    "page": "url-categories_get.htm",
+    "title": "Get the list of all URL Categories",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLCategory/"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_url_categories, algosec_url_category data sources; complete list is the resource read/drift/import helper.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_get.htm"
+  },
+  {
+    "page": "url-categories_get_category.htm",
+    "title": "Get the URL(s) of a specified URL Category",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/urlcategory/{category}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Not used: lowercase urlcategory path and unrelated multi-category response example; exact lookup uses complete list.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_get_category.htm"
+  },
+  {
+    "page": "url-categories_get_url_url_ip.htm",
+    "title": "Get the IPs of a specified URL",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}/URL/{url}/IP"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Not needed: documented cURL array shape available through full category inventory; granular path capitalization differs.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_get_url_url_ip.htm"
+  },
+  {
+    "page": "url-categories_put.htm",
+    "title": "Create/add  URL Categories",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_url_category create, canonical cURL payload {categories:{name:{urls:{URL:[IP]}}}}. Refuses preexisting category.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_put.htm"
+  },
+  {
+    "page": "url-categories_put_category.htm",
+    "title": "Rename a specified URL Category",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}"
+    ],
+    "status": "Implemented",
+    "reason": "algosec_url_category name update; JSON string body per parameter definition; verifies old absence and new contents.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_put_category.htm"
+  },
+  {
+    "page": "url-categories_put_ip.htm",
+    "title": "Add IPs to URL",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}/URL/{url}/IP"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded resource: additive IP mutation has no documented individual IP deletion; cannot implement a complete membership lifecycle.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_put_ip.htm"
+  },
+  {
+    "page": "url-categories_put_url.htm",
+    "title": "Add URLs to a specified URL Category",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}/URL"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Excluded mutation: body example has one urls wrapper, cURL has two; cannot establish safe merge/overwrite semantics.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_put_url.htm"
+  },
+  {
+    "page": "url-categories_put_url_url.htm",
+    "title": "Edit the URL of a specified URL Category",
+    "methods": [
+      "PUT"
+    ],
+    "documented_paths": [
+      "/api/v1/plugins/{brand}/URLcategory/{category}/URL/{url}"
+    ],
+    "status": "Excluded/deferred",
+    "reason": "Deferred: URL rename alone is insufficient for a safe complete URL resource lifecycle.",
+    "source": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/url-categories_put_url_url.htm"
+  },
+  {
+    "page": "groups_list_dev_get.htm",
+    "title": "List device groups",
+    "methods": [
+      "GET"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/groups"
+    ],
+    "status": "Experimental A33.20 EA",
+    "reason": "Requires experimental_device_groups=true; default false. Vendor does not recommend production use. Exact complete inventory verification; no live acceptance.",
+    "source": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_list_dev_get.htm"
+  },
+  {
+    "page": "groups_create_post.htm",
+    "title": "Create device group",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/groups"
+    ],
+    "status": "Experimental A33.20 EA",
+    "reason": "Requires experimental_device_groups=true; default false. Vendor does not recommend production use. Exact complete inventory verification; no live acceptance.",
+    "source": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_create_post.htm"
+  },
+  {
+    "page": "groups-add-device-post.htm",
+    "title": "Add group members",
+    "methods": [
+      "POST"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/groups/{groupDisplayName}/addDevices"
+    ],
+    "status": "Experimental A33.20 EA",
+    "reason": "Requires experimental_device_groups=true; default false. Vendor does not recommend production use. Exact complete inventory verification; no live acceptance.",
+    "source": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-add-device-post.htm"
+  },
+  {
+    "page": "groups-devices-delete.htm",
+    "title": "Remove group members",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/groups/{groupDisplayName}/removeDevices"
+    ],
+    "status": "Experimental A33.20 EA",
+    "reason": "Requires experimental_device_groups=true; default false. Vendor does not recommend production use. Exact complete inventory verification; no live acceptance.",
+    "source": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-devices-delete.htm"
+  },
+  {
+    "page": "groups-existing-delete.htm",
+    "title": "Delete device group",
+    "methods": [
+      "DELETE"
+    ],
+    "documented_paths": [
+      "/afa/api/v1/groups/{groupDisplayName}"
+    ],
+    "status": "Experimental A33.20 EA",
+    "reason": "Requires experimental_device_groups=true; default false. Vendor does not recommend production use. Exact complete inventory verification; no live acceptance.",
+    "source": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups-existing-delete.htm"
+  }
+]

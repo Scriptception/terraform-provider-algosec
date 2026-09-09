@@ -1,0 +1,18 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: "Experimental"
+description: |-
+  {{.Description | plainmarkdown}}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{.Description}}
+
+Targets only the [A33.20 EA inventory contract](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/groups_list_dev_get.htm). The [vendor warning](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/managing-devices-and-groups.htm) advises against production use. The experimental gate defaults to false; read_only remains true. Exact display-name lookup uses the complete validated inventory, never a detail-endpoint 404. Requires complete administrator visibility; filtered but structurally valid inventories cannot be detected. Tested only against a synthetic HTTPS fixture, not an appliance.
+
+## Example Usage
+
+{{tffile .ExampleFile}}
+
+{{.SchemaMarkdown | trimspace}}
