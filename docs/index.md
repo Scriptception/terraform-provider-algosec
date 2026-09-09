@@ -63,6 +63,8 @@ Before Registry availability, use the release ZIP filesystem mirror described in
 [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md);
 real init works with this source without Registry lookup. That guide also covers
 CA trust, category prerequisites, disposable mutations, import/destroy, exact known
-limitations and the pending publication checklist. No GPG key is available yet;
-signing, final release archives, Registry publication/install and appliance testing
-remain pending. Scope is unchanged at 2 resources / 12 data sources.
+limitations and the remaining Registry onboarding checklist. The signed v0.1.3
+GitHub release contains eight platform archives, manifest, checksums, detached
+signature and public key; uploaded bytes were downloaded and verified. Registry
+publication/direct installation and appliance testing remain pending.
+Scope is unchanged at 2 resources / 12 data sources.

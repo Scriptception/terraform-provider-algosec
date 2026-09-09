@@ -93,15 +93,39 @@ process, not by copying Vault secrets into GitHub. The pending list below record
 what the earlier code-preparation run did not do; final release evidence belongs
 to the corresponding GitHub release.
 
+## Final signed release verification
+
+Published [v0.1.3](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3)
+from source commit `f4c4e9e7e8af1b57e8643a4dbad9694c8d3c0aac` after
+[exact-commit CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34303349786)
+completed successfully. Post-release documentation commits do not change the tag
+or any release assets.
+
+- Re-ran local release checks and package smoke; built the clean tagged source
+  with GoReleaser v2.18.1 using `release --clean --skip=publish,sign`.
+- Verified all eight ZIPs and the protocol-6.0 Registry manifest against SHA256SUMS.
+  Signed SHA256SUMS using the Vault-held key in an ephemeral tmpfs keyring and
+  verified the detached binary signature in a separate public-only keyring.
+- Downloaded all 12 uploaded assets from the draft release and compared every byte
+  via SHA256 to the verified local assets before publishing. Public release
+  readback confirmed `isDraft=false` and all expected assets.
+- Exact Linux amd64 archive passed real mirror-backed init/validate/schema on
+  Terraform 1.11.0 and 1.16.1; the GitHub-downloaded archive passed again on 1.16.1.
+  Mirror init reports unauthenticated because Terraform does not verify Registry
+  signatures in that mode; independent GPG verification is the authentication
+  evidence. Other platforms were cross-built and archive-checked, not executed.
+- Local non-secret evidence: `signed-release-report.json`,
+  `release-download-verification.json`, `release-download-0.1.3/` under the
+  maintainer's `algosec-provider-work` directory.
+
 ## Pending external and live verification
 
-- No GPG key is available yet. No signing, key access, signed checksum verification,
-  release tag, push, Registry onboarding, publication or Registry installation was
-  performed. Parent handles external systems.
-- No final cross-platform archive build was performed in this preparation. Parent
-  must build/review/sign final archives and execute `scripts/package_smoke.py
-  --archive ...` on the actual host release ZIP, plus validate other target platforms.
-- No credentials were read and no appliance was contacted. A32.60 base compatibility,
+- Registry API returned 404/provider-not-found after GitHub publication. A fresh
+  direct-only `terraform init` with `= 0.1.3`, isolated data directory and no mirror
+  failed with provider-not-found. Registry login, namespace public-key registration
+  and repository onboarding remain required. GitHub release publication is not
+  Registry publication. See the [one-time checklist](user-testing.md#remaining-registry-onboarding).
+- No appliance credentials were read and no appliance was contacted. A32.60 base compatibility,
   Panorama override prerequisites, acknowledgement shapes, delayed consistency and
   A33.20 EA group behavior still require authorized appliance evidence.
 - Category delete's nested vendor example conflicts with its response table. The

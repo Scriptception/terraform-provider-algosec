@@ -1,7 +1,8 @@
-# Testing the 0.1.3 candidate
+# Testing the signed 0.1.3 release
 
-Status: prepared for review, unpublished and not live-appliance tested. Scope remains
-2 resources and 12 data sources. Start with [read-only quickstart](../examples/quickstart).
+Status: [published on GitHub](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3),
+not yet available through Terraform Registry and not live-appliance tested. Scope
+remains 2 resources and 12 data sources. Start with [read-only quickstart](../examples/quickstart).
 
 ## Install a release ZIP without Registry availability
 
@@ -103,20 +104,27 @@ acceptance has been run.
 - Sessions are not refreshed or logged out automatically. Writes are not replayed,
   redirects are refused, and authentication/HTTP errors are not treated as absence.
 
-## Maintainer publication checklist (pending external work)
+## Remaining Registry onboarding
 
-- Review and commit the candidate; verify VERSION/tag agreement on tested main.
-- Configure a protected release environment and Registry-compatible GPG signing key;
-  register the public key with the correct Registry namespace. No signing is done yet.
-- Complete Registry onboarding for `Scriptception/algosec` and repository association.
-- Build final cross-platform release ZIPs, manifest, SHA256SUMS and detached signature;
-  verify checksums/signatures and run the archive smoke on the exact release binary.
-- Publish the authorized tag/release through the release workflow, verify all assets,
-  and confirm Registry indexing. These steps are handled outside this preparation.
-- From a clean directory without overrides/mirror, verify Registry `terraform init`
-  with `= 0.1.3`; validate, then run authorized appliance tests separately.
-- Record actual platform/version/operation results; never promote synthetic tests
-  into live compatibility claims.
+The signed GitHub release, tag, eight platform archives, manifest, checksums,
+public-key signature verification and downloaded Linux archive smoke are complete.
+Private signing material remains in Vault, not GitHub secrets. The hosted signing
+job is deliberately opt-in; this release used the Vault-backed maintainer process.
+
+1. Sign into [Terraform Registry](https://registry.terraform.io/) using the GitHub
+   account with access to `Scriptception/terraform-provider-algosec`.
+2. In **User Settings > Signing Keys**, add the release asset
+   [`terraform-provider-signing-key.asc`](https://github.com/Scriptception/terraform-provider-algosec/releases/download/v0.1.3/terraform-provider-signing-key.asc)
+   to the `Scriptception` namespace. Confirm the fingerprint above. This is the
+   public key only; never upload or share the Vault-held private key/passphrase.
+3. Open [Publish > Provider](https://registry.terraform.io/publish/provider),
+   select `Scriptception/terraform-provider-algosec`, and complete onboarding.
+   This creates the Registry GitHub release webhook for future versions.
+4. Confirm indexing, then from a fresh directory with direct installation and no
+   overrides/mirror verify `terraform init` with `= 0.1.3`, then validate. The
+   pre-onboarding direct-init check correctly failed with provider-not-found.
+5. Run authorized appliance tests separately and record actual platform/version/
+   operation results. Synthetic tests are not live compatibility evidence.
 
 [HashiCorp publication requirements](https://developer.hashicorp.com/terraform/registry/providers/publishing)
 are the external checklist reference. No CI job makes live appliance calls.

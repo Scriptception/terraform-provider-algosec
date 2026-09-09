@@ -6,7 +6,7 @@
 - Validate rename/delete post-operation categories maps and retain owned state on ambiguous replies; keep GET verification and document conflicting vendor examples.
 - Inventory all 85 A32.60 and 119 A33.20 catalog pages, separate literal labels from selected routes, map 17 implemented operations to Terraform surfaces, and add offline consistency gates.
 - Add pinned read-only quickstart, filesystem-mirror ZIP installation smoke and practical first-user testing/publication checklist. No scope expansion.
-- Unpublished preparation; no signing, Registry installation or live appliance acceptance claimed.
+- Published a signed GitHub release with eight platform archives; verified all uploaded assets and exact Linux archive installation. Registry onboarding/direct installation and live-appliance acceptance remain pending.
 
 
 ## 0.1.2
