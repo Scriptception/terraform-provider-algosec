@@ -143,7 +143,7 @@ func TestProtocolSchema(t *testing.T) {
 			t.Fatal(d.Summary, d.Detail)
 		}
 	}
-	if len(s.ResourceSchemas) != 3 || len(s.DataSourceSchemas) != 12 {
+	if len(s.ResourceSchemas) != 4 || len(s.DataSourceSchemas) != 12 {
 		t.Fatalf("unexpected surface: %d/%d", len(s.ResourceSchemas), len(s.DataSourceSchemas))
 	}
 }

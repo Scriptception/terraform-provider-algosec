@@ -18,6 +18,9 @@ import (
 
 type AlgoSecProvider struct{ version string }
 type providerModel struct {
+	AppVizURL                types.String `tfsdk:"appviz_saas_url"`
+	AppVizToken              types.String `tfsdk:"appviz_saas_token"`
+	ExperimentalAppVizRoles  types.Bool   `tfsdk:"experimental_appviz_roles"`
 	ExperimentalTrustedRules types.Bool   `tfsdk:"experimental_trusted_rules"`
 	ExperimentalDeviceGroups types.Bool   `tfsdk:"experimental_device_groups"`
 	URL                      types.String `tfsdk:"url"`
@@ -37,7 +40,10 @@ func (p *AlgoSecProvider) Metadata(_ context.Context, _ provider.MetadataRequest
 	r.Version = p.version
 }
 func (p *AlgoSecProvider) Schema(_ context.Context, _ provider.SchemaRequest, r *provider.SchemaResponse) {
-	r.Schema = schema.Schema{Description: "Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.", Attributes: map[string]schema.Attribute{
+	r.Schema = schema.Schema{Description: "Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments, plus separately gated AppViz SaaS Early Availability roles. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.", Attributes: map[string]schema.Attribute{
+		"appviz_saas_url":            schema.StringAttribute{Optional: true, Description: "Separate AppViz SaaS HTTPS origin. Environment: ALGOSEC_APPVIZ_SAAS_URL. Not the legacy on-premises AppViz API. TLS verification is always required.", Validators: []validator.String{originValidator{}}},
+		"appviz_saas_token":          schema.StringAttribute{Optional: true, Sensitive: true, Description: "AppViz SaaS Bearer token. Prefer ALGOSEC_APPVIZ_SAAS_TOKEN to avoid configuration/plan persistence. Never refreshed, logged, or stored in resource state."},
+		"experimental_appviz_roles":  schema.BoolAttribute{Optional: true, Description: "Enable AppViz SaaS Early Availability roles. Defaults false; vendor EA, synthetic-contract tested only. Separate from AFA and legacy AppViz authentication."},
 		"experimental_trusted_rules": schema.BoolAttribute{Optional: true, Description: "Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups."},
 		"experimental_device_groups": schema.BoolAttribute{Optional: true, Description: "EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility."},
 		"url":                        schema.StringAttribute{Optional: true, Description: "HTTPS appliance origin, without a path. Environment: ALGOSEC_URL.", Validators: []validator.String{originValidator{}}},
@@ -55,12 +61,12 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 	if r.Diagnostics.HasError() {
 		return
 	}
-	for n, v := range map[string]types.String{"url": m.URL, "username": m.Username, "password": m.Password, "session_id": m.SessionID} {
+	for n, v := range map[string]types.String{"appviz_saas_url": m.AppVizURL, "appviz_saas_token": m.AppVizToken, "url": m.URL, "username": m.Username, "password": m.Password, "session_id": m.SessionID} {
 		if v.IsUnknown() {
 			r.Diagnostics.AddAttributeError(path.Root(n), "Unknown provider configuration", "Provider settings must be known before configuring the client.")
 		}
 	}
-	if m.ExperimentalTrustedRules.IsUnknown() || m.ExperimentalDeviceGroups.IsUnknown() || m.Insecure.IsUnknown() || m.ReadOnly.IsUnknown() || m.Timeout.IsUnknown() {
+	if m.ExperimentalAppVizRoles.IsUnknown() || m.ExperimentalTrustedRules.IsUnknown() || m.ExperimentalDeviceGroups.IsUnknown() || m.Insecure.IsUnknown() || m.ReadOnly.IsUnknown() || m.Timeout.IsUnknown() {
 		r.Diagnostics.AddError("Unknown provider configuration", "Safety and timeout settings must be known before configuring the client.")
 	}
 	if r.Diagnostics.HasError() {
@@ -84,7 +90,7 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 	if !m.ReadOnly.IsNull() {
 		readOnly = m.ReadOnly.ValueBool()
 	}
-	c, err := client.New(client.Options{URL: str(m.URL, "ALGOSEC_URL"), Username: str(m.Username, "ALGOSEC_USERNAME"), Password: str(m.Password, "ALGOSEC_PASSWORD"), SessionID: str(m.SessionID, "ALGOSEC_SESSION_ID"), Timeout: time.Duration(timeout) * time.Second, Insecure: m.Insecure.ValueBool(), ReadOnly: readOnly, ExperimentalTrustedRules: m.ExperimentalTrustedRules.ValueBool(), ExperimentalDeviceGroups: m.ExperimentalDeviceGroups.ValueBool()})
+	c, err := client.New(client.Options{AppVizURL: str(m.AppVizURL, "ALGOSEC_APPVIZ_SAAS_URL"), AppVizToken: str(m.AppVizToken, "ALGOSEC_APPVIZ_SAAS_TOKEN"), ExperimentalAppVizRoles: m.ExperimentalAppVizRoles.ValueBool(), URL: str(m.URL, "ALGOSEC_URL"), Username: str(m.Username, "ALGOSEC_USERNAME"), Password: str(m.Password, "ALGOSEC_PASSWORD"), SessionID: str(m.SessionID, "ALGOSEC_SESSION_ID"), Timeout: time.Duration(timeout) * time.Second, Insecure: m.Insecure.ValueBool(), ReadOnly: readOnly, ExperimentalTrustedRules: m.ExperimentalTrustedRules.ValueBool(), ExperimentalDeviceGroups: m.ExperimentalDeviceGroups.ValueBool()})
 	if err != nil {
 		r.Diagnostics.AddError("Invalid AlgoSec configuration", err.Error())
 		return
@@ -93,7 +99,7 @@ func (p *AlgoSecProvider) Configure(ctx context.Context, req provider.ConfigureR
 	r.DataSourceData = c
 }
 func (p *AlgoSecProvider) Resources(context.Context) []func() resource.Resource {
-	return []func() resource.Resource{NewURLCategoryResource, NewDeviceGroupResource, NewTrustedRuleResource}
+	return []func() resource.Resource{NewURLCategoryResource, NewDeviceGroupResource, NewTrustedRuleResource, NewAppVizRoleResource}
 }
 func (p *AlgoSecProvider) DataSources(context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{

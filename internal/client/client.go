@@ -25,6 +25,8 @@ var ErrNotFound = errors.New("object absent from complete inventory")
 var ErrContract = errors.New("API response does not match the documented contract")
 
 type Options struct {
+	AppVizURL, AppVizToken             string
+	ExperimentalAppVizRoles            bool
 	ExperimentalTrustedRules           bool
 	ExperimentalDeviceGroups           bool
 	URL, Username, Password, SessionID string
@@ -32,6 +34,7 @@ type Options struct {
 	Insecure, ReadOnly                 bool
 }
 type Client struct {
+	AppViz                      *AppVizClient
 	experimentalTrustedRules    bool
 	experimentalDeviceGroups    bool
 	loginGate                   chan struct{}
@@ -60,14 +63,30 @@ func ValidateURL(raw string) error {
 	return nil
 }
 func New(o Options) (*Client, error) {
-	if err := ValidateURL(o.URL); err != nil {
-		return nil, err
+	if o.URL != "" || o.AppVizURL == "" {
+		if err := ValidateURL(o.URL); err != nil {
+			return nil, err
+		}
 	}
 	if o.Timeout == 0 {
 		o.Timeout = 30 * time.Second
 	}
 	if o.Timeout < time.Second || o.Timeout > 5*time.Minute {
 		return nil, errors.New("timeout must be between 1 and 300 seconds")
+	}
+	var appviz *AppVizClient
+	if o.AppVizURL != "" || o.AppVizToken != "" {
+		var err error
+		appviz, err = NewAppVizClient(o.AppVizURL, o.AppVizToken, o.Timeout, o.ReadOnly, o.ExperimentalAppVizRoles)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if o.URL == "" && appviz != nil {
+		if o.Username != "" || o.Password != "" || o.SessionID != "" {
+			return nil, errors.New("AFA credentials require a separate url")
+		}
+		return &Client{AppViz: appviz, readOnly: o.ReadOnly}, nil
 	}
 	if o.SessionID != "" && (o.Username != "" || o.Password != "") {
 		return nil, errors.New("session_id and username/password authentication are mutually exclusive")
@@ -81,7 +100,7 @@ func New(o Options) (*Client, error) {
 	tr := http.DefaultTransport.(*http.Transport).Clone()
 	tr.TLSClientConfig = &tls.Config{MinVersion: tls.VersionTLS12, InsecureSkipVerify: o.Insecure} // explicit opt-in only
 	tr.ResponseHeaderTimeout = o.Timeout
-	return &Client{loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}, nil
+	return &Client{AppViz: appviz, loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}, nil
 }
 func validSession(s string) bool {
 	for _, r := range s {
@@ -112,6 +131,9 @@ func (e *HTTPError) Error() string {
 	return fmt.Sprintf("AlgoSec request failed (HTTP %d); check permissions and appliance availability", e.Status)
 }
 func (c *Client) login(ctx context.Context) error {
+	if c.base == "" {
+		return errors.New("AFA operations require separate url and AFA authentication")
+	}
 	select {
 	case c.loginGate <- struct{}{}:
 	case <-ctx.Done():

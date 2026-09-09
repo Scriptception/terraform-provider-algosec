@@ -31,6 +31,9 @@ provider "algosec" {
   read_only = false
   experimental_device_groups = true
   experimental_trusted_rules = true
+  experimental_appviz_roles = true
+  appviz_saas_url = "https://saas.example.invalid"
+  appviz_saas_token = "syntheticSmokeToken"
 }
 resource "algosec_url_category" "smoke" {
   name = "tf-smoke"
@@ -44,6 +47,9 @@ resource "algosec_trusted_rule" "smoke" {
   device_name = "SyntheticDevice"
   rule_id = "synthetic-rule"
 }
+resource "algosec_appviz_role" "smoke" {
+ name = "Synthetic reviewers"
+}
 ''')
 env = {k: v for k, v in os.environ.items() if not k.startswith("ALGOSEC_")}
 env.update(TF_CLI_CONFIG_FILE=str(cli), TF_IN_AUTOMATION="1", CHECKPOINT_DISABLE="1")
@@ -56,12 +62,12 @@ def run(*args, capture=False):
 result = run("providers", "schema", "-json", capture=True)
 schema = json.loads(result.stdout)
 p = schema["provider_schemas"]["registry.terraform.io/scriptception/algosec"]
-assert len(p["resource_schemas"]) == 3
+assert len(p["resource_schemas"]) == 4
 assert len(p["data_source_schemas"]) == 12
 (work / "schema.json").write_text(result.stdout)
 run("validate", "-no-color")
 run("plan", "-refresh=false", "-input=false", "-no-color", "-out=smoke.tfplan")
 plan = json.loads(run("show", "-json", "smoke.tfplan", capture=True).stdout)
 assert all(r["change"]["actions"] == ["create"] for r in plan["resource_changes"])
-assert len(plan["resource_changes"]) == 3
-print("Compiled provider: schema 3 resources / 12 data sources; validate passed; plan has 3 creates.")
+assert len(plan["resource_changes"]) == 4
+print("Compiled provider: schema 4 resources / 12 data sources; validate passed; plan has 4 creates.")

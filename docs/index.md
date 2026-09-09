@@ -1,12 +1,19 @@
 ---
 page_title: "algosec Provider"
 description: |-
-  Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+  Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments, plus separately gated AppViz SaaS Early Availability roles. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
 ---
 
 # algosec Provider
 
-Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments, plus separately gated AppViz SaaS Early Availability roles. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+
+Unreleased development candidate `0.3.0-dev` adds `algosec_appviz_role`:
+**4 resources, 12 data sources and 24 selected operations**. AppViz SaaS requires
+separate bearer configuration and `experimental_appviz_roles=true`. It is vendor
+Early Availability, distinct from legacy AppViz. See the
+[role contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/appviz-role-contract.md).
+Published installation pins below remain unchanged.
 
 The published `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
 `algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
@@ -47,6 +54,9 @@ provider "algosec" {
 
 ### Optional
 
+- `appviz_saas_token` (String, Sensitive) AppViz SaaS Bearer token. Prefer ALGOSEC_APPVIZ_SAAS_TOKEN to avoid configuration/plan persistence. Never refreshed, logged, or stored in resource state.
+- `appviz_saas_url` (String) Separate AppViz SaaS HTTPS origin. Environment: ALGOSEC_APPVIZ_SAAS_URL. Not the legacy on-premises AppViz API. TLS verification is always required.
+- `experimental_appviz_roles` (Boolean) Enable AppViz SaaS Early Availability roles. Defaults false; vendor EA, synthetic-contract tested only. Separate from AFA and legacy AppViz authentication.
 - `experimental_device_groups` (Boolean) EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility.
 - `experimental_trusted_rules` (Boolean) Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups.
 - `insecure` (Boolean) Disable TLS verification explicitly. Defaults to false. Install the appliance CA in the system trust store instead when possible.

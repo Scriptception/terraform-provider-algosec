@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0-dev (unreleased)
+
+- Add experimental `algosec_appviz_role` for the public AppViz SaaS Early Availability role contract, with separate bearer authentication, complete readable permission/membership ownership, explicit import, fail-closed reads and recovery. No legacy AppViz or live compatibility claim.
+- Add four typed SaaS operations: role GET/create/update/delete (4 resources, 12 data sources, 24 selected operations). Preserve published 0.2.0 installation pins.
+- Reject known-invalid category IPs alongside unknown values, and null group members, before replacement destroys owned objects.
+- Remove name-only live-test cleanup that could delete another actor's category after an unconfirmed create; Terraform state drives cleanup.
+- Add a cross-product public-operation inventory and runnable continuation ledger; remaining candidates are tracked separately from implemented lifecycles.
+
 ## 0.2.0
 
 - Reject known expired trusted-rule creation/replacement dates during planning, before deletion; preserve unchanged expired assignments and destroy.

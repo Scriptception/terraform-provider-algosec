@@ -8,6 +8,13 @@ description: |-
 
 {{.Description}}
 
+Unreleased development candidate `0.3.0-dev` adds `algosec_appviz_role`:
+**4 resources, 12 data sources and 24 selected operations**. AppViz SaaS requires
+separate bearer configuration and `experimental_appviz_roles=true`. It is vendor
+Early Availability, distinct from legacy AppViz. See the
+[role contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/appviz-role-contract.md).
+Published installation pins below remain unchanged.
+
 The published `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
 `algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
 `experimental_trusted_rules=true` gate; all input changes replace. See the

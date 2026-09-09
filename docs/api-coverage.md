@@ -1,5 +1,30 @@
 # API coverage: ASMS A32.60 base and experimental A33.20 additions
 
+## Unreleased development candidate 0.3.0-dev
+
+The working candidate exposes **4 resources, 12 data sources and 24 selected
+method/route operations**. It adds `algosec_appviz_role`, separately gated AppViz
+SaaS Early Availability role ownership; see [contract](appviz-role-contract.md).
+Published 0.2.0 counts below remain historical and installation pins are unchanged.
+
+The [cross-product operation ledger](cross-product-operations.json) contains
+**934 discovery records: 772 REST operations and 162 unresolved SOAP service/binding
+records**. Every record carries evidence, auth/version boundary, disposition and
+remaining reason. Literal vendor labels are retained separately from selected
+canonical implementation routes; relative labels are keyed with their documented
+catalog/server base where necessary to disambiguate products' subservices. No
+SOAP binding or unresolved QName is invented. Twenty-four records map to current
+implementation; other versions of similar routes remain unverified. These are
+named-catalog discovery counts, not an overall coverage percentage.
+
+AppViz legacy owned service/network objects and ordinary flows were revalidated
+through public A33.30 and have specific identity/read/draft contract gaps. SaaS is
+a separate stream. Remaining A33.30 tag, FireFlow direct binding and ACE/ObjectFlow
+work is listed in the [continuation ledger](durable-expansion-ledger.md).
+The original 204-page AFA inventory below is retained as the published baseline;
+it is not the broader cross-product discovery denominator.
+
+
 Published **v0.2.0** contains **3 resources, 12 data sources and 20
 method/route operations**. Publication and direct Registry installation are [verified](verification.md);
 no live acceptance is claimed.

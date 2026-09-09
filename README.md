@@ -1,5 +1,10 @@
 # Terraform Provider for AlgoSec
 
+> Development branch: `0.3.0-dev` adds experimental `algosec_appviz_role` for
+> AppViz SaaS and fixes category/group replacement and cleanup ownership defects.
+> This is unreleased; published 0.2.0 pins below are unchanged. See the
+> [contract](docs/appviz-role-contract.md) and [continuation ledger](docs/durable-expansion-ledger.md).
+
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
 Firewall Analyzer / ASMS A32.60**, with explicitly experimental A33.20 device
 groups and trusted-rule assignments, built from public API documentation. It is not affiliated with or
