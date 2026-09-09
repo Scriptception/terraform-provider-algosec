@@ -10,7 +10,13 @@
 3. Choose the next task explicitly. A new session is not authorization to publish
    a release, change signing credentials, or contact an appliance.
 
-## Published baseline
+## Release candidate 0.2.0
+
+`VERSION` and active installation pins now select `0.2.0`. Final release gates,
+exact-source review, signing, publication and clean Registry verification remain
+pending for the parent release session. No live acceptance is claimed.
+
+## Historical published baseline: v0.1.4
 
 - [Terraform Registry v0.1.4](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
   and [GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4).
@@ -30,7 +36,13 @@
 
 ## Implemented scope and boundaries
 
-The provider exposes **2 resources and 12 data sources**, implementing **17
+Release candidate `0.2.0` adds `algosec_trusted_rule` (A33.20) behind
+`experimental_trusted_rules=true`, separate from vendor EA groups. See the
+[contract and limitations](trusted-rule-contract.md) and
+[historical implementation verification](public-expansion-verification.md). Published
+v0.1.4 still has 2 resources, 12 data sources and 17 operations.
+
+The provider exposes **3 resources and 12 data sources**, implementing **20
 method/route operations**. The inventory covers **204 documentation pages**:
 85 A32.60 and 119 A33.20. Page counts are not API-operation coverage percentages.
 
@@ -47,6 +59,8 @@ partial state on ambiguous update/readback errors; do not adopt another actor's
 object to make recovery appear successful.
 
 ## Next useful work
+
+See the [public-provider expansion roadmap](coverage-roadmap.md) for prioritized contract research and resource milestones.
 
 1. **Read-only live acceptance:** obtain an authorized appliance/version and
    approved credential source. Use the [quickstart](../examples/quickstart/README.md)

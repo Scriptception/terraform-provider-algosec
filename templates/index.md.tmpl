@@ -8,7 +8,10 @@ description: |-
 
 {{.Description}}
 
-The final surface is **2 resources and 12 data sources**. The base targets ASMS
+The release candidate `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
+`algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
+`experimental_trusted_rules=true` gate; all input changes replace. See the
+[contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/trusted-rule-contract.md). The base targets ASMS
 A32.60. Device-group resource and data sources separately target **A33.20 Early
 Availability** and require `experimental_device_groups=true` (default false).
 AlgoSec does not recommend these APIs for production:
@@ -22,12 +25,16 @@ because the public API does not establish existingFile readback.
 
 {{.SchemaMarkdown | trimspace}}
 
-## First user test: 0.1.4
+## First user test: release candidate 0.2.0
 
 Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
-pinned to `= 0.1.4`, with environment-based authentication and TLS verification.
+pinned to `= 0.2.0`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
-Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
+0.2.0 publication and Registry verification are pending. Use the local candidate
+installation instructions in user testing until publication is verified. Then run
+`terraform init`, `terraform validate`, and an authorized `terraform plan`.
+
+Historical v0.1.4 evidence:
 [v0.1.4 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4).
 Clean direct installation, Registry signature verification, validate and schema
 loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
@@ -35,4 +42,5 @@ loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
 downloaded and hash-verified. No live-appliance acceptance has been performed.
 See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
 for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
-Scope is unchanged at 2 resources / 12 data sources.
+The published v0.1.4 scope is 2 resources / 12 data sources; the trusted-rule
+addition is part of the 0.2.0 release candidate.

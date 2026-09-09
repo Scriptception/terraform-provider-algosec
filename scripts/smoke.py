@@ -30,6 +30,7 @@ provider "algosec" {
   session_id = "syntheticSmokeSession"
   read_only = false
   experimental_device_groups = true
+  experimental_trusted_rules = true
 }
 resource "algosec_url_category" "smoke" {
   name = "tf-smoke"
@@ -38,6 +39,10 @@ resource "algosec_url_category" "smoke" {
 resource "algosec_device_group" "smoke" {
   display_name = "Synthetic smoke"
   members = ["Example Device"]
+}
+resource "algosec_trusted_rule" "smoke" {
+  device_name = "SyntheticDevice"
+  rule_id = "synthetic-rule"
 }
 ''')
 env = {k: v for k, v in os.environ.items() if not k.startswith("ALGOSEC_")}
@@ -51,12 +56,12 @@ def run(*args, capture=False):
 result = run("providers", "schema", "-json", capture=True)
 schema = json.loads(result.stdout)
 p = schema["provider_schemas"]["registry.terraform.io/scriptception/algosec"]
-assert len(p["resource_schemas"]) == 2
+assert len(p["resource_schemas"]) == 3
 assert len(p["data_source_schemas"]) == 12
 (work / "schema.json").write_text(result.stdout)
 run("validate", "-no-color")
 run("plan", "-refresh=false", "-input=false", "-no-color", "-out=smoke.tfplan")
 plan = json.loads(run("show", "-json", "smoke.tfplan", capture=True).stdout)
 assert all(r["change"]["actions"] == ["create"] for r in plan["resource_changes"])
-assert len(plan["resource_changes"]) == 2
-print("Compiled provider: schema 2 resources / 12 data sources; validate passed; plan has 2 creates.")
+assert len(plan["resource_changes"]) == 3
+print("Compiled provider: schema 3 resources / 12 data sources; validate passed; plan has 3 creates.")

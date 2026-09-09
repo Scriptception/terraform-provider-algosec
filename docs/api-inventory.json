@@ -18,11 +18,11 @@
       "catalog_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/afa-rest-web-services.htm",
       "unique_linked_pages_excluding_self": 119,
       "page_classifications": {
-        "deferred read-only": 51,
+        "deferred read-only": 50,
         "reference": 2,
         "operational": 25,
-        "unsupported mutation": 24,
-        "supported": 17
+        "unsupported mutation": 22,
+        "supported": 20
       }
     }
   },
@@ -4892,9 +4892,9 @@
       "page": "trusted-rules-add-post.htm",
       "title": "Add Trusted Rules to a Device",
       "url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-add-post.htm",
-      "classification": "unsupported mutation",
-      "reason": "Distinct durable trusted-rules API with read/delete counterparts in A33.20; candidate future resource, but no implemented lifecycle or tested partial-result/drift contract.",
-      "implementation_evidence_only": false,
+      "classification": "supported",
+      "reason": "Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance.",
+      "implementation_evidence_only": true,
       "live_verified": false,
       "resource_blocks": [
         {
@@ -4918,9 +4918,9 @@
       "page": "trusted-rules-delete.htm",
       "title": "Delete Trusted Rules",
       "url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-delete.htm",
-      "classification": "unsupported mutation",
-      "reason": "Deletion counterpart of A33.20 trusted-rules collection; do not conflate with legacy trustedTraffic.",
-      "implementation_evidence_only": false,
+      "classification": "supported",
+      "reason": "Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance.",
+      "implementation_evidence_only": true,
       "live_verified": false,
       "resource_blocks": [
         {
@@ -4944,9 +4944,9 @@
       "page": "trusted-rules-get.htm",
       "title": "Get a list of all Trusted Rules",
       "url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-get.htm",
-      "classification": "deferred read-only",
-      "reason": "A33.20 trusted-rules inventory; distinct from legacy trustedTraffic and not implemented.",
-      "implementation_evidence_only": false,
+      "classification": "supported",
+      "reason": "Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance.",
+      "implementation_evidence_only": true,
       "live_verified": false,
       "resource_blocks": [
         {
@@ -5862,6 +5862,48 @@
         "resource.algosec_device_group"
       ],
       "source_route_expression": "api+\"/groups/\"+part"
+    },
+    {
+      "method": "GET",
+      "actual_route_template": "/afa/api/v1/trusted-rules/rules",
+      "version_scope": "a33.20",
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-get.htm",
+      "source_file": "internal/client/trusted_rules.go",
+      "client_function": "TrustedRule",
+      "source_route_expression": "api+\"/trusted-rules/rules\"",
+      "surfaces": [
+        "resource.algosec_trusted_rule"
+      ],
+      "live_verified": false,
+      "response_choice": "Catalog /afa base and PHPSESSID; strict complete single-device inventory for GET; exact single requested ID acknowledgement for writes. See docs/trusted-rule-contract.md."
+    },
+    {
+      "method": "POST",
+      "actual_route_template": "/afa/api/v1/trusted-rules/rules",
+      "version_scope": "a33.20",
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-add-post.htm",
+      "source_file": "internal/client/trusted_rules.go",
+      "client_function": "CreateTrustedRule",
+      "source_route_expression": "api+\"/trusted-rules/rules\"",
+      "surfaces": [
+        "resource.algosec_trusted_rule"
+      ],
+      "live_verified": false,
+      "response_choice": "Catalog /afa base and PHPSESSID; strict complete single-device inventory for GET; exact single requested ID acknowledgement for writes. See docs/trusted-rule-contract.md."
+    },
+    {
+      "method": "DELETE",
+      "actual_route_template": "/afa/api/v1/trusted-rules/rules",
+      "version_scope": "a33.20",
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-delete.htm",
+      "source_file": "internal/client/trusted_rules.go",
+      "client_function": "DeleteTrustedRule",
+      "source_route_expression": "api+\"/trusted-rules/rules\"",
+      "surfaces": [
+        "resource.algosec_trusted_rule"
+      ],
+      "live_verified": false,
+      "response_choice": "Catalog /afa base and PHPSESSID; strict complete single-device inventory for GET; exact single requested ID acknowledgement for writes. See docs/trusted-rule-contract.md."
     }
   ]
 }

@@ -3,7 +3,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.1.4"
+      version = "= 0.2.0"
     }
   }
 }

@@ -25,12 +25,14 @@ var ErrNotFound = errors.New("object absent from complete inventory")
 var ErrContract = errors.New("API response does not match the documented contract")
 
 type Options struct {
+	ExperimentalTrustedRules           bool
 	ExperimentalDeviceGroups           bool
 	URL, Username, Password, SessionID string
 	Timeout                            time.Duration
 	Insecure, ReadOnly                 bool
 }
 type Client struct {
+	experimentalTrustedRules    bool
 	experimentalDeviceGroups    bool
 	loginGate                   chan struct{}
 	base                        string
@@ -79,7 +81,7 @@ func New(o Options) (*Client, error) {
 	tr := http.DefaultTransport.(*http.Transport).Clone()
 	tr.TLSClientConfig = &tls.Config{MinVersion: tls.VersionTLS12, InsecureSkipVerify: o.Insecure} // explicit opt-in only
 	tr.ResponseHeaderTimeout = o.Timeout
-	return &Client{loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups}, nil
+	return &Client{loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}, nil
 }
 func validSession(s string) bool {
 	for _, r := range s {

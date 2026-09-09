@@ -20,8 +20,8 @@ for version, count in [('a32.60', 85), ('a33.20', 119)]:
         assert p['url'].endswith('/' + p['page']) and p['reason'] and not p['live_verified']
         assert 'resource_blocks' in p and 'curl_url_evidence' in p
 ops = d['implemented_operations']
-assert len(ops) == len({(o['method'], o['actual_route_template']) for o in ops}) == 17
-assert collections.Counter(o['version_scope'] for o in ops) == {'a32.60': 12, 'a33.20': 5}
+assert len(ops) == len({(o['method'], o['actual_route_template']) for o in ops}) == 20
+assert collections.Counter(o['version_scope'] for o in ops) == {'a32.60': 12, 'a33.20': 8}
 surfaces = set()
 for o in ops:
     assert o['documentation_url'] in urls
@@ -61,11 +61,11 @@ for kind, folder in [('resource', 'resources'), ('data', 'data-sources')]:
     for file in (root / 'docs' / folder).glob('*.md'):
         expected.add(f'{kind}.algosec_{file.stem}')
 assert surfaces == expected, (surfaces ^ expected)
-assert len([s for s in surfaces if s.startswith('resource.')]) == 2
+assert len([s for s in surfaces if s.startswith('resource.')]) == 3
 assert len([s for s in surfaces if s.startswith('data.')]) == 12
 # Verify registration count independently of generated docs.
 provider = (root / 'internal/provider/provider.go').read_text()
-assert len(re.findall(r'New\w+Resource,?', provider)) == 2
+assert len(re.findall(r'New\w+Resource,?', provider)) == 3
 assert len(re.findall(r'New\w+DataSource,?', provider)) == 12
 serialized = json.dumps(d)
 assert '/home/hermes/' not in serialized and '<html' not in serialized
@@ -93,4 +93,4 @@ if '--write' in sys.argv:
     file.write_text(want)
 else:
     assert text == want, 'Page tables differ: run python3 scripts/coverage_check.py --write'
-print('Coverage consistent: 85 + 119 pages; 17 method/routes; 2 resources / 12 data sources.')
+print('Coverage consistent: 85 + 119 pages; 20 method/routes; 3 resources / 12 data sources.')

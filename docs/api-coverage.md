@@ -1,6 +1,10 @@
-# API coverage: ASMS A32.60 base and experimental A33.20 groups
+# API coverage: ASMS A32.60 base and experimental A33.20 additions
 
-This initial provider targets the **public A32.60 REST documentation**, retrieved
+Release candidate **0.2.0** contains **3 resources, 12 data sources and 20
+method/route operations**. Publication and Registry verification are pending;
+no live acceptance is claimed.
+
+This provider targets the **public A32.60 REST documentation**, retrieved
 2026-09-09. It is not a claim of compatibility with every ASMS version or live
 appliance verification. The public catalog links were fetched directly with
 Python requests and parsed with HTMLParser. Detailed source excerpts and research
@@ -13,9 +17,11 @@ The appliance-local Swagger is not publicly downloadable without an appliance;
 no appliance was contacted. This inventory covers the linked public AFA REST
 catalog, not undiscovered endpoints, FireFlow or AppViz APIs.
 
-## Initial surface and contract choices
+## Release candidate 0.2.0 surface and contract choices
 
-Two resources: `algosec_url_category`, `algosec_device_group` (experimental A33.20 EA).
+Three resources: `algosec_url_category`, `algosec_device_group` (experimental A33.20 EA),
+and `algosec_trusted_rule` (separately gated experimental A33.20 public contract).
+The trusted-rule addition is part of release candidate 0.2.0; see [its contract](trusted-rule-contract.md).
 Twelve data sources: `algosec_url_categories`, `algosec_url_category`,
 `algosec_devices`, `algosec_device`, `algosec_risk_profiles`,
 `algosec_risk_profile_files`, `algosec_security_zones`, `algosec_device_zones`,
@@ -72,16 +78,16 @@ mutation and policy workflows are not supported.
 The machine-readable [inventory](api-inventory.json) includes every linked page:
 85 A32.60 pages and 119 A33.20 pages (catalog self-links excluded). These are
 **documentation PAGE counts**, not operation counts or compatibility percentages.
-There are **17 implemented method/route operations**, including login: 12 baseline
-and 5 experimental group operations. Exact-lookup data sources reuse list routes.
+There are **20 implemented method/route operations**, including login: 12 baseline
+5 experimental group operations and 3 experimental trusted-rule operations. Exact-lookup data sources reuse list routes.
 The JSON maps each selected method/route to its client function, Terraform surface,
 official evidence URL and version. No A33.20 appliance compatibility is inferred.
 
 | Page classification | A32.60 | A33.20 |
 |---|---:|---:|
-| Supported in code, documentation only | 12 | 17 |
-| Deferred read-only | 37 | 51 |
-| Unsupported mutation | 13 | 24 |
+| Supported in code, documentation only | 12 | 20 |
+| Deferred read-only | 37 | 50 |
+| Unsupported mutation | 13 | 22 |
 | Operational | 21 | 25 |
 | Reference | 2 | 2 |
 | Total pages | 85 | 119 |
@@ -98,7 +104,8 @@ query, while acknowledge/activate POSTs mutate status; the page is operational.
 
 A33.20 adds individual category IP deletion; the A32.60 missing-counterpart
 limitation is version-scoped. New trusted-rules APIs are separate from legacy
-trustedTraffic and need their own lifecycle review. Configuration writes disagree
+trustedTraffic and now have a separately gated single-assignment lifecycle; see
+[contract choices and limits](trusted-rule-contract.md). Configuration writes disagree
 on `/config/values` versus `/config/value`, lack reset semantics, and proxy writes
 carry credentials without a proven dedicated read. These remain unsupported
 mutations. New user/role writes also remain excluded. Filename replacements for
@@ -369,9 +376,9 @@ transaction or ETag is documented; concurrent writers remain a race limitation.
 | [Sync ACE Resources with ASMS](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/sync-aws_post.htm) | POST /api/v1/cloudflow-accounts/sync | **operational** — Manually trigger ACE/ASMS resource synchronization; one-shot job writes a status file, not owned desired state. |
 | [Perform Traffic Simulation Query](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/traffic-simulation-query.htm) | POST /api/v1/query/ | **operational** — Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource. |
 | [Find Route Between Source and Destination](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/traffic-simulation-query1.htm) | POST /api/v1/query/routing | **operational** — Routing simulation computation; access to all path firewalls required, not durable state. |
-| [Add Trusted Rules to a Device](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-add-post.htm) | POST /api/v1/trusted-rules/rules | **unsupported mutation** — Distinct durable trusted-rules API with read/delete counterparts in A33.20; candidate future resource, but no implemented lifecycle or tested partial-result/drift contract. |
-| [Delete Trusted Rules](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-delete.htm) | DELETE /api/v1/trusted-rules/rules | **unsupported mutation** — Deletion counterpart of A33.20 trusted-rules collection; do not conflate with legacy trustedTraffic. |
-| [Get a list of all Trusted Rules](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-get.htm) | GET /api/v1/trusted-rules/rules | **deferred read-only** — A33.20 trusted-rules inventory; distinct from legacy trustedTraffic and not implemented. |
+| [Add Trusted Rules to a Device](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-add-post.htm) | POST /api/v1/trusted-rules/rules | **supported** — Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance. |
+| [Delete Trusted Rules](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-delete.htm) | DELETE /api/v1/trusted-rules/rules | **supported** — Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance. |
+| [Get a list of all Trusted Rules](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-rules-get.htm) | GET /api/v1/trusted-rules/rules | **supported** — Experimental single trusted-rule assignment lifecycle; public contract and synthetic tests only. Separate opt-in, no live acceptance. |
 | [Delete trusted traffic data](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-traffic_deletedata.htm) | DELETE /api/v1/ trustedTraffic/{trustedTrafficId} | **unsupported mutation** — Excluded mutation: standalone deletion of trusted traffic is not a desired-state resource lifecycle. |
 | [Edit trusted traffic data](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-traffic_editdata.htm) | PUT /api/v1/trustedTraffic/{trustedTrafficId} | **unsupported mutation** — Excluded mutation: no reliable complete drift source; same object/request typing conflicts as create. |
 | [Export trusted traffic to a CSV or JSON file](https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/trusted-traffic_exportdata.htm) | GET /api/v1//trustedTraffic/firewalls/{firewallName} | **operational** — Analysis, reporting, optimization, bulk credential rotation or workflow action; intentionally not modeled as a durable administration resource. |
