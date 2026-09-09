@@ -111,6 +111,28 @@ acceptance has been run.
 - Sessions are not refreshed or logged out automatically. Writes are not replayed,
   redirects are refused, and authentication/HTTP errors are not treated as absence.
 
+## Unfinished live-acceptance checklist
+
+No item below is implied by successful Registry installation or synthetic tests.
+The existing [live tests](../internal/provider/live_test.go) cover device inventory
+and a category create/import/rename/destroy sequence, not all data sources or full
+replacement/drift/recovery behavior. No live group test currently exists.
+
+- [ ] Authorized A32.60 read-only quickstart with verified TLS and complete inventory
+  visibility; extend coverage beyond the device-only automated read test.
+- [ ] Before running category mutation tests, review cleanup ownership. The current
+  live helper performs name-based lookup/delete in cleanup; add a regression and
+  require proof of test ownership for rejected/ambiguous creates before relying on
+  cleanup in a concurrent environment. This static review concern is unverified
+  against an appliance; no mutation test was run during handoff preparation.
+- [ ] Separately authorized disposable category test: override prerequisites,
+  acknowledgements, create/import/rename, URL/IP replacement, drift, destroy and
+  verified cleanup. Check the documented delete-envelope conflict and consistency.
+- [ ] Separately authorized A33.20 EA group inventory/lifecycle, exact membership,
+  import/replacement and partial-failure recovery; keep EA opt-in explicit.
+- [ ] Record sanitized appliance/version/operation evidence, not credentials, raw
+  captures, inventory dumps, plans or state in Git/shared logs.
+
 ## Registry publication verified
 
 Version 0.1.4 is indexed. The private key remains in Vault; the shared public key

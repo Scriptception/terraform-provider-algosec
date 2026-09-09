@@ -55,9 +55,15 @@ object to make recovery appear successful.
 2. Record actual API compatibility and sanitized observations, especially response
    envelopes, category acknowledgements, inventory visibility and consistency.
    Keep tenant data, credentials, raw captures, plans and state out of Git.
-3. Only after separate approval, test a disposable Panorama URL-category lifecycle
-   with the required override file. A33.20 group validation is a separate test
-   matrix; current group tests are synthetic only.
+3. Before any live mutation, review the existing test helper's name-based cleanup:
+   it must not delete a concurrent actor's object after an unconfirmed create.
+   Add an ownership regression before relying on cleanup. This is a static review
+   concern, not a reproduced appliance finding. Only after separate approval, test
+   a disposable Panorama category with the required override file. Existing live
+   automation covers device inventory and category create/import/rename/destroy,
+   not all data sources, replacement, drift or recovery. A33.20 group validation
+   needs a separate live matrix; current group tests are synthetic only. See the
+   [unfinished checklist](user-testing.md#unfinished-live-acceptance-checklist).
 4. Review dependency update PRs normally. No dependency updates or scope expansion
    are implicitly accepted by this handoff.
 5. For new resources, prove create/read/update/delete/import contracts first and

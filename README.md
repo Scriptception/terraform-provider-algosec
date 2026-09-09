@@ -185,9 +185,10 @@ signing-key fingerprint for v0.1.4 onward is `BB831B4CD32200DD15EDF4E9AB71E79683
 The alternative tag-triggered GitHub signing workflow is disabled unless
 `RELEASE_SIGNING_MODE=github-secrets` is explicitly configured together with
 approved `GPG_PRIVATE_KEY`/`PASSPHRASE` environment secrets and release protection.
-Do not enable it for the Vault-only release path. Registry onboarding and a clean
-Registry install remain separate acceptance steps; a GitHub release alone is not
-proof of Registry availability.
+Do not enable it for the Vault-only release path. Registry onboarding and v0.1.4
+installation verification are complete. Every future release still requires its
+own clean Registry installation check; GitHub publication alone is not proof of
+Registry availability.
 
 Licensed under [MPL-2.0](LICENSE). Layout, contributor workflow and release
 conventions follow the maintainer's MISP, Airlock and Mimecast providers, also

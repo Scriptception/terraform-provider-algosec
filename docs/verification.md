@@ -109,8 +109,9 @@ These logs are local execution evidence, not GitHub Actions execution results.
 
 ### Signing setup after code review
 
-The maintainer created an RSA-3072 signing key through the approved Vault wrapper
-and verified the stored record by reading it back. Fingerprint:
+For historical v0.1.3 only, the maintainer created an RSA-3072 signing key through
+the approved Vault wrapper and verified readback. This is not the current shared
+signer used by v0.1.4. Historical fingerprint:
 `71B43325624199D6C4339C17EE5515CFD4999B22`. Private key generation used an ephemeral
 tmpfs keyring; the persistent private key and passphrase remain in Vault. The
 hosted signing workflow now requires explicit `RELEASE_SIGNING_MODE=github-secrets`
@@ -144,7 +145,7 @@ or any release assets.
   `release-download-verification.json`, `release-download-0.1.3/` under the
   maintainer's `algosec-provider-work` directory.
 
-### Historical Registry failure and remaining live verification
+### Historical v0.1.3 Registry failure
 
 - Registry API returned 404/provider-not-found after GitHub publication. A fresh
   direct-only `terraform init` with `= 0.1.3`, isolated data directory and no mirror
@@ -152,6 +153,8 @@ or any release assets.
   for v0.1.4; see [current Registry verification](user-testing.md#registry-publication-verified).
   This historical failure does not require repeating onboarding. GitHub release
   publication alone remains insufficient proof of Registry availability.
+## Remaining live acceptance
+
 - No appliance credentials were read and no appliance was contacted. A32.60 base compatibility,
   Panorama override prerequisites, acknowledgement shapes, delayed consistency and
   A33.20 EA group behavior still require authorized appliance evidence.

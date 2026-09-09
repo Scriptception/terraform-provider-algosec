@@ -123,8 +123,11 @@ was also inspected to avoid overlooking durable administration:
   and [get configuration](https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/getting-a-configuration.htm):
   generic secret-bearing settings with no unset/reset contract; excluded.
 
-All committed fixtures are synthetic. No live appliance, credential manager,
-external mutation, acceptance environment, or Registry publication was used.
+All committed fixtures are synthetic. During the API research and synthetic-test
+phase, no live appliance, credential manager, external mutation, acceptance
+environment, or Registry publication was used. Subsequent signed releases and
+Registry installation are recorded separately in [verification](verification.md);
+these do not establish live-appliance compatibility.
 
 ## A33.20 experimental groups and later authorization APIs
 
