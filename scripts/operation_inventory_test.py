@@ -45,3 +45,26 @@ class ReconciledInventoryTests(unittest.TestCase):
                 if mutation == 'wrong_version': bad['current_implementation'][-1]['version_scope'] = 'a32.60'
                 if mutation == 'invent_function': bad['current_implementation'][-1]['client_function'] = 'Invented'
                 with self.assertRaises(ValueError): validate(bad, root)
+
+    def test_consistently_wrong_route_rejected(self):
+        import json, shutil, subprocess, sys, tempfile
+        from pathlib import Path
+        from operation_inventory import current_mappings
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory(prefix='algosec-route-regression-') as directory:
+            target = Path(directory)
+            for folder in ['scripts', 'docs', 'internal']:
+                shutil.copytree(root/folder, target/folder)
+            api_path = target/'docs/api-inventory.json'
+            overlay_path = target/'docs/cross-product-operations.json'
+            api = json.loads(api_path.read_text())
+            overlay = json.loads(overlay_path.read_text())
+            rename = next(o for o in api['implemented_operations'] if o.get('product') == 'AFA tags' and o['client_function'] == 'Rename')
+            delete = next(o for o in api['implemented_operations'] if o.get('product') == 'AFA tags' and o['client_function'] == 'Delete')
+            rename['actual_route_template'] = delete['actual_route_template']
+            rename['source_route_expression'] = delete['source_route_expression']
+            api_path.write_text(json.dumps(api))
+            overlay['current_implementation'] = current_mappings(overlay, api)
+            overlay_path.write_text(json.dumps(overlay))
+            result = subprocess.run([sys.executable, '-B', 'scripts/coverage_check.py'], cwd=target, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0, 'A consistently incorrect route and regenerated overlay passed')

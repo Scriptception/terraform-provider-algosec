@@ -8,8 +8,9 @@ description: |-
 
 {{.Description}}
 
-Unreleased development candidate `0.3.0-dev` adds `algosec_appviz_role`:
-**4 resources, 12 data sources and 24 selected operations**. AppViz SaaS requires
+Unreleased development candidate `0.3.0-dev` adds the experimental AppViz,
+tag, URL/IP, FireFlow and ACE subsets: **12 resources, 12 data sources and 53
+selected operations**. AppViz SaaS requires
 separate bearer configuration and `experimental_appviz_roles=true`. It is vendor
 Early Availability, distinct from legacy AppViz. See the
 [role contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/appviz-role-contract.md).
@@ -58,3 +59,13 @@ Unreleased expansion also includes [A33.30 EA ALGOSEC tags](tag-contract.md) and
 Whole AppViz role import/replacement requires `appviz_whole_role_ownership=true`
 and destroys unreadable description/LDAP linkage. Current discovery and selected
 implementation are tracked separately in the [reconciled inventory](inventory-reconciliation.md).
+
+[A33.30 FireFlow direct member/permission bindings](fireflow-binding-contract.md)
+use a separate verified-TLS session client and `experimental_fireflow_bindings=true`.
+They preserve inherited/unrelated grants and never create or delete parent roles.
+
+The selected rolling ACE SaaS subset adds [CD notification email sets, Jira,
+custom threat entries and manual cloud-registration/name bindings](ace-contract.md).
+It uses a separate bearer client and `experimental_ace_public_contracts=true`.
+Write-only arguments require Terraform 1.11+, while the recommended ephemeral
+saved-plan examples require Terraform 1.16.1+.

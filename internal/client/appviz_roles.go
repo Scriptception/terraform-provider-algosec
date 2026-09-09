@@ -376,18 +376,19 @@ func (c *AppVizClient) DeleteRole(ctx context.Context, old AppVizRole) error {
 	}
 	// The body is untyped, but explicit failure indicators cannot be ignored.
 	var body map[string]json.RawMessage
-	if json.Unmarshal(ack.Body, &body) == nil {
-		for key, value := range body {
-			text := strings.TrimSpace(string(value))
-			switch strings.ToLower(key) {
-			case "success", "status":
-				if text == "false" || strings.EqualFold(text, `"Failure"`) || strings.EqualFold(text, `"Error"`) {
-					return ErrContract
-				}
-			case "error", "errors":
-				if text != "null" && text != "{}" && text != "[]" && text != `""` {
-					return ErrContract
-				}
+	if json.Unmarshal(ack.Body, &body) != nil || body == nil {
+		return ErrContract
+	}
+	for key, value := range body {
+		text := strings.TrimSpace(string(value))
+		switch strings.ToLower(key) {
+		case "success", "status":
+			if text == "false" || strings.EqualFold(text, `"Failure"`) || strings.EqualFold(text, `"Error"`) {
+				return ErrContract
+			}
+		case "error", "errors":
+			if text != "null" && text != "{}" && text != "[]" && text != `""` {
+				return ErrContract
 			}
 		}
 	}

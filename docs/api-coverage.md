@@ -2,11 +2,13 @@
 
 ## Unreleased development candidate 0.3.0-dev
 
-The working candidate exposes **6 resources, 12 data sources and 31 selected
+The working candidate exposes **12 resources, 12 data sources and 53 selected
 method/route operations**. It adds AppViz SaaS whole-role ownership with explicit
 destructive ownership acknowledgement, A33.30 EA ALGOSEC tags and A33.20 singleton
-URL/IP assignments. See [role](appviz-role-contract.md), [tag](tag-contract.md) and
-[URL/IP](url-ip-contract.md) contracts. Published 0.2.0 counts remain historical.
+URL/IP assignments, A33.30 [FireFlow direct bindings](fireflow-binding-contract.md),
+and experimental rolling ACE configuration. See [role](appviz-role-contract.md),
+[tag](tag-contract.md), [URL/IP](url-ip-contract.md) and [ACE](ace-contract.md)
+contracts. Published 0.2.0 counts remain historical.
 
 The [reconciled cross-product inventory](inventory-reconciliation.md) preserves
 **975 candidate records and 1,048 source observations**: 747 selected REST,
@@ -14,8 +16,7 @@ The [reconciled cross-product inventory](inventory-reconciliation.md) preserves
 SOAP operation QNames. Current mappings are separate from source classifications
 and discovery counts. No overall coverage percentage or live acceptance is claimed.
 
-FireFlow direct bindings and the narrowed AppViz/ACE nominations remain active
-implementation work in the [continuation ledger](durable-expansion-ledger.md).
+The remaining narrowed AppViz nominations remain active implementation work in the [continuation ledger](durable-expansion-ledger.md); ACE's selected subset is implemented with its live and full-drift limits retained.
 Tag-hostgroup assignment has a narrow identity mapping blocker described in the
 tag contract. This is an intermediate sub-batch, not final durable-family closure.
 

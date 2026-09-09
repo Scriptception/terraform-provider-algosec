@@ -7,9 +7,38 @@ history remain unchanged. No appliance calls, credentials, Vault, remote changes
 tags, signing, publication or policy changes occurred. Public documentation and
 local synthetic HTTPS are the only API evidence used.
 
-## Current tag/URL and review-fix sub-batch
+## Current FireFlow direct-binding and review-fix sub-batch
 
-Current surface: **6 resources, 12 data sources, 31 selected method/route operations**.
+Batch 2 independent review reproduced malformed AppViz wrapper bodies, ambiguous
+URL/IP JSON and a consistently wrong route mapping. Retained regressions now reject
+these inputs before confirmation/adoption/absence; category and URL identifiers
+remain case-sensitive. Source mapping checks bind the selected function request.
+
+Current surface: **12 resources, 12 data sources, 53 selected operations**.
+`algosec_fireflow_role_member` owns one direct User/Role tuple;
+`algosec_fireflow_role_permission` owns one direct System/CustomField/RequestTemplate
+permission tuple. [Contract](fireflow-binding-contract.md): separate verified-TLS
+FireFlow_Session client, exact Success acknowledgements, preserved inherited and
+unrelated grants, canonical import, replacement validation and recovery. Parent-role
+inverse routes are represented by role membership, not counted twice.
+
+[Full sub-batch gates](durable-expansion-batch3-verification.md) passed on
+Terraform 1.16.1 and 1.11.0. Final parent frozen review remains pending; no live
+acceptance or final closure is claimed. Narrowed AppViz/ACE subsets remain active implementation work.
+
+## Current ACE configuration sub-batch
+
+The isolated ACE implementation is now integrated with planning-time serialized
+payload limits, forced-replacement credential guards, Unicode alias rejection and
+separate disabled-client configuration. It adds four experimental resources and
+18 selected rolling-SaaS operations. The secure ephemeral saved-plan examples
+require Terraform 1.16.1 or later; literal write-only protocol tests still cover
+the provider's 1.11 compatibility boundary. Independent frozen ACE review remains
+pending, and full cloud credential drift is intentionally outside this scope.
+
+## Historical tag/URL and review-fix sub-batch
+
+Sub-batch surface: **6 resources, 12 data sources, 31 selected method/route operations**.
 Added `algosec_tag` and `algosec_url_ip_membership`; see their
 [tag](tag-contract.md) and [URL/IP](url-ip-contract.md) contracts. Tag-hostgroup
 assignment has the narrow identity mapping blocker described there.
@@ -22,12 +51,13 @@ provider acknowledgement; permission implication and known-payload checks run
 before replacement. Existing baseline safety fixes remain intact.
 
 This is an intermediate coherent sub-batch. Final frozen-source independent review
-is pending, and FireFlow plus narrowed AppViz/ACE durable subsets remain work.
+requested changes; the current sub-batch fixes are recorded below. Narrowed
+AppViz/ACE durable subsets remain work.
 No completion or live acceptance is implied by current implementation counts.
 [Executed sub-batch gates](durable-expansion-batch2-verification.md) passed on
 Terraform 1.16.1 and 1.11.0; final independent review remains pending.
 
-## First coherent batch
+## Historical first coherent batch
 
 - Implemented **`algosec_appviz_role`**: separately gated AppViz SaaS EA role,
   typed bearer client, complete readable authorization/membership sets, import,
@@ -49,7 +79,7 @@ Terraform 1.16.1 and 1.11.0; final independent review remains pending.
 with **747 selected REST, 66 unresolved REST, 162 unresolved SOAP catalog names**
 and **1,048 source observations**. Zero SOAP operation QNames are certified.
 Original IDs, literal labels, source pointers and version/auth provenance remain
-unchanged. The additive `current_implementation` overlay maps 31 selected
+unchanged. The additive `current_implementation` overlay maps 53 selected
 operations; historical audit classifications are not current support claims.
 See [reconciliation](inventory-reconciliation.md). The provisional first-batch
 934-record inventory is retained only as frozen input metadata.
@@ -82,7 +112,7 @@ legacy versions, and directly retrieved SaaS public schemas and role metadata.
 | AFA A33.30 ALGOSEC tags | Implemented experimental | [Selected contract](tag-contract.md); short-page pagination, ID refresh/import and association-loaded delete guard. |
 | AFA A33.20 URL/IP singleton | Implemented experimental | [Selected contract](url-ip-contract.md); exact delta acknowledgement; no overlapping whole-category ownership. |
 | AFA tag-hostgroup assignment | Evidence-blocked identity mapping | [Narrow blocker](tag-contract.md#hostgroup-association-boundary): establish allowed-device ID to deviceDataId and canonical hostgroup read before creating an absent tuple. |
-| FireFlow A33.30 direct role permission/member bindings | Implementation candidates; next batch | Independently re-fetched [permission GET](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-get.htm) and [POST](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-post.htm), plus members GET/POST. Separate FireFlow_Session auth, singleton delta, explicit Success ack and direct/inherited reads support bounded binding work. Parent dossiers available; implement with ownership regressions. |
+| FireFlow A33.30 direct role permission/member bindings | Implemented experimental | [Contract](fireflow-binding-contract.md); separate cookie client, singleton deltas, exact Success and direct/inherited reads. Full privileged visibility and exclusive tuple writers required. |
 | FireFlow whole roles/users and SOAP custom-field assignments | Evidence-blocked full lifecycle | No whole-role DELETE; user mutation not established. Mixed REST/SOAP custom fields require certified identity/auth/namespace/binding and safe value ownership. Do not invent role delete or infer SOAP binding. |
 | FireFlow tickets, sub-ticket configurations and object change requests | Workflow boundary | Ticket configuration is reversible but scoped to a change request, not global durable configuration. Submission/status is not authoritative deployed network/service CRUD. Keep workflows out of managed resources. |
 | AFA map ignored-interface, URT, tunnels, risk/config/zone and remaining durable families | Unassessed | Parent map/URT evidence and broader graph must be reconciled; require read/identity/auth/reset semantics per candidate. Preserve generic secret-bearing config exclusions until narrowed. |
@@ -111,11 +141,9 @@ These are local synthetic tests, never appliance acceptance.
 
 1. Read `AGENTS.md`, this ledger, `docs/appviz-role-contract.md`, and `git status`.
    Preserve the branch and unrelated work. Parent owns remote push/PR/merge.
-2. Parent independently reviews the frozen first batch, then supplies fixes or
-   next-batch direction. Broad expansion is **not complete**: unassessed/candidate
+2. Parent independently reviews each exact frozen sub-batch, then supplies findings. Broad expansion is **not complete**: unassessed/candidate
    rows above are real remaining work, not evidence-blocked by fiat.
-3. Next implementation priorities: A33.30 FireFlow singleton role permission/member
-   bindings, then AppViz role/action, application-revision and service custom-field
+3. Next implementation priorities: AppViz role/action, application-revision and service custom-field
    bindings; ACE notification emails, Jira, threat entries and manual cloud-account
    registration subsets. Read
    external `afa/{tag-implementation-contract,current-actionable-addendum}.md`,

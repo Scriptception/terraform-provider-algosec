@@ -3,6 +3,7 @@ package client
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"net/netip"
 	"slices"
@@ -156,4 +157,19 @@ func categoryMembershipEqual(a, b Category) bool {
 		}
 	}
 	return true
+}
+
+// Fixed schema fields use Go JSON case folding; category and URL map keys are
+// literal identifiers. Reject ambiguity without conflating those identifiers.
+func (c *Categories) UnmarshalJSON(raw []byte) error {
+	if err := jsonUniqueKeys(raw, func(depth int) bool { return depth == 0 || depth == 2 }); err != nil {
+		return err
+	}
+	type plain Categories
+	var out plain
+	if err := json.Unmarshal(raw, &out); err != nil {
+		return ErrContract
+	}
+	*c = Categories(out)
+	return nil
 }

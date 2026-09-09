@@ -13,6 +13,8 @@ import (
 )
 
 func TestReviewPublishedAFAConfigIgnoresDisabledSaaSEnv(t *testing.T) {
+	t.Setenv("ALGOSEC_FIREFLOW_URL", "https://fireflow.example.invalid")
+	t.Setenv("ALGOSEC_FIREFLOW_SESSION", "")
 	t.Setenv("ALGOSEC_APPVIZ_SAAS_URL", "https://example.invalid")
 	t.Setenv("ALGOSEC_APPVIZ_SAAS_TOKEN", "")
 	p := New("review")()

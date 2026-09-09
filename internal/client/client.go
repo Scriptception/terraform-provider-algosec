@@ -25,6 +25,10 @@ var ErrNotFound = errors.New("object absent from complete inventory")
 var ErrContract = errors.New("API response does not match the documented contract")
 
 type Options struct {
+	ACEURL, ACEToken                   string
+	ExperimentalACE                    bool
+	FireFlowURL, FireFlowSession       string
+	ExperimentalFireFlowBindings       bool
 	ExperimentalURLIPs                 bool
 	ExperimentalTags                   bool
 	AppVizURL, AppVizToken             string
@@ -36,6 +40,8 @@ type Options struct {
 	Insecure, ReadOnly                 bool
 }
 type Client struct {
+	ACE                         *ACEClient
+	FireFlow                    *FireFlowClient
 	URLIPs                      *URLIPClient
 	AppVizWholeRoleOwnership    bool
 	Tags                        *TagClient
@@ -68,7 +74,7 @@ func ValidateURL(raw string) error {
 	return nil
 }
 func New(o Options) (*Client, error) {
-	if o.URL != "" || o.AppVizURL == "" {
+	if o.URL != "" || (o.AppVizURL == "" && o.FireFlowURL == "" && o.ACEURL == "") {
 		if err := ValidateURL(o.URL); err != nil {
 			return nil, err
 		}
@@ -79,6 +85,14 @@ func New(o Options) (*Client, error) {
 	if o.Timeout < time.Second || o.Timeout > 5*time.Minute {
 		return nil, errors.New("timeout must be between 1 and 300 seconds")
 	}
+	var ace *ACEClient
+	if o.ACEURL != "" || o.ACEToken != "" {
+		var err error
+		ace, err = NewACEClient(o.ACEURL, o.ACEToken, o.Timeout, o.ReadOnly, o.ExperimentalACE)
+		if err != nil {
+			return nil, err
+		}
+	}
 	var appviz *AppVizClient
 	if o.AppVizURL != "" || o.AppVizToken != "" {
 		var err error
@@ -87,11 +101,19 @@ func New(o Options) (*Client, error) {
 			return nil, err
 		}
 	}
-	if o.URL == "" && appviz != nil {
+	var fireflow *FireFlowClient
+	if o.FireFlowURL != "" || o.FireFlowSession != "" {
+		var err error
+		fireflow, err = NewFireFlowClient(o.FireFlowURL, o.FireFlowSession, o.Timeout, o.ReadOnly, o.ExperimentalFireFlowBindings)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if o.URL == "" && (appviz != nil || fireflow != nil || ace != nil) {
 		if o.Username != "" || o.Password != "" || o.SessionID != "" {
 			return nil, errors.New("AFA credentials require a separate url")
 		}
-		return &Client{AppViz: appviz, readOnly: o.ReadOnly}, nil
+		return &Client{ACE: ace, AppViz: appviz, FireFlow: fireflow, readOnly: o.ReadOnly}, nil
 	}
 	if o.SessionID != "" && (o.Username != "" || o.Password != "") {
 		return nil, errors.New("session_id and username/password authentication are mutually exclusive")
@@ -105,7 +127,7 @@ func New(o Options) (*Client, error) {
 	tr := http.DefaultTransport.(*http.Transport).Clone()
 	tr.TLSClientConfig = &tls.Config{MinVersion: tls.VersionTLS12, InsecureSkipVerify: o.Insecure} // explicit opt-in only
 	tr.ResponseHeaderTimeout = o.Timeout
-	c := &Client{AppViz: appviz, loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}
+	c := &Client{ACE: ace, AppViz: appviz, FireFlow: fireflow, loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}
 	c.Tags = NewTagClient(c, o.ExperimentalTags)
 	c.URLIPs = NewURLIPClient(c, o.ExperimentalURLIPs)
 	return c, nil

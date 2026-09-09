@@ -72,6 +72,17 @@ def current_mappings(document, api_inventory):
     identity = SourceIdentity(inputs[2], inputs[3])
     result = []
     for op in api_inventory['implemented_operations']:
+        if op.get('product') == 'ACE':
+            candidates = [row['id'] for row in document['operations']
+                          if row['protocol'] == 'REST'
+                          and row['version'] == 'rolling-saas'
+                          and row['method'] == op['method']
+                          and row['route'] == op['actual_route_template']
+                          and op['documentation_url'] in row['source_urls']]
+            require(len(candidates) == 1, 'Ambiguous or absent exact ACE operation mapping: ' + str(op))
+            tests = ['internal/client/ace_test.go', 'internal/provider/ace_test.go', 'internal/provider/ace_recovery_test.go']
+            result.append({'candidate_id': candidates[0], **op, 'tests': tests, 'independent_final_review': 'pending', 'live_verified': False})
+            continue
         version = VERSIONS[op['version_scope']]
         candidates = []
         tests = []
@@ -86,6 +97,7 @@ def current_mappings(document, api_inventory):
                 candidates.append(row['id'])
         require(len(set(candidates)) == 1, 'Ambiguous or absent exact operation mapping: ' + str(op))
         if op.get('product') == 'AFA tags': tests = ['internal/client/tags_test.go', 'internal/provider/tag_test.go', 'internal/provider/tag_url_recovery_test.go']
+        if op.get('product') == 'FireFlow': tests = ['internal/client/fireflow_test.go', 'internal/provider/fireflow_test.go', 'internal/provider/fireflow_recovery_test.go']
         if op.get('product') == 'AFA URL/IP': tests = ['internal/client/url_ip_test.go', 'internal/provider/url_ip_test.go', 'internal/provider/tag_url_recovery_test.go']
         if 'resource.algosec_url_ip_membership' in op['surfaces']:
             tests.append('internal/provider/url_ip_test.go')

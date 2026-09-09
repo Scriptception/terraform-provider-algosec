@@ -1,0 +1,1 @@
+terraform import algosec_ace_cd_notification_emails.alerts aws

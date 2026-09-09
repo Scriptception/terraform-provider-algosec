@@ -2,6 +2,18 @@
 
 ## 0.3.0-dev (unreleased)
 
+- Reject malformed AppViz DELETE body shapes and ambiguous category JSON without
+  conflating case-sensitive identifiers; bind inventory routes to selected requests.
+- Add separately gated A33.30 FireFlow direct User/Role membership and direct
+  System/CustomField/RequestTemplate permission bindings with verified TLS,
+  externally supplied session cookies and preserved inherited/unrelated grants.
+- Add four separately gated rolling ACE SaaS configuration resources for CD
+  notification email sets, Jira integration, custom threat entries and reduced
+  manual cloud-registration/name lifecycles. Planning rejects oversized encoded
+  writes and unresolved replacement bootstrap credentials; live compatibility is
+  unverified.
+
+
 - Add experimental A33.30 EA ALGOSEC tags and A33.20 singleton URL/IP membership.
 - Fix independently reproduced AppViz oversized replacement, disabled ambient
   SaaS configuration, and documented DELETE-wrapper completion regressions.
@@ -12,7 +24,7 @@
 
 
 - Add experimental `algosec_appviz_role` for the public AppViz SaaS Early Availability role contract, with separate bearer authentication, complete readable permission/membership ownership, explicit import, fail-closed reads and recovery. No legacy AppViz or live compatibility claim.
-- Add four typed SaaS operations: role GET/create/update/delete (4 resources, 12 data sources, 24 selected operations). Preserve published 0.2.0 installation pins.
+- Add four typed SaaS operations: role GET/create/update/delete (historical first sub-batch: 4 resources, 12 data sources, 24 selected operations). Preserve published 0.2.0 installation pins.
 - Reject known-invalid category IPs alongside unknown values, and null group members, before replacement destroys owned objects.
 - Remove name-only live-test cleanup that could delete another actor's category after an unconfirmed create; Terraform state drives cleanup.
 - Add a cross-product public-operation inventory and runnable continuation ledger; remaining candidates are tracked separately from implemented lifecycles.

@@ -6,7 +6,7 @@ For `feat/durable-api-expansion`, start with the
 [durable expansion ledger](durable-expansion-ledger.md) and
 [AppViz SaaS role contract](appviz-role-contract.md). Development VERSION is
 `0.3.0-dev`; published 0.2.0 pins and historical evidence below remain unchanged.
-This candidate has six resources, twelve data sources and thirty-one selected
+This candidate has twelve resources, twelve data sources and fifty-three selected
 operations. No publication or live acceptance is authorized by this handoff.
 
 
@@ -22,7 +22,8 @@ operations. No publication or live acceptance is authorized by this handoff.
 
 ## Current published baseline: v0.2.0
 
-`VERSION` and active installation pins select published `0.2.0`:
+Historical release `VERSION` and retained installation pins select published `0.2.0`;
+the current repository `VERSION` is the unpublished `0.3.0-dev` candidate:
 [Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0)
 and [signed GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.2.0).
 Immutable tag `v0.2.0` is commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
@@ -65,7 +66,7 @@ Published `v0.2.0` adds `algosec_trusted_rule` (A33.20) behind
 [historical implementation verification](public-expansion-verification.md). Historical
 v0.1.4 has 2 resources, 12 data sources and 17 operations.
 
-The provider exposes **3 resources and 12 data sources**, implementing **20
+The published v0.2.0 provider exposes **3 resources and 12 data sources**, implementing **20
 method/route operations**. The inventory covers **204 documentation pages**:
 85 A32.60 and 119 A33.20. Page counts are not API-operation coverage percentages.
 

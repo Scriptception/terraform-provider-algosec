@@ -1,9 +1,11 @@
 # Terraform Provider for AlgoSec
 
-> Development branch: `0.3.0-dev` adds experimental `algosec_appviz_role` for
-> AppViz SaaS and fixes category/group replacement and cleanup ownership defects.
-> This is unreleased; published 0.2.0 pins below are unchanged. See the
-> [contract](docs/appviz-role-contract.md) and [continuation ledger](docs/durable-expansion-ledger.md).
+> Development branch `0.3.0-dev` currently adds separately gated AppViz role,
+> A33.30 tag, A33.20 URL/IP membership, A33.30 FireFlow direct bindings and
+> rolling ACE configuration: 12 resources, 12 data sources and 53 selected
+> operations. This is unreleased;
+> published 0.2.0 pins below remain unchanged. See the
+> [continuation ledger](docs/durable-expansion-ledger.md).
 
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
 Firewall Analyzer / ASMS A32.60**, with explicitly experimental A33.20 device
@@ -18,7 +20,7 @@ and direct Registry installation are verified. **Live-appliance testing remains 
 
 Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/maintainer-handoff.md).
 
-## Implemented scope
+## Published v0.2.0 scope
 
 | Resources | Ownership and lifecycle |
 |---|---|
@@ -36,7 +38,7 @@ Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/m
 | `algosec_network_objects` | Paginated device network-object search. |
 | `algosec_trusted_traffic` | Informational paginated trusted-traffic inventory; upstream may omit zero-hit entries. |
 
-User/role management, general credentialed device onboarding, trusted-traffic
+In published v0.2.0, user/role management, general credentialed device onboarding, trusted-traffic
 mutation, risk-profile mutation, rule documentation, analyses, exports, active
 changes and other one-shot operations are excluded. The coverage map gives
 endpoint-specific reasons; this is not a full ASMS administration provider.

@@ -158593,6 +158593,566 @@
         "internal/provider/url_ip_test.go"
       ],
       "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-60eb661d0eee6bf9",
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/FireFlow/api/roles/{id}/members",
+      "client_function": "Members",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/members\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_member"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-get.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false,
+      "tests": [
+        "internal/client/fireflow_test.go",
+        "internal/provider/fireflow_recovery_test.go",
+        "internal/provider/fireflow_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-c826a1b08234f23a",
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/FireFlow/api/roles/{id}/members",
+      "client_function": "ChangeMember",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/members\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_member"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-post.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false,
+      "tests": [
+        "internal/client/fireflow_test.go",
+        "internal/provider/fireflow_recovery_test.go",
+        "internal/provider/fireflow_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-efd6a68a6812dcdd",
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/FireFlow/api/roles/{id}/permissions",
+      "client_function": "Permissions",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/permissions\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_permission"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-get.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false,
+      "tests": [
+        "internal/client/fireflow_test.go",
+        "internal/provider/fireflow_recovery_test.go",
+        "internal/provider/fireflow_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-1c8b7dc417994b7c",
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/FireFlow/api/roles/{id}/permissions",
+      "client_function": "ChangePermission",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/permissions\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_permission"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-post.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false,
+      "tests": [
+        "internal/client/fireflow_test.go",
+        "internal/provider/fireflow_recovery_test.go",
+        "internal/provider/fireflow_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-31ca5c846d30ccc8",
+      "product": "ACE",
+      "client_function": "Accounts",
+      "method": "GET",
+      "actual_route_template": "/api/algosaas/accounts/v1/account",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-42441e1c7d2644f3",
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/700ea656af479-onboard-a-single-aws-account",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-15b5f4135ed333b8",
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/46ac658f69d17-update-an-aws-account-name",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-a27118ed0dc0cb80",
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/a52cb60d0e71a-delete-an-aws-account",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-279301d864587f7c",
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/433b9a550df17-onboard-a-single-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-0357ee62bf13a7e4",
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/165717337a77d-update-an-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-d9e1a8fa2d7f1dc0",
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/5743a2429ad66-delete-an-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-364c0410e73c8820",
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/fb7ea5acbb779-onboard-a-single-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-35426cff4b3e9077",
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/7d9f3d77dfe5c-update-a-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-28c9e4f65a9ae325",
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/153b4761af20e-delete-a-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-a339f3e541b2012f",
+      "product": "ACE",
+      "client_function": "Jira",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/9qel3er0lwyna-get-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-80c897d674793960",
+      "product": "ACE",
+      "client_function": "CreateJira",
+      "method": "POST",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/owlrnpuhg6c18-create-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-6399dd3aee0564e3",
+      "product": "ACE",
+      "client_function": "DeleteJira",
+      "method": "DELETE",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/cjon09rnk8332-delete-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-a1d3144b87a7cfda",
+      "product": "ACE",
+      "client_function": "CDEmails",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/e4by78wj36yqp-get-cd-mitigation-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "source_route_expression": "aceCDPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-9c5dc31382dfa138",
+      "product": "ACE",
+      "client_function": "patchCDEmails",
+      "method": "PATCH",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0fop00rbo1jtv-update-cd-mitigation-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "source_route_expression": "aceCDPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-8d37b854dcaa0bf9",
+      "product": "ACE",
+      "client_function": "ThreatEntry",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/gy2nwb0ekgdpq-get-detailed-list-data-for-threat-type",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-6b289cf1ea4d5ab1",
+      "product": "ACE",
+      "client_function": "CreateThreatEntry",
+      "method": "POST",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/sp0xl325r7rhb-add-a-new-item-to-a-custom-threat-list",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
+    },
+    {
+      "candidate_id": "op-718d314df14c3f42",
+      "product": "ACE",
+      "client_function": "DeleteThreatEntry",
+      "method": "DELETE",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/j09s7757tcg1p-delete-item-s-from-a-custom-threat-list",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath",
+      "tests": [
+        "internal/client/ace_test.go",
+        "internal/provider/ace_test.go",
+        "internal/provider/ace_recovery_test.go"
+      ],
+      "independent_final_review": "pending"
     }
   ]
 }
