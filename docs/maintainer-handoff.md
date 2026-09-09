@@ -1,0 +1,110 @@
+# Maintainer handoff
+
+## Start here in a fresh session
+
+1. Read [AGENTS.md](../AGENTS.md), this handoff, [API coverage](api-coverage.md),
+   and the current section of [verification](verification.md).
+2. Inspect `git status --short --branch`, the current commit, open pull requests,
+   and current CI before making changes. Preserve unrelated work; do not replay
+   old release scripts or infer that a previously green tree is still current.
+3. Choose the next task explicitly. A new session is not authorization to publish
+   a release, change signing credentials, or contact an appliance.
+
+## Published baseline
+
+- [Terraform Registry v0.1.4](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
+  and [GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.4).
+- Immutable release source: `172f6e77cb0476a981b3cbb08ace3d2975ecbd3b`.
+  Main contains later documentation improvements; it is not the release source.
+- [Release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34309853152)
+  passed. Direct-only Registry init, signature verification, validate and schema
+  loading passed on Terraform 1.11.0 and 1.16.1, without mirrors or plugin caches.
+- Shared Terraform signing-key fingerprint:
+  `BB831B4CD32200DD15EDF4E9AB71E7968334DF52` (Registry key `11617`).
+  Reuse this key across the maintainer's Terraform providers. Do not create a new
+  per-provider key or copy private material into GitHub Secrets.
+- v0.1.3 was signed with an earlier key and is historical. Do not move its tag,
+  replace its assets, or confuse its old onboarding failure with current status.
+- Eight platform archives were cross-built and verified; execution tests were
+  Linux amd64 only. All 12 uploaded release assets were downloaded/hash-compared.
+
+## Implemented scope and boundaries
+
+The provider exposes **2 resources and 12 data sources**, implementing **17
+method/route operations**. The inventory covers **204 documentation pages**:
+85 A32.60 and 119 A33.20. Page counts are not API-operation coverage percentages.
+
+Base APIs target A32.60. Device groups target A33.20 Early Availability, are
+experimental and require explicit opt-in. No live AlgoSec appliance compatibility
+has been established. Do not turn synthetic fixture tests into a live acceptance
+claim. Managed file devices, users/roles and broader operational workflows remain
+excluded where a complete durable lifecycle contract has not been demonstrated.
+
+Create ownership must come from an operation-specific positive acknowledgement,
+not a same-name GET after rejected or unconfirmed creation. Keep the category and
+group regression suites when extending the provider. Preserve already-owned
+partial state on ambiguous update/readback errors; do not adopt another actor's
+object to make recovery appear successful.
+
+## Next useful work
+
+1. **Read-only live acceptance:** obtain an authorized appliance/version and
+   approved credential source. Use the [quickstart](../examples/quickstart/README.md)
+   with verified TLS, complete administrator inventory visibility and protected
+   working state. `terraform plan` reads the appliance; it is not an offline test.
+2. Record actual API compatibility and sanitized observations, especially response
+   envelopes, category acknowledgements, inventory visibility and consistency.
+   Keep tenant data, credentials, raw captures, plans and state out of Git.
+3. Only after separate approval, test a disposable Panorama URL-category lifecycle
+   with the required override file. A33.20 group validation is a separate test
+   matrix; current group tests are synthetic only.
+4. Review dependency update PRs normally. No dependency updates or scope expansion
+   are implicitly accepted by this handoff.
+5. For new resources, prove create/read/update/delete/import contracts first and
+   add failing ownership and recovery regressions before implementation changes.
+
+## Development and release commands
+
+Normal environment: Go and Terraform on PATH, plus a C compiler for the race
+suite. Tool versions are declared in `go.mod`, `Makefile` and the CI workflow.
+
+```sh
+make fmt-check test vet vuln docs-check smoke actionlint
+make generate                    # after schema/example/template edits
+make coverage-check
+make release-check               # includes package smoke and GoReleaser check
+```
+
+`make test` includes real Terraform protocol tests against synthetic local HTTPS
+fixtures. `make testacc-read` is an explicit live operation; mutation additionally
+requires the documented opt-in variables. See [user testing](user-testing.md).
+
+### Future authorized releases
+
+1. Bump `VERSION`, changelog and active example pins; regenerate docs. Preserve
+   historical evidence rather than globally replacing old version strings.
+2. Run release gates and exact-source CI. Freeze the source commit, then create a
+   new tag; never overwrite a released version.
+3. Verify the existing shared private/public key pair, derive its full fingerprint,
+   match it to the Registry public key and test signing before building a release.
+   Keep secret retrieval/signing in the approved credential boundary.
+4. Build the clean tag using `goreleaser release --clean --skip=publish,sign`.
+   Sign checksums in an ephemeral keyring and verify with an independent
+   public-only keyring. Include the protocol manifest in the checksums.
+5. Create a draft release with an explicit asset list. Download every uploaded
+   asset, compare hashes/counts, and test the exact host ZIP before publishing.
+6. Verify Registry indexing and then direct-only init in a fresh HOME/config/data
+   directory with no mirror, development override or plugin cache. Require the
+   expected signing key, checksum, schema and validation results.
+7. Update current docs after verified publication without altering the immutable
+   release tag or assets.
+
+The maintainer's default signing path is Vault-backed. The hosted GitHub signing
+job is opt-in (`RELEASE_SIGNING_MODE=github-secrets`) and is not the default release
+mechanism. HCP Terraform token authentication is distinct from public Registry
+onboarding. Existing onboarding already works: do not repeat the old browser/token
+setup loop. An empty classic GitHub hooks list is not sufficient evidence that
+Registry integration is absent; v0.1.4 indexed automatically after publication.
+
+Host-specific tool paths, Vault record names and version-pinned helper scripts
+belong in the local `terraform-provider-algosec` skill, not this portable runbook.

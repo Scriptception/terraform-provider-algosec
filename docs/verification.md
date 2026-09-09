@@ -26,13 +26,13 @@ passed. Provider code and dependencies are unchanged from v0.1.3.
 
 ## Historical 0.1.3 candidate verification
 
-Prepared on 2026-09-09 from clean main
-`c659b5eb24f5ab5aeb662c50c7c1eb5299de509d`. Changes remain uncommitted for maintainer
-review. Scope is unchanged: 2 resources / 12 data sources, 17 client method/route
-operations including login. All API fixtures are synthetic. This document records
-this preparation's executed checks, not previous revisions' release claims.
+The candidate was prepared on 2026-09-09 from clean main
+`c659b5eb24f5ab5aeb662c50c7c1eb5299de509d`; its changes were subsequently reviewed,
+committed and released as recorded below. Scope was 2 resources / 12 data sources,
+17 client method/route operations including login. All API fixtures were synthetic.
+The following subsections preserve historical evidence, not current task status.
 
-## Evidence and TDD
+### Evidence and TDD
 
 The independent publication audit and captured official A32.60 create, rename and
 delete pages were read. Their URLs and selected contract choices are in
@@ -66,7 +66,7 @@ The existing synthetic server already returned the selected documented categorie
 maps for all three operations; comments now explain the delete response-table
 choice. No alternate write route, response retry or guessed payload was introduced.
 
-## Tools and executed gates
+### Tools and executed gates
 
 Observed local tools: Go **1.26.8 linux/amd64**, Terraform **1.16.1** and **1.11.0**.
 Race tests used `CGO_ENABLED=1` with the supplied Zig 0.16.0 `zig cc` compiler.
@@ -107,7 +107,7 @@ stopped at docs parity because inventory edits overlapped its snapshot; the sett
 documentation passed the subsequent final run. Initial failures are not hidden.
 These logs are local execution evidence, not GitHub Actions execution results.
 
-## Signing setup after code review
+### Signing setup after code review
 
 The maintainer created an RSA-3072 signing key through the approved Vault wrapper
 and verified the stored record by reading it back. Fingerprint:
@@ -119,7 +119,7 @@ process, not by copying Vault secrets into GitHub. The pending list below record
 what the earlier code-preparation run did not do; final release evidence belongs
 to the corresponding GitHub release.
 
-## Final signed release verification
+### Final signed release verification
 
 Published [v0.1.3](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3)
 from source commit `f4c4e9e7e8af1b57e8643a4dbad9694c8d3c0aac` after
@@ -144,13 +144,14 @@ or any release assets.
   `release-download-verification.json`, `release-download-0.1.3/` under the
   maintainer's `algosec-provider-work` directory.
 
-## Pending external and live verification
+### Historical Registry failure and remaining live verification
 
 - Registry API returned 404/provider-not-found after GitHub publication. A fresh
   direct-only `terraform init` with `= 0.1.3`, isolated data directory and no mirror
-  failed with provider-not-found. Registry login, namespace public-key registration
-  and repository onboarding remain required. GitHub release publication is not
-  Registry publication. See the [one-time checklist](user-testing.md#remaining-registry-onboarding).
+  failed with provider-not-found. Those onboarding/signing blockers were resolved
+  for v0.1.4; see [current Registry verification](user-testing.md#registry-publication-verified).
+  This historical failure does not require repeating onboarding. GitHub release
+  publication alone remains insufficient proof of Registry availability.
 - No appliance credentials were read and no appliance was contacted. A32.60 base compatibility,
   Panorama override prerequisites, acknowledgement shapes, delayed consistency and
   A33.20 EA group behavior still require authorized appliance evidence.

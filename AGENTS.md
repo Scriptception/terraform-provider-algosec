@@ -1,5 +1,8 @@
 # Contributor guidance
 
+- Fresh sessions start with [maintainer handoff](docs/maintainer-handoff.md) for
+  the published baseline, release workflow and remaining live-acceptance work.
+
 - Scope is durable ASMS A32.60 administration. Read docs/api-coverage.md before
   adding endpoints. Public official contracts are primary; never invent routes,
   payloads, identifiers, response envelopes or delete/reset behavior.

@@ -11,6 +11,8 @@ Terraform lifecycle tests, and a [signed v0.1.4 release](https://github.com/Scri
 **[Published in Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4); live-appliance testing remains pending.** Read the
 [API coverage and contract limitations](docs/api-coverage.md) before using it.
 
+Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/maintainer-handoff.md).
+
 ## Implemented scope
 
 | Resources | Ownership and lifecycle |
