@@ -9,6 +9,9 @@ permissions:
 
 jobs:
   release:
+    # Default releases are signed by the maintainer's Vault-backed local process.
+    # Opt in only when separately approved GitHub signing secrets are configured.
+    if: ${{ vars.RELEASE_SIGNING_MODE == 'github-secrets' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     environment: release

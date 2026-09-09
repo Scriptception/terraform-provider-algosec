@@ -63,7 +63,8 @@ terraform {
   required_version = ">= 1.11.0"
   required_providers {
     algosec = {
-      source = "Scriptception/algosec"
+      source  = "Scriptception/algosec"
+      version = "= 0.1.3"
     }
   }
 }
@@ -173,16 +174,35 @@ initial build.
 
 ## Releases and license
 
-`VERSION` and `CHANGELOG.md` use SemVer. The tag-triggered release workflow checks
-that the tag matches VERSION and the current tested main source, reruns gates,
-and uses a `release` environment for GPG secrets. Configure environment protection
-and approval rules before publishing. Configure
-`GPG_PRIVATE_KEY` and `PASSPHRASE` with a Registry-compatible RSA/DSA key before
-publishing. GoReleaser produces cross-platform ZIPs, a manifest, SHA256 sums and
-signed checksums. Registry onboarding and install validation remain future work.
+`VERSION` and `CHANGELOG.md` use SemVer. The maintainer's default release path
+builds the tested commit with GoReleaser, signs checksums using the key held in
+Vault, verifies the exact archives, then publishes the GitHub release. The private
+key is never stored in this repository or copied to GitHub Secrets. The public
+signing-key fingerprint is `71B43325624199D6C4339C17EE5515CFD4999B22`.
+
+The alternative tag-triggered GitHub signing workflow is disabled unless
+`RELEASE_SIGNING_MODE=github-secrets` is explicitly configured together with
+approved `GPG_PRIVATE_KEY`/`PASSPHRASE` environment secrets and release protection.
+Do not enable it for the Vault-only release path. Registry onboarding and a clean
+Registry install remain separate acceptance steps; a GitHub release alone is not
+proof of Registry availability.
 
 Licensed under [MPL-2.0](LICENSE). Layout, contributor workflow and release
 conventions follow the maintainer's MISP, Airlock and Mimecast providers, also
 MPL-2.0. AlgoSec documentation is linked as evidence, not bundled as upstream HTML.
 
 Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.
+
+## First user test: 0.1.3 candidate
+
+Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
+pinned to `= 0.1.3`, with environment-based authentication and TLS verification.
+It exposes only counts; full inventory can still enter plan/state and needs protection.
+Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
+Before Registry availability, use the release ZIP filesystem mirror described in
+[user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md);
+real init works with this source without Registry lookup. That guide also covers
+CA trust, category prerequisites, disposable mutations, import/destroy, exact known
+limitations and the pending publication checklist. No GPG key is available yet;
+signing, final release archives, Registry publication/install and appliance testing
+remain pending. Scope is unchanged at 2 resources / 12 data sources.

@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"net/netip"
+	"slices"
 )
 
 const categoryPath = api + "/plugins/panorama/URLCategory/"
@@ -21,6 +22,10 @@ func (c *Client) Categories(ctx context.Context) (map[string]Category, error) {
 	if err := c.do(ctx, "GET", categoryPath, nil, nil, &out); err != nil {
 		return nil, err
 	}
+	return validateCategories(out)
+}
+
+func validateCategories(out Categories) (map[string]Category, error) {
 	if out.Categories == nil {
 		return nil, ErrContract
 	}
@@ -76,9 +81,21 @@ func (c *Client) CreateCategory(ctx context.Context, name string, v Category) er
 	if err := ValidateURLs(v.URLs); err != nil {
 		return err
 	}
-	return c.do(ctx, "PUT", categoryPath, nil, Categories{map[string]Category{name: v}}, nil)
+	var out Categories
+	if err := c.do(ctx, "PUT", categoryPath, nil, Categories{map[string]Category{name: v}}, &out); err != nil {
+		return err
+	}
+	all, err := validateCategories(out)
+	if err != nil {
+		return err
+	}
+	got, ok := all[name]
+	if !ok || !categoryMembershipEqual(got, v) {
+		return ErrContract
+	}
+	return nil
 }
-func (c *Client) RenameCategory(ctx context.Context, oldName, newName string) error {
+func (c *Client) RenameCategory(ctx context.Context, oldName, newName string, expected Category) error {
 	part, err := Segment(oldName)
 	if err != nil {
 		return err
@@ -86,11 +103,57 @@ func (c *Client) RenameCategory(ctx context.Context, oldName, newName string) er
 	if _, err = Segment(newName); err != nil {
 		return err
 	}
-	return c.do(ctx, "PUT", categoryPath+part+"/", nil, newName, nil)
+	var out Categories
+	if err := c.do(ctx, "PUT", categoryPath+part+"/", nil, newName, &out); err != nil {
+		return err
+	}
+	all, err := validateCategories(out)
+	if err != nil {
+		return err
+	}
+	if _, ok := all[oldName]; ok {
+		return ErrContract
+	}
+	if got, ok := all[newName]; !ok || !categoryMembershipEqual(got, expected) {
+		return ErrContract
+	}
+	return nil
 }
 func (c *Client) DeleteCategory(ctx context.Context, name string) error {
 	if _, err := Segment(name); err != nil {
 		return err
 	}
-	return c.do(ctx, "DELETE", categoryPath, nil, []string{name}, nil)
+	// Select the response table's post-deletion categories map, shared with GET.
+	// The contradictory nested example is not an alternate contract or retry path.
+	var out Categories
+	if err := c.do(ctx, "DELETE", categoryPath, nil, []string{name}, &out); err != nil {
+		return err
+	}
+	all, err := validateCategories(out)
+	if err != nil {
+		return err
+	}
+	if _, ok := all[name]; ok {
+		return ErrContract
+	}
+	return nil
+}
+
+func categoryMembershipEqual(a, b Category) bool {
+	if len(a.URLs) != len(b.URLs) {
+		return false
+	}
+	for url, ips := range a.URLs {
+		other, ok := b.URLs[url]
+		if !ok {
+			return false
+		}
+		x, y := slices.Clone(ips), slices.Clone(other)
+		slices.Sort(x)
+		slices.Sort(y)
+		if !slices.Equal(x, y) {
+			return false
+		}
+	}
+	return true
 }

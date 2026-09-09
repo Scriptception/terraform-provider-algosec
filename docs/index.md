@@ -23,17 +23,19 @@ terraform {
   required_version = ">= 1.11.0"
   required_providers {
     algosec = {
-      source = "Scriptception/algosec"
+      source  = "Scriptception/algosec"
+      version = "= 0.1.3"
     }
   }
 }
 
 provider "algosec" {
   # Set ALGOSEC_URL and ALGOSEC_SESSION_ID, or ALGOSEC_USERNAME/ALGOSEC_PASSWORD.
-  # This initial provider is not published. See README for local dev overrides.
+  # This initial provider is not published. See docs/user-testing.md for ZIP mirror installation.
   # A33.20 EA groups only: experimental_device_groups = true.
   # AlgoSec does not recommend these group APIs for production.
   read_only = true
+  insecure  = false
 }
 ```
 
@@ -50,3 +52,17 @@ provider "algosec" {
 - `timeout_seconds` (Number) Per-request timeout, 1–300 seconds. Defaults to 30. No requests are automatically retried.
 - `url` (String) HTTPS appliance origin, without a path. Environment: ALGOSEC_URL.
 - `username` (String) ASMS login username. Environment: ALGOSEC_USERNAME. Mutually exclusive with session_id.
+
+## First user test: 0.1.3 candidate
+
+Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
+pinned to `= 0.1.3`, with environment-based authentication and TLS verification.
+It exposes only counts; full inventory can still enter plan/state and needs protection.
+Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
+Before Registry availability, use the release ZIP filesystem mirror described in
+[user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md);
+real init works with this source without Registry lookup. That guide also covers
+CA trust, category prerequisites, disposable mutations, import/destroy, exact known
+limitations and the pending publication checklist. No GPG key is available yet;
+signing, final release archives, Registry publication/install and appliance testing
+remain pending. Scope is unchanged at 2 resources / 12 data sources.

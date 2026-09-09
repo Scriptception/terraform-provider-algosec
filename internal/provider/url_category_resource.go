@@ -137,7 +137,7 @@ func (r *urlCategoryResource) Create(ctx context.Context, q resource.CreateReque
 		return
 	}
 	if err = r.c.CreateCategory(ctx, m.Name.ValueString(), v); err != nil {
-		s.Diagnostics.AddError("Cannot create category", err.Error())
+		s.Diagnostics.AddError("Category create not confirmed", err.Error()+" Inspect the remote category and verify ownership before importing or retrying; no ownership was recorded.")
 		return
 	}
 	// Persist recoverable identity before read-back, even if read-back subsequently fails.
@@ -211,7 +211,7 @@ func (r *urlCategoryResource) Update(ctx context.Context, q resource.UpdateReque
 			s.Diagnostics.AddError("Cannot check rename target", err.Error())
 			return
 		}
-		if err = r.c.RenameCategory(ctx, old.ID.ValueString(), m.Name.ValueString()); err != nil {
+		if err = r.c.RenameCategory(ctx, old.ID.ValueString(), m.Name.ValueString(), previous); err != nil {
 			s.Diagnostics.AddError("Cannot rename category", err.Error())
 			return
 		}

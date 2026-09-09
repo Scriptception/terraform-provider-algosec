@@ -53,6 +53,8 @@ func (s *Server) handle(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		s.Writes++
 	}
+	// Synthetic category writes return the documented post-operation categories map.
+	// Delete follows the response table, not the contradictory nested example.
 	const cats = "/afa/api/v1/plugins/panorama/URLCategory/"
 	if r.URL.Path == cats {
 		switch r.Method {

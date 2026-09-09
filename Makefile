@@ -43,7 +43,7 @@ smoke: build
 actionlint:
 	$(GO) run github.com/rhysd/actionlint/cmd/actionlint@$(ACTIONLINT_VERSION)
 
-release-check: fmt-check test vet vuln docs-check smoke actionlint
+release-check: coverage-check package-smoke fmt-check test vet vuln docs-check smoke actionlint
 	$(GO) mod verify
 	$(GORELEASER) check
 
@@ -55,3 +55,10 @@ testacc-mutation:
 	@test "$$ALGOSEC_ACC_MUTATION" = 1
 	@test "$$ALGOSEC_ACC_DISPOSABLE" = 1
 	TF_ACC=1 $(GO) test -v -timeout=60m ./internal/provider -run '^TestAcc.*Mutation$$'
+
+.PHONY: coverage-check package-smoke
+coverage-check:
+	python3 scripts/coverage_check.py
+
+package-smoke: build
+	TERRAFORM=$(TERRAFORM) python3 scripts/package_smoke.py

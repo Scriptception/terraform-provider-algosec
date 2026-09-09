@@ -295,7 +295,9 @@ func TestMutationResponseErrors(t *testing.T) {
 				func() error {
 					return c.CreateCategory(context.Background(), "test", Category{URLs: map[string][]string{}})
 				},
-				func() error { return c.RenameCategory(context.Background(), "test", "new") },
+				func() error {
+					return c.RenameCategory(context.Background(), "test", "new", Category{URLs: map[string][]string{}})
+				},
 				func() error { return c.DeleteCategory(context.Background(), "test") },
 			} {
 				if err := call(); err == nil {
@@ -303,5 +305,24 @@ func TestMutationResponseErrors(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestCreateCategoryExactAcknowledgementMembership(t *testing.T) {
+	for _, tc := range []struct {
+		body string
+		good bool
+	}{
+		{`{"categories":{"test":{"urls":{"example.invalid":["192.0.2.2","192.0.2.1"]}}}}`, true},
+		{`{"categories":{"test":{"urls":{"example.invalid":["192.0.2.1"]}}}}`, false},
+		{`{"categories":{"test":{"urls":{"example.invalid":["192.0.2.1","192.0.2.3"]}}}}`, false},
+		{`{"categories":{"test":{"urls":{"wrong.invalid":["192.0.2.1","192.0.2.2"]}}}}`, false},
+		{`{"categories":{"test":{"urls":{"example.invalid":["invalid"]}}}}`, false},
+	} {
+		c := fixture(t, func(w http.ResponseWriter, r *http.Request) { fmt.Fprint(w, tc.body) })
+		err := c.CreateCategory(context.Background(), "test", Category{URLs: map[string][]string{"example.invalid": {"192.0.2.1", "192.0.2.2"}}})
+		if (err == nil) != tc.good {
+			t.Fatalf("acknowledgement %s: %v", tc.body, err)
+		}
 	}
 }

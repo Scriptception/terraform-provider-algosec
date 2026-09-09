@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3
+
+- Fix category create ownership: require the documented exact name/URL/IP acknowledgement before recording state; retain confirmed identity on failed readback.
+- Validate rename/delete post-operation categories maps and retain owned state on ambiguous replies; keep GET verification and document conflicting vendor examples.
+- Inventory all 85 A32.60 and 119 A33.20 catalog pages, separate literal labels from selected routes, map 17 implemented operations to Terraform surfaces, and add offline consistency gates.
+- Add pinned read-only quickstart, filesystem-mirror ZIP installation smoke and practical first-user testing/publication checklist. No scope expansion.
+- Unpublished preparation; no signing, Registry installation or live appliance acceptance claimed.
+
+
 ## 0.1.2
 
 Unpublished ownership safety correction.
