@@ -64,7 +64,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.1.3"
+      version = "= 0.1.4"
     }
   }
 }
@@ -193,10 +193,10 @@ MPL-2.0. AlgoSec documentation is linked as evidence, not bundled as upstream HT
 
 Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.
 
-## First user test: 0.1.3 candidate
+## First user test: 0.1.4
 
 Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
-pinned to `= 0.1.3`, with environment-based authentication and TLS verification.
+pinned to `= 0.1.4`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
 Run `terraform init`, `terraform validate`, then an authorized `terraform plan`.
 Before Registry availability, use the release ZIP filesystem mirror described in

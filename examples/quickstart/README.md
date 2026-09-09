@@ -1,4 +1,4 @@
-# Read-only first user test (0.1.3 candidate)
+# Read-only first user test (0.1.4 candidate)
 
 This configuration queries devices and risk-profile names. It does not require
 Panorama category preparation or enable experimental groups. No live compatibility
