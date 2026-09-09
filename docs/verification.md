@@ -1,12 +1,35 @@
 # Release verification
 
-## Release candidate 0.2.0: publication pending
+## Published v0.2.0: direct Registry installation verified
 
-The candidate contains 3 resources, 12 data sources and 20 method/route operations.
-Final release gates, signing, publication and Registry installation verification
-remain pending. [Historical implementation verification](public-expansion-verification.md)
+Published [v0.2.0 in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0)
+and as a [signed GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.2.0).
+The release contains **3 resources, 12 data sources and 20 method/route operations**.
+
+- Immutable tag `v0.2.0`: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
+  tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`.
+  [Release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830)
+  passed for that exact commit. Subsequent documentation HEAD is not the immutable
+  release source; these publication notes do not change the tag or release assets.
+- Eight platform archives were built. Nine files (archives plus manifest) were
+  checksummed, and the detached signature verified with shared fingerprint
+  `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`.
+- All 12 uploaded assets were downloaded and hash-verified. The downloaded Linux
+  amd64 archive passed package smoke testing; execution was Linux amd64 only.
+  Cross-building other platforms does not establish execution on them.
+- Registry archive hash matched the release. Direct-only init in isolated
+  HOME/config/data, without mirrors or plugin cache, passed on Terraform 1.11.0
+  and 1.16.1 and verified signature key `AB71E7968334DF52`. Validate and schema
+  loading passed on both versions: 3 resources and 12 data sources.
+- Evidence in the maintainer's work directory: `registry-0.2.0-verification.json`,
+  `release-download-0.2.0-verification.json`, `signed-release-0.2.0-report.json`
+  and `release-0.2.0-source-ci.json`. Isolation, exact Terraform version mapping
+  and execution scope are also confirmed by the maintainer's release handoff.
+
+No appliance calls or live acceptance were performed. Device groups and trusted
+rules retain separate experimental opt-ins. [Historical implementation verification](public-expansion-verification.md)
 records synthetic tests of the preceding development candidate, not live acceptance.
-No live appliance acceptance has been performed.
+Historical development evidence and older release records below remain separate.
 
 ## Historical v0.1.4: public Registry installation verified
 
@@ -30,7 +53,7 @@ passed. Provider code and dependencies are unchanged from v0.1.3.
   `release-download-0.1.4-verification.json`, `signed-release-0.1.4-report.json`,
   `release-0.1.4-gates.log`, direct-init logs and lockfiles.
 - v0.1.3 tag/assets remain unchanged. Historical onboarding limitations below
-  describe that earlier release, not the verified historical v0.1.4 availability or pending 0.2.0 release.
+  describe that earlier release, not the verified historical v0.1.4 availability or verified v0.2.0 publication.
 
 ## Historical 0.1.3 candidate verification
 

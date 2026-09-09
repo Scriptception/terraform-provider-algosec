@@ -8,7 +8,7 @@ description: |-
 
 Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
 
-The release candidate `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
+The published `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
 `algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
 `experimental_trusted_rules=true` gate; all input changes replace. See the
 [contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/trusted-rule-contract.md). The base targets ASMS
@@ -34,7 +34,7 @@ terraform {
 
 provider "algosec" {
   # Set ALGOSEC_URL and ALGOSEC_SESSION_ID, or ALGOSEC_USERNAME/ALGOSEC_PASSWORD.
-  # Release candidate 0.2.0: publication pending. See docs/user-testing.md for ZIP mirror installation.
+  # Published v0.2.0: direct Registry installation verified; no live appliance acceptance.
   # A33.20 EA groups only: experimental_device_groups = true.
   # AlgoSec does not recommend these group APIs for production.
   read_only = true
@@ -57,22 +57,23 @@ provider "algosec" {
 - `url` (String) HTTPS appliance origin, without a path. Environment: ALGOSEC_URL.
 - `username` (String) ASMS login username. Environment: ALGOSEC_USERNAME. Mutually exclusive with session_id.
 
-## First user test: release candidate 0.2.0
+## First user test: published v0.2.0
 
 Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
 pinned to `= 0.2.0`, with environment-based authentication and TLS verification.
 It exposes only counts; full inventory can still enter plan/state and needs protection.
-0.2.0 publication and Registry verification are pending. Use the local candidate
-installation instructions in user testing until publication is verified. Then run
+v0.2.0 publication and direct Registry installation are verified. Run
 `terraform init`, `terraform validate`, and an authorized `terraform plan`.
 
-Historical v0.1.4 evidence:
-[v0.1.4 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4).
-Clean direct installation, Registry signature verification, validate and schema
+[v0.2.0 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0).
+Direct-only installation with isolated HOME/config/data and no mirrors or plugin
+cache, Registry signature verification, validate and schema
 loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
 `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`. All 12 GitHub release assets were
-downloaded and hash-verified. No live-appliance acceptance has been performed.
+downloaded and hash-verified. Eight platform archives were built; execution was
+Linux amd64 only. No live-appliance acceptance has been performed.
 See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
 for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
-The published v0.1.4 scope is 2 resources / 12 data sources; the trusted-rule
-addition is part of the 0.2.0 release candidate.
+Immutable v0.2.0 source: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
+tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`. Subsequent documentation HEAD
+is not the release source. See [release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830).

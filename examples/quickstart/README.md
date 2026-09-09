@@ -1,10 +1,10 @@
-# Read-only first user test (release candidate 0.2.0)
+# Read-only first user test (published v0.2.0)
 
 This configuration queries devices and risk-profile names. It does not require
 Panorama category preparation or enable experimental groups or trusted rules.
-Version 0.2.0 publication and Registry verification are pending. Live-appliance
-compatibility remains unverified. Historical v0.1.4 installation evidence does
-not verify this candidate; see the root README.
+Version 0.2.0 publication and direct Registry installation are verified on
+Terraform 1.11.0 and 1.16.1 (Linux amd64). Live-appliance compatibility remains
+unverified; see the root README and [release evidence](../../docs/verification.md).
 
 Use Terraform 1.11+ and an administrator with complete inventory visibility.
 Inject `ALGOSEC_URL` (HTTPS origin) and either `ALGOSEC_SESSION_ID` or both
@@ -18,10 +18,9 @@ Unix platforms, `SSL_CERT_FILE` / `SSL_CERT_DIR` can select your CA bundle/direc
 Keep hostname verification valid and `insecure = false`; do not bypass TLS to make
 the test pass. The provider has no custom CA-file attribute.
 
-Copy this directory into a private working directory. Until 0.2.0 publication
-and Registry verification, use a reviewed local candidate through the
-[filesystem mirror](../../docs/user-testing.md). Normal Registry installation
-is available only after those release steps complete.
+Copy this directory into a private working directory. Direct Registry installation
+is verified for v0.2.0. An optional offline
+[filesystem mirror](../../docs/user-testing.md) is also documented.
 With authorization to query your appliance, run:
 
 ```sh

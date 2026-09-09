@@ -1,7 +1,7 @@
 # A33.20 trusted-rule assignment contract
 
-Release candidate 0.2.0, researched 2026-09-09. Publication and Registry
-verification are pending; live acceptance has not been performed. This adds one managed
+Published v0.2.0, researched 2026-09-09. Publication and direct Registry
+installation are [verified](verification.md); live acceptance has not been performed. This adds one managed
 resource, `algosec_trusted_rule`, and three operations. Published v0.1.4 remains
 unchanged. Horizon Security Analyzer/AFA is included through the existing AFA
 API identifiers. No appliance compatibility or vendor Early Availability status

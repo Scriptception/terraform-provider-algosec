@@ -1,7 +1,7 @@
 # API coverage: ASMS A32.60 base and experimental A33.20 additions
 
-Release candidate **0.2.0** contains **3 resources, 12 data sources and 20
-method/route operations**. Publication and Registry verification are pending;
+Published **v0.2.0** contains **3 resources, 12 data sources and 20
+method/route operations**. Publication and direct Registry installation are [verified](verification.md);
 no live acceptance is claimed.
 
 This provider targets the **public A32.60 REST documentation**, retrieved
@@ -17,11 +17,11 @@ The appliance-local Swagger is not publicly downloadable without an appliance;
 no appliance was contacted. This inventory covers the linked public AFA REST
 catalog, not undiscovered endpoints, FireFlow or AppViz APIs.
 
-## Release candidate 0.2.0 surface and contract choices
+## Published v0.2.0 surface and contract choices
 
 Three resources: `algosec_url_category`, `algosec_device_group` (experimental A33.20 EA),
 and `algosec_trusted_rule` (separately gated experimental A33.20 public contract).
-The trusted-rule addition is part of release candidate 0.2.0; see [its contract](trusted-rule-contract.md).
+The trusted-rule addition is part of published v0.2.0; see [its contract](trusted-rule-contract.md).
 Twelve data sources: `algosec_url_categories`, `algosec_url_category`,
 `algosec_devices`, `algosec_device`, `algosec_risk_profiles`,
 `algosec_risk_profile_files`, `algosec_security_zones`, `algosec_device_zones`,

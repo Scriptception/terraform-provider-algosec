@@ -13,7 +13,7 @@ Manages one A33.20 AFA trusted-rule assignment, not the firewall rule. Requires 
 ## Example Usage
 
 ```terraform
-# A33.20 public-contract candidate; no live appliance acceptance.
+# Published v0.2.0 experimental A33.20 public contract; no live appliance acceptance.
 # Configure experimental_trusted_rules = true and read_only = false on the provider.
 resource "algosec_trusted_rule" "example" {
   device_name = "branch-firewall-01"

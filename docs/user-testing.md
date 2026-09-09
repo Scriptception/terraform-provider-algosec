@@ -1,18 +1,17 @@
-# Testing release candidate 0.2.0
+# Testing published v0.2.0
 
-Status: publication and Registry verification are pending. Candidate scope is
+Status: publication and direct Registry installation are verified. Published scope is
 3 resources, 12 data sources and 20 method/route operations. No live-appliance
 acceptance has been performed. Start with the [read-only quickstart](../examples/quickstart).
 Device groups and trusted rules retain separate experimental opt-in flags.
 
 ## Install from Terraform Registry
 
-After 0.2.0 publication and clean Registry verification, use the pinned read-only
-quickstart and run `terraform init` followed by `terraform validate`. Until then,
-use a reviewed local candidate via the mirror below or the README development
-override. A subsequent plan requires credentials and contacts the appliance.
-Historical v0.1.4 direct installation and signature verification passed on
-Terraform 1.11.0 and 1.16.1; those results do not verify 0.2.0.
+Use the pinned read-only quickstart and run `terraform init` followed by
+`terraform validate`. v0.2.0 direct installation, signature verification, validate
+and schema loading passed on Terraform 1.11.0 and 1.16.1 (Linux amd64), with
+isolated HOME/config/data and no mirrors or plugin cache. A subsequent plan
+requires credentials and contacts the appliance.
 
 ## Optional offline release ZIP installation
 
@@ -146,16 +145,16 @@ replacement/drift/recovery behavior. No live group test currently exists.
 
 ## Registry publication verified
 
-The following is historical v0.1.4 evidence. 0.2.0 verification is pending.
-
-Version 0.1.4 is indexed. The private key remains in Vault; the shared public key
+Version 0.2.0 is indexed. The private key remains in Vault; the shared public key
 matches Registry key `11617`. Clean direct init accepted key `AB71E7968334DF52`,
-validate passed, and schema loading found 2 resources and 12 data sources on both
+validate passed, and schema loading found 3 resources and 12 data sources on both
 supported Terraform test versions. No appliance was contacted.
 
 The signed GitHub release contains eight platform archives plus manifest,
 checksums, detached signature and public key. All 12 uploaded assets were downloaded
-and hash-compared before publishing. v0.1.3 and its assets remain unchanged.
+and hash-compared. Eight archives were built; execution was Linux amd64 only.
+Historical releases and their assets remain unchanged. Immutable release source
+and subsequent documentation HEAD are distinguished in [verification](verification.md).
 
 Run authorized appliance tests separately; synthetic and install tests do not
 prove live compatibility. See [verification evidence](verification.md).

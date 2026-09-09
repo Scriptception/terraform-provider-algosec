@@ -10,11 +10,24 @@
 3. Choose the next task explicitly. A new session is not authorization to publish
    a release, change signing credentials, or contact an appliance.
 
-## Release candidate 0.2.0
+## Current published baseline: v0.2.0
 
-`VERSION` and active installation pins now select `0.2.0`. Final release gates,
-exact-source review, signing, publication and clean Registry verification remain
-pending for the parent release session. No live acceptance is claimed.
+`VERSION` and active installation pins select published `0.2.0`:
+[Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0)
+and [signed GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.2.0).
+Immutable tag `v0.2.0` is commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
+tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`.
+[Exact-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830)
+passed. Subsequent documentation HEAD is not the release source.
+
+All 12 assets were downloaded and hash-verified; eight platform archives were
+built, with execution tested on Linux amd64 only. Direct-only isolated
+HOME/config/data installation, without mirrors or plugin cache, passed init,
+signature verification, validate and schema loading on Terraform 1.11.0 and 1.16.1:
+3 resources and 12 data sources, implementing 20 operations. Shared signing-key
+fingerprint: `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`.
+See [verification](verification.md) for evidence. No live appliance acceptance
+is claimed; experimental opt-ins remain required.
 
 ## Historical published baseline: v0.1.4
 
@@ -36,11 +49,11 @@ pending for the parent release session. No live acceptance is claimed.
 
 ## Implemented scope and boundaries
 
-Release candidate `0.2.0` adds `algosec_trusted_rule` (A33.20) behind
+Published `v0.2.0` adds `algosec_trusted_rule` (A33.20) behind
 `experimental_trusted_rules=true`, separate from vendor EA groups. See the
 [contract and limitations](trusted-rule-contract.md) and
-[historical implementation verification](public-expansion-verification.md). Published
-v0.1.4 still has 2 resources, 12 data sources and 17 operations.
+[historical implementation verification](public-expansion-verification.md). Historical
+v0.1.4 has 2 resources, 12 data sources and 17 operations.
 
 The provider exposes **3 resources and 12 data sources**, implementing **20
 method/route operations**. The inventory covers **204 documentation pages**:

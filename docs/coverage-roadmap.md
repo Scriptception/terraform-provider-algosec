@@ -1,10 +1,11 @@
 # Public-provider expansion roadmap
 
 Planning evidence reviewed 2026-09-09. The first single-assignment trusted-rule
-batch is now implemented in release candidate `0.2.0` under separate user
+batch is now published in `v0.2.0` under separate user
 authorization; see [contract decisions](trusted-rule-contract.md) and
 [verification](public-expansion-verification.md). Remaining milestones below are
-research priorities. 0.2.0 publication and Registry verification remain pending.
+research priorities. v0.2.0 publication and direct Registry installation are
+[verified](verification.md); live appliance acceptance remains outstanding.
 The original baseline and planning findings are historical.
 
 Planning review: This is a **not-exhaustive, representative
@@ -31,9 +32,10 @@ must not silently disappear from a claim of all-AlgoSec coverage.
 
 ## Baseline and research boundary
 
-The published v0.1.4 baseline recorded in [coverage](api-coverage.md) and
-[handoff](maintainer-handoff.md) has 2 resources, 12 data sources and 17
-implemented method/route operations. Their
+The historical published v0.1.4 planning baseline had 2 resources, 12 data sources
+and 17 implemented method/route operations. Published v0.2.0 now has 3 resources,
+12 data sources and 20 operations; see [coverage](api-coverage.md) and
+[handoff](maintainer-handoff.md). The
 204 inventoried AFA documentation pages (85 A32.60, 119 A33.20) do not enumerate
 all AlgoSec APIs. Device groups remain experimental A33.20 Early Availability;
 no live appliance compatibility has been established.
@@ -131,7 +133,7 @@ newer documentation. This policy is a proposal, not a new support guarantee.
 
 ### P0 / milestone 1: trusted-rule assignments
 
-**Implemented in release candidate 0.2.0, experimental:** one
+**Published in v0.2.0, experimental:** one
 `algosec_trusted_rule` resource owning one trust assignment identified by device
 tree name and existing rule ID. It manages trust metadata, not the firewall rule
 itself. Avoid a device-wide authoritative set that could delete other owners'

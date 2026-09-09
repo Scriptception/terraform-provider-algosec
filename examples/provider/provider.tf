@@ -10,7 +10,7 @@ terraform {
 
 provider "algosec" {
   # Set ALGOSEC_URL and ALGOSEC_SESSION_ID, or ALGOSEC_USERNAME/ALGOSEC_PASSWORD.
-  # Release candidate 0.2.0: publication pending. See docs/user-testing.md for ZIP mirror installation.
+  # Published v0.2.0: direct Registry installation verified; no live appliance acceptance.
   # A33.20 EA groups only: experimental_device_groups = true.
   # AlgoSec does not recommend these group APIs for production.
   read_only = true
