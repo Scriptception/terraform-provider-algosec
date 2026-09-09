@@ -8,13 +8,13 @@ description: |-
 
 {{.Description}}
 
-Unreleased development candidate `0.3.0-dev` adds the experimental AppViz,
+Version `0.3.0` adds the experimental AppViz,
 tag, URL/IP, FireFlow and ACE subsets: **12 resources, 12 data sources and 53
 selected operations**. AppViz SaaS requires
 separate bearer configuration and `experimental_appviz_roles=true`. It is vendor
 Early Availability, distinct from legacy AppViz. See the
 [role contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/appviz-role-contract.md).
-Published installation pins below remain unchanged.
+The v0.2.0 sections below retain historical baseline evidence.
 
 The published `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
 `algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
@@ -54,7 +54,7 @@ Immutable v0.2.0 source: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
 tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`. Subsequent documentation HEAD
 is not the release source. See [release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830).
 
-Unreleased expansion also includes [A33.30 EA ALGOSEC tags](tag-contract.md) and
+This expansion also includes [A33.30 EA ALGOSEC tags](tag-contract.md) and
 [A33.20 singleton URL/IP assignments](url-ip-contract.md), each separately gated.
 Whole AppViz role import/replacement requires `appviz_whole_role_ownership=true`
 and destroys unreadable description/LDAP linkage. Current discovery and selected

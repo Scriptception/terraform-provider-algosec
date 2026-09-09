@@ -1,5 +1,14 @@
 # Maintainer handoff
 
+## Authorized v0.3.0 release preparation
+
+The user authorized publication of the implemented 12-resource, 12-data-source,
+53-operation subset. VERSION is 0.3.0. Earlier unreleased/authorization statements
+below describe historical checkpoints. Broad API expansion is not complete;
+unassessed families in the ledger remain future work and are not release claims.
+Local synthetic compatibility does not establish live appliance acceptance.
+Publication status must be checked against the actual GitHub release and Registry.
+
 ## Active unreleased expansion branch
 
 For `feat/durable-api-expansion`, start with the

@@ -31,7 +31,7 @@ def validate_request_binding(o):
         method = json.dumps(o['method'])
         expression = re.sub(r'\s+', '', o['source_route_expression'])
         caller = 'c.requestCode' if 'c.requestCode(ctx,' + method + ',' in body else 'c.request'
-        assert caller + '(ctx,' + method + ',' + expression in body, (o['client_function'], method, expression)
+        assert caller + '(ctx,' + method + ',' + expression + ',' in body, (o['client_function'], method, expression)
         return
     name = o['client_function'].split('/')[0]
     match = re.search(r'func \(\w+ \*\w+\) '+re.escape(name)+r'\(', source)

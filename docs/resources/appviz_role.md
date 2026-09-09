@@ -13,7 +13,7 @@ Manages an AppViz SaaS Early Availability role, including complete user membersh
 ## Example Usage
 
 ```terraform
-# Requires the unreleased development provider; published 0.2.0 lacks this resource.
+# Requires provider 0.3.0 or later; 0.2.0 lacks this resource.
 # Configure ALGOSEC_APPVIZ_SAAS_URL and ALGOSEC_APPVIZ_SAAS_TOKEN in the environment.
 provider "algosec" {
   experimental_appviz_roles   = true

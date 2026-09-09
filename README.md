@@ -1,10 +1,10 @@
 # Terraform Provider for AlgoSec
 
-> Development branch `0.3.0-dev` currently adds separately gated AppViz role,
+> Version `0.3.0` adds separately gated AppViz role,
 > A33.30 tag, A33.20 URL/IP membership, A33.30 FireFlow direct bindings and
 > rolling ACE configuration: 12 resources, 12 data sources and 53 selected
-> operations. This is unreleased;
-> published 0.2.0 pins below remain unchanged. See the
+> operations. Live compatibility remains unverified. The v0.2.0 sections below
+> retain historical baseline evidence. See the
 > [continuation ledger](docs/durable-expansion-ledger.md).
 
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
@@ -74,7 +74,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.2.0"
+      version = "= 0.3.0"
     }
   }
 }
@@ -97,7 +97,7 @@ operation. Login and all administration writes are never replayed automatically.
 
 ## Local build and use
 
-Install published v0.2.0 with the configuration above and `terraform init`.
+Install v0.3.0 with the configuration above and `terraform init`.
 For offline installation, use the [ZIP mirror instructions](docs/user-testing.md).
 For local development, build with a CLI override:
 

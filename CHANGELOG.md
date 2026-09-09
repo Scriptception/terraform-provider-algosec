@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.3.0-dev (unreleased)
+## 0.3.0
+
+- Close reviewed Jira mixed-unknown payload, FireFlow Unicode acknowledgement and ACE method-binding validation gaps.
+- Add a supplied-artifact migration regression from v0.2.0; see docs/published-upgrade.md for its bounded synthetic scope.
 
 - Reject malformed AppViz DELETE body shapes and ambiguous category JSON without
   conflating case-sensitive identifiers; bind inventory routes to selected requests.
@@ -20,7 +23,7 @@
 - Require explicit whole-role destructive ownership acknowledgement, including
   imports; validate vulnerability permission prerequisites before replacement.
 - Reconcile 975 discovery identities and 1,048 source observations with exact
-  current implementation mappings. All additions remain unreleased and unverified live.
+  current implementation mappings. All additions remain experimental and unverified live.
 
 
 - Add experimental `algosec_appviz_role` for the public AppViz SaaS Early Availability role contract, with separate bearer authentication, complete readable permission/membership ownership, explicit import, fail-closed reads and recovery. No legacy AppViz or live compatibility claim.
