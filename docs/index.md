@@ -1,12 +1,20 @@
 ---
 page_title: "algosec Provider"
 description: |-
-  Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+  Unofficial AlgoSec provider with A32.60 AFA base APIs, separately gated experimental A33.20 groups/trusted rules/URL-IP assignments, A33.30 EA tags and FireFlow direct bindings, AppViz SaaS EA roles, and experimental ACE SaaS configuration. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
 ---
 
 # algosec Provider
 
-Unofficial AlgoSec Firewall Analyzer / ASMS A32.60 provider with separately gated experimental A33.20 device groups and trusted-rule assignments. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+Unofficial AlgoSec provider with A32.60 AFA base APIs, separately gated experimental A33.20 groups/trusted rules/URL-IP assignments, A33.30 EA tags and FireFlow direct bindings, AppViz SaaS EA roles, and experimental ACE SaaS configuration. Uses protocol 6 and HTTPS. Prefer environment credentials; read_only defaults to true.
+
+Version `0.3.0` adds the experimental AppViz,
+tag, URL/IP, FireFlow and ACE subsets: **12 resources, 12 data sources and 53
+selected operations**. AppViz SaaS requires
+separate bearer configuration and `experimental_appviz_roles=true`. It is vendor
+Early Availability, distinct from legacy AppViz. See the
+[role contract](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/appviz-role-contract.md).
+The v0.2.0 sections below retain historical baseline evidence.
 
 The published `0.2.0` surface is **3 resources and 12 data sources**, implementing **20 method/route operations**.
 `algosec_trusted_rule` adds one A33.20 assignment lifecycle behind the separate
@@ -27,7 +35,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.2.0"
+      version = "= 0.3.0"
     }
   }
 }
@@ -47,8 +55,20 @@ provider "algosec" {
 
 ### Optional
 
+- `ace_access_token` (String, Sensitive) Externally supplied ACE bearer token. Prefer ALGOSEC_ACE_ACCESS_TOKEN; never stored in resource state.
+- `ace_url` (String) Separate regional ACE HTTPS origin. Environment ALGOSEC_ACE_URL. CAA routes use the documented /prevasio service base. TLS verification is mandatory.
+- `appviz_saas_token` (String, Sensitive) AppViz SaaS Bearer token. Prefer ALGOSEC_APPVIZ_SAAS_TOKEN to avoid configuration/plan persistence. Never refreshed, logged, or stored in resource state.
+- `appviz_saas_url` (String) Separate AppViz SaaS HTTPS origin. Environment: ALGOSEC_APPVIZ_SAAS_URL. Not the legacy on-premises AppViz API. TLS verification is always required.
+- `appviz_whole_role_ownership` (Boolean) Explicitly acknowledge destructive whole-role ownership, including imported roles: delete/replacement removes unreadable description and LDAP linkage. Defaults false. Required by algosec_appviz_role in addition to its experimental gate; use dedicated exclusively owned roles.
+- `experimental_ace_public_contracts` (Boolean) Enable the experimental rolling ACE SaaS public contracts. Defaults false and remains separate from AFA, FireFlow and AppViz clients; no live acceptance.
+- `experimental_appviz_roles` (Boolean) Enable AppViz SaaS Early Availability roles. Defaults false; vendor EA, synthetic-contract tested only. Separate from AFA and legacy AppViz authentication.
 - `experimental_device_groups` (Boolean) EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility.
+- `experimental_fireflow_bindings` (Boolean) Enable A33.30 direct FireFlow member/permission bindings. Defaults false; separate from AFA/AppViz clients. Complete privileged visibility and exclusive ownership required; synthetic contracts only.
+- `experimental_tags` (Boolean) Enable experimental A33.30 vendor Early Availability ALGOSEC tags. Defaults false. Complete administrator visibility, exclusive writers and short-page pagination contract required; no live acceptance.
 - `experimental_trusted_rules` (Boolean) Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups.
+- `experimental_url_ip_memberships` (Boolean) Enable A33.20 experimental singleton URL/IP memberships. Defaults false; separate from whole-category ownership and other experimental flags. Never overlap whole-category or concurrent tuple ownership. No live acceptance.
+- `fireflow_session` (String, Sensitive) Externally supplied FireFlow_Session cookie value. Prefer ALGOSEC_FIREFLOW_SESSION. No login, refresh or logout; never stored in resource state.
+- `fireflow_url` (String) Separate FireFlow HTTPS origin. Environment ALGOSEC_FIREFLOW_URL. TLS verification is mandatory, independent of AFA insecure.
 - `insecure` (Boolean) Disable TLS verification explicitly. Defaults to false. Install the appliance CA in the system trust store instead when possible.
 - `password` (String, Sensitive) ASMS login password. Prefer ALGOSEC_PASSWORD to avoid configuration/plan persistence.
 - `read_only` (Boolean) Refuse all administration writes. Defaults to true; set false to manage resources. Authentication may establish an API session.
@@ -77,3 +97,19 @@ for CA trust, category prerequisites, disposable mutations, import/destroy and l
 Immutable v0.2.0 source: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
 tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`. Subsequent documentation HEAD
 is not the release source. See [release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830).
+
+This expansion also includes [A33.30 EA ALGOSEC tags](tag-contract.md) and
+[A33.20 singleton URL/IP assignments](url-ip-contract.md), each separately gated.
+Whole AppViz role import/replacement requires `appviz_whole_role_ownership=true`
+and destroys unreadable description/LDAP linkage. Current discovery and selected
+implementation are tracked separately in the [reconciled inventory](inventory-reconciliation.md).
+
+[A33.30 FireFlow direct member/permission bindings](fireflow-binding-contract.md)
+use a separate verified-TLS session client and `experimental_fireflow_bindings=true`.
+They preserve inherited/unrelated grants and never create or delete parent roles.
+
+The selected rolling ACE SaaS subset adds [CD notification email sets, Jira,
+custom threat entries and manual cloud-registration/name bindings](ace-contract.md).
+It uses a separate bearer client and `experimental_ace_public_contracts=true`.
+Write-only arguments require Terraform 1.11+, while the recommended ephemeral
+saved-plan examples require Terraform 1.16.1+.

@@ -232,9 +232,13 @@ func (d *trustedDevice) UnmarshalJSON(b []byte) error {
 // Reject duplicate object keys rather than allowing encoding/json's last-key-wins
 // behavior to turn a conflicting failure response into positive ownership.
 func trustedJSON(b []byte) error {
+	return jsonUniqueKeys(b, func(int) bool { return true })
+}
+
+func jsonUniqueKeys(b []byte, fold func(int) bool) error {
 	dec := json.NewDecoder(strings.NewReader(string(b)))
-	var value func() error
-	value = func() error {
+	var value func(int) error
+	value = func(depth int) error {
 		token, e := dec.Token()
 		if e != nil {
 			return ErrContract
@@ -252,18 +256,20 @@ func trustedJSON(b []byte) error {
 					return ErrContract
 				}
 				k, ok := key.(string)
-				k = strings.ToLower(k)
+				if fold(depth) {
+					k = strings.ToLower(k)
+				}
 				if !ok || seen[k] {
 					return ErrContract
 				}
 				seen[k] = true
-				if e = value(); e != nil {
+				if e = value(depth + 1); e != nil {
 					return e
 				}
 			}
 		case '[':
 			for dec.More() {
-				if e = value(); e != nil {
+				if e = value(depth + 1); e != nil {
 					return e
 				}
 			}
@@ -273,7 +279,7 @@ func trustedJSON(b []byte) error {
 		_, e = dec.Token()
 		return e
 	}
-	return value()
+	return value(0)
 }
 func (a *trustedAcknowledgement) UnmarshalJSON(b []byte) error {
 	if e := trustedJSON(b); e != nil {

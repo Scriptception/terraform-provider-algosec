@@ -1,5 +1,12 @@
 # Terraform Provider for AlgoSec
 
+> Version `0.3.0` adds separately gated AppViz role,
+> A33.30 tag, A33.20 URL/IP membership, A33.30 FireFlow direct bindings and
+> rolling ACE configuration: 12 resources, 12 data sources and 53 selected
+> operations. Live compatibility remains unverified. The v0.2.0 sections below
+> retain historical baseline evidence. See the
+> [continuation ledger](docs/durable-expansion-ledger.md).
+
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
 Firewall Analyzer / ASMS A32.60**, with explicitly experimental A33.20 device
 groups and trusted-rule assignments, built from public API documentation. It is not affiliated with or
@@ -13,7 +20,7 @@ and direct Registry installation are verified. **Live-appliance testing remains 
 
 Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/maintainer-handoff.md).
 
-## Implemented scope
+## Published v0.2.0 scope
 
 | Resources | Ownership and lifecycle |
 |---|---|
@@ -31,7 +38,7 @@ Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/m
 | `algosec_network_objects` | Paginated device network-object search. |
 | `algosec_trusted_traffic` | Informational paginated trusted-traffic inventory; upstream may omit zero-hit entries. |
 
-User/role management, general credentialed device onboarding, trusted-traffic
+In published v0.2.0, user/role management, general credentialed device onboarding, trusted-traffic
 mutation, risk-profile mutation, rule documentation, analyses, exports, active
 changes and other one-shot operations are excluded. The coverage map gives
 endpoint-specific reasons; this is not a full ASMS administration provider.
@@ -67,7 +74,7 @@ terraform {
   required_providers {
     algosec = {
       source  = "Scriptception/algosec"
-      version = "= 0.2.0"
+      version = "= 0.3.0"
     }
   }
 }
@@ -90,7 +97,7 @@ operation. Login and all administration writes are never replayed automatically.
 
 ## Local build and use
 
-Install published v0.2.0 with the configuration above and `terraform init`.
+Install v0.3.0 with the configuration above and `terraform init`.
 For offline installation, use the [ZIP mirror instructions](docs/user-testing.md).
 For local development, build with a CLI override:
 

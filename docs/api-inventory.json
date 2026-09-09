@@ -823,7 +823,7 @@
     {
       "version": "a32.60",
       "page": "nat-rules_get.htm",
-      "title": "Get  NAT\u00a0rules information",
+      "title": "Get  NAT rules information",
       "url": "https://techdocs.algosec.com/en/asms/a32.60/asms-help/content/api-guide/nat-rules_get.htm",
       "classification": "deferred read-only",
       "reason": "Additional analyzed topology/object/report query outside the initial administrative inventory; no mutation is implemented or implied.",
@@ -831,18 +831,18 @@
       "live_verified": false,
       "resource_blocks": [
         {
-          "resource_label_text": "/afa/api/v1/rule/natRulesInfo/\u200b",
+          "resource_label_text": "/afa/api/v1/rule/natRulesInfo/​",
           "method_labels": [
             "GET"
           ],
           "path_fragments_raw": [
-            "/afa/api/v1/rule/natRulesInfo/\u200b"
+            "/afa/api/v1/rule/natRulesInfo/​"
           ],
           "source_line": 15
         }
       ],
       "contract_notes": [
-        "Inventory ends /natRulesInfo/\u00e2\\x80\\x8b. Correct UTF-8 source contains U+200B; executable cURL omits it and trailing slash. Decode response bytes as UTF-8, store source text literally plus codepoint warning. Separate cURL candidate /api/v1/rule/natRulesInfo from literal resource label, not silent repair."
+        "Inventory ends /natRulesInfo/â\\x80\\x8b. Correct UTF-8 source contains U+200B; executable cURL omits it and trailing slash. Decode response bytes as UTF-8, store source text literally plus codepoint warning. Separate cURL candidate /api/v1/rule/natRulesInfo from literal resource label, not silent repair."
       ],
       "curl_url_evidence": [
         "http://api.example.com/api/v1/rule/natRulesInfo?entityTreeName=myEntity&pageNumber=0&pageSize=50"
@@ -1389,8 +1389,8 @@
       ],
       "contract_notes": [],
       "curl_url_evidence": [
-        "https://<AFA\u00a0server IP>/afa/api/v1/analyzeTask/status",
-        "https://<AFA server IP\u00a0address>/fa/server/analysis/status?entity=fw1&entityType=device&session=f87381213f579c424370e9c21c709e40"
+        "https://<AFA server IP>/afa/api/v1/analyzeTask/status",
+        "https://<AFA server IP address>/fa/server/analysis/status?entity=fw1&entityType=device&session=f87381213f579c424370e9c21c709e40"
       ]
     },
     {
@@ -1692,18 +1692,18 @@
       "live_verified": false,
       "resource_blocks": [
         {
-          "resource_label_text": "/afa/api/v1/interfaces/routingInformation/\u200b",
+          "resource_label_text": "/afa/api/v1/interfaces/routingInformation/​",
           "method_labels": [
             "GET"
           ],
           "path_fragments_raw": [
-            "/afa/api/v1/interfaces/routingInformation/\u200b"
+            "/afa/api/v1/interfaces/routingInformation/​"
           ],
           "source_line": 19
         }
       ],
       "contract_notes": [
-        "Inventory ends /routingInformation/\u00e2\\x80\\x8b. Source contains U+200B; cURL has /afa/api/v1/interfaces/routingInformation. UTF-8 decode; explicit source/executable-example distinction and warning, not an invisible suffix in usable routes."
+        "Inventory ends /routingInformation/â\\x80\\x8b. Source contains U+200B; cURL has /afa/api/v1/interfaces/routingInformation. UTF-8 decode; explicit source/executable-example distinction and warning, not an invisible suffix in usable routes."
       ],
       "curl_url_evidence": [
         "http://<localhost>/afa/api/v1/interfaces/routingInformation?entityTreeName=myEntity&pageNumber=0&pageSize=50"
@@ -2638,7 +2638,7 @@
     {
       "version": "a33.20",
       "page": "config_params_valuesall_get.htm",
-      "title": "Get a list of AFA Advanced Configuration Parameters &\u00a0Values",
+      "title": "Get a list of AFA Advanced Configuration Parameters & Values",
       "url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/config_params_valuesall_get.htm",
       "classification": "deferred read-only",
       "reason": "Generic config map may contain secrets; no blanket raw-config state export.",
@@ -3591,18 +3591,18 @@
       "live_verified": false,
       "resource_blocks": [
         {
-          "resource_label_text": "/afa/api/v1/rule/natRulesInfo/\u200b",
+          "resource_label_text": "/afa/api/v1/rule/natRulesInfo/​",
           "method_labels": [
             "GET"
           ],
           "path_fragments_raw": [
-            "/afa/api/v1/rule/natRulesInfo/\u200b"
+            "/afa/api/v1/rule/natRulesInfo/​"
           ],
           "source_line": 15
         }
       ],
       "contract_notes": [
-        "Inventory ends /natRulesInfo/\u00e2\\x80\\x8b. Correct UTF-8 source contains U+200B; executable cURL omits it and trailing slash. Decode response bytes as UTF-8, store source text literally plus codepoint warning. Separate cURL candidate /api/v1/rule/natRulesInfo from literal resource label, not silent repair."
+        "Inventory ends /natRulesInfo/â\\x80\\x8b. Correct UTF-8 source contains U+200B; executable cURL omits it and trailing slash. Decode response bytes as UTF-8, store source text literally plus codepoint warning. Separate cURL candidate /api/v1/rule/natRulesInfo from literal resource label, not silent repair."
       ],
       "curl_url_evidence": [
         "http://api.example.com/api/v1/rule/natRulesInfo?entityTreeName=myEntity&pageNumber=0&pageSize=50"
@@ -4253,8 +4253,8 @@
       ],
       "contract_notes": [],
       "curl_url_evidence": [
-        "https://<AFA\u00a0server IP>/afa/api/v1/analyzeTask/status",
-        "https://<AFA server IP\u00a0address>/fa/server/analysis/status?entity=fw1&entityType=device&session=f87381213f579c424370e9c21c709e40"
+        "https://<AFA server IP>/afa/api/v1/analyzeTask/status",
+        "https://<AFA server IP address>/fa/server/analysis/status?entity=fw1&entityType=device&session=f87381213f579c424370e9c21c709e40"
       ]
     },
     {
@@ -4656,18 +4656,18 @@
       "live_verified": false,
       "resource_blocks": [
         {
-          "resource_label_text": "/afa/api/v1/interfaces/routingInformation/\u200b",
+          "resource_label_text": "/afa/api/v1/interfaces/routingInformation/​",
           "method_labels": [
             "GET"
           ],
           "path_fragments_raw": [
-            "/afa/api/v1/interfaces/routingInformation/\u200b"
+            "/afa/api/v1/interfaces/routingInformation/​"
           ],
           "source_line": 19
         }
       ],
       "contract_notes": [
-        "Inventory ends /routingInformation/\u00e2\\x80\\x8b. Source contains U+200B; cURL has /afa/api/v1/interfaces/routingInformation. UTF-8 decode; explicit source/executable-example distinction and warning, not an invisible suffix in usable routes."
+        "Inventory ends /routingInformation/â\\x80\\x8b. Source contains U+200B; cURL has /afa/api/v1/interfaces/routingInformation. UTF-8 decode; explicit source/executable-example distinction and warning, not an invisible suffix in usable routes."
       ],
       "curl_url_evidence": [
         "http://<localhost>/afa/api/v1/interfaces/routingInformation?entityTreeName=myEntity&pageNumber=0&pageSize=50"
@@ -5612,7 +5612,8 @@
       "surfaces": [
         "data.algosec_url_categories",
         "data.algosec_url_category",
-        "resource.algosec_url_category"
+        "resource.algosec_url_category",
+        "resource.algosec_url_ip_membership"
       ],
       "source_route_expression": "categoryPath"
     },
@@ -5904,6 +5905,577 @@
       ],
       "live_verified": false,
       "response_choice": "Catalog /afa base and PHPSESSID; strict complete single-device inventory for GET; exact single requested ID acknowledgement for writes. See docs/trusted-rule-contract.md."
+    },
+    {
+      "product": "AppViz SaaS",
+      "version_scope": "saas-2026-09-09",
+      "method": "GET",
+      "actual_route_template": "/BusinessFlow/rest/v1/settings/permissions/role",
+      "client_function": "Role",
+      "source_file": "internal/client/appviz_roles.go",
+      "source_route_expression": "appVizRolePath",
+      "surfaces": [
+        "resource.algosec_appviz_role"
+      ],
+      "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/7r93tg1xsbeqf",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
+      "live_verified": false
+    },
+    {
+      "product": "AppViz SaaS",
+      "version_scope": "saas-2026-09-09",
+      "method": "POST",
+      "actual_route_template": "/BusinessFlow/rest/v1/settings/permissions/role",
+      "client_function": "UpdateRole",
+      "source_file": "internal/client/appviz_roles.go",
+      "source_route_expression": "appVizRolePath",
+      "surfaces": [
+        "resource.algosec_appviz_role"
+      ],
+      "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/4wo7alllbgaph",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
+      "live_verified": false
+    },
+    {
+      "product": "AppViz SaaS",
+      "version_scope": "saas-2026-09-09",
+      "method": "DELETE",
+      "actual_route_template": "/BusinessFlow/rest/v1/settings/permissions/role",
+      "client_function": "DeleteRole",
+      "source_file": "internal/client/appviz_roles.go",
+      "source_route_expression": "appVizRolePath",
+      "surfaces": [
+        "resource.algosec_appviz_role"
+      ],
+      "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/mkgujbmi04j1h",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
+      "live_verified": false
+    },
+    {
+      "product": "AppViz SaaS",
+      "version_scope": "saas-2026-09-09",
+      "method": "POST",
+      "actual_route_template": "/BusinessFlow/rest/v1/settings/permissions/role/new",
+      "client_function": "CreateRole",
+      "source_file": "internal/client/appviz_roles.go",
+      "source_route_expression": "appVizRolePath+\"/new\"",
+      "surfaces": [
+        "resource.algosec_appviz_role"
+      ],
+      "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/nfm3d9hk4k4i2",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/afa/api/v1/tags",
+      "client_function": "List",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-all-tags-get.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/afa/api/v1/tags",
+      "client_function": "Create",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-create-post.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/afa/api/v1/tags/details",
+      "client_function": "Associations",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/details\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tag-details-get.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "PUT",
+      "actual_route_template": "/afa/api/v1/tags/{tagId}/name",
+      "client_function": "Rename",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/\"+part+\"/name\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tagid-name-put.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "DELETE",
+      "actual_route_template": "/afa/api/v1/tags/{tagId}",
+      "client_function": "Delete",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/\"+part",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tag-delete.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA URL/IP",
+      "version_scope": "a33.20",
+      "method": "PUT",
+      "actual_route_template": "/afa/api/v1/plugins/panorama/URLCategory/{category}/URL/{url}/IP/",
+      "client_function": "Change",
+      "source_file": "internal/client/url_ip.go",
+      "source_route_expression": "categoryPath+categoryPart+\"/URL/\"+urlPart+\"/IP/\"",
+      "surfaces": [
+        "resource.algosec_url_ip_membership"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/url-categories_put_ip.htm",
+      "response_choice": "Explicit singleton IP array; typed full category map acknowledgment must contain exact category/URL and expected IP membership; readback required, no whole-category ownership.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA URL/IP",
+      "version_scope": "a33.20",
+      "method": "DELETE",
+      "actual_route_template": "/afa/api/v1/plugins/panorama/URLCategory/{category}/URL/{url}/IP/",
+      "client_function": "Change",
+      "source_file": "internal/client/url_ip.go",
+      "source_route_expression": "categoryPath+categoryPart+\"/URL/\"+urlPart+\"/IP/\"",
+      "surfaces": [
+        "resource.algosec_url_ip_membership"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/url-categories_delete_ip.htm",
+      "response_choice": "Explicit singleton IP array; typed full category map acknowledgment must contain exact category/URL and expected IP membership; readback required, no whole-category ownership.",
+      "live_verified": false
+    },
+    {
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/FireFlow/api/roles/{id}/members",
+      "client_function": "Members",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/members\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_member"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-get.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/FireFlow/api/roles/{id}/members",
+      "client_function": "ChangeMember",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/members\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_member"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-post.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/FireFlow/api/roles/{id}/permissions",
+      "client_function": "Permissions",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/permissions\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_permission"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-get.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "FireFlow",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/FireFlow/api/roles/{id}/permissions",
+      "client_function": "ChangePermission",
+      "source_file": "internal/client/fireflow.go",
+      "source_route_expression": "fireFlowRolePath+part+\"/permissions\"",
+      "surfaces": [
+        "resource.algosec_fireflow_role_permission"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-post.htm",
+      "response_choice": "Exact Success with empty messages, complete direct-member/direct-inherited permission read; singleton explicit add/remove arrays. Member mutation data null; permission mutation data empty object. No partial success, HTTP-error absence or unconfirmed create adoption.",
+      "auth_contract": "Externally supplied FireFlow_Session cookie over verified TLS; separate service client, no login or session refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "ACE",
+      "client_function": "Accounts",
+      "method": "GET",
+      "actual_route_template": "/api/algosaas/accounts/v1/account",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/700ea656af479-onboard-a-single-aws-account",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider"
+    },
+    {
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/46ac658f69d17-update-an-aws-account-name",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/a52cb60d0e71a-delete-an-aws-account",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/433b9a550df17-onboard-a-single-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider"
+    },
+    {
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/165717337a77d-update-an-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/5743a2429ad66-delete-an-azure-subscription",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "createAccount",
+      "method": "POST",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/fb7ea5acbb779-onboard-a-single-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+v.Provider"
+    },
+    {
+      "product": "ACE",
+      "client_function": "RenameAccount",
+      "method": "PATCH",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/7d9f3d77dfe5c-update-a-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "DeleteAccount",
+      "method": "DELETE",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_accounts.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/153b4761af20e-delete-a-gcp-project",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "source_route_expression": "aceAccountPath+\"/\"+current.Provider+\"/\"+segment"
+    },
+    {
+      "product": "ACE",
+      "client_function": "Jira",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/9qel3er0lwyna-get-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "CreateJira",
+      "method": "POST",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/owlrnpuhg6c18-create-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "DeleteJira",
+      "method": "DELETE",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_jira.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/cjon09rnk8332-delete-jira-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "source_route_expression": "aceJiraPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "CDEmails",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/e4by78wj36yqp-get-cd-mitigation-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "source_route_expression": "aceCDPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "patchCDEmails",
+      "method": "PATCH",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0fop00rbo1jtv-update-cd-mitigation-configuration",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "source_route_expression": "aceCDPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "ThreatEntry",
+      "method": "GET",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/gy2nwb0ekgdpq-get-detailed-list-data-for-threat-type",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "CreateThreatEntry",
+      "method": "POST",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/sp0xl325r7rhb-add-a-new-item-to-a-custom-threat-list",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath"
+    },
+    {
+      "product": "ACE",
+      "client_function": "DeleteThreatEntry",
+      "method": "DELETE",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "request": {
+        "body": "Documented typed JSON or no body",
+        "authentication": "Externally supplied bearer access token; separate ACE client; no refresh/login"
+      },
+      "response_choice": "Typed contract with operation-specific acknowledgement, exact identity and readback; incomplete or ambiguous responses fail closed.",
+      "source_file": "internal/client/ace_threat.go",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/j09s7757tcg1p-delete-item-s-from-a-custom-threat-list",
+      "version_scope": "rolling-saas-2026-09-09",
+      "live_verified": false,
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "source_route_expression": "aceThreatPath"
     }
   ]
 }

@@ -1,4 +1,7 @@
-# Read-only first user test (published v0.2.0)
+# Read-only first user test (v0.3.0)
+
+The configuration now pins v0.3.0. The v0.2.0 verification statements below
+are historical; see the release notes for current verification.
 
 This configuration queries devices and risk-profile names. It does not require
 Panorama category preparation or enable experimental groups or trusted rules.

@@ -143,7 +143,12 @@ func TestProtocolSchema(t *testing.T) {
 			t.Fatal(d.Summary, d.Detail)
 		}
 	}
-	if len(s.ResourceSchemas) != 3 || len(s.DataSourceSchemas) != 12 {
+	for _, name := range []string{"algosec_url_category", "algosec_device_group", "algosec_trusted_rule", "algosec_appviz_role", "algosec_tag", "algosec_url_ip_membership", "algosec_fireflow_role_member", "algosec_fireflow_role_permission"} {
+		if _, ok := s.ResourceSchemas[name]; !ok {
+			t.Fatalf("missing resource schema %s", name)
+		}
+	}
+	if len(s.ResourceSchemas) != 12 || len(s.DataSourceSchemas) != 12 {
 		t.Fatalf("unexpected surface: %d/%d", len(s.ResourceSchemas), len(s.DataSourceSchemas))
 	}
 }

@@ -37,7 +37,13 @@ func (v groupNameValidator) MarkdownDescription(ctx context.Context) string {
 	return v.Description(ctx)
 }
 func (v groupNameValidator) ValidateString(_ context.Context, q validator.StringRequest, s *validator.StringResponse) {
-	if q.ConfigValue.IsNull() || q.ConfigValue.IsUnknown() {
+	if q.ConfigValue.IsUnknown() {
+		return
+	}
+	if q.ConfigValue.IsNull() {
+		if v.member {
+			s.Diagnostics.AddAttributeError(q.Path, "Invalid members", "Device display names must not be null.")
+		}
 		return
 	}
 	var err error
@@ -214,4 +220,23 @@ func (r *deviceGroupResource) ImportState(ctx context.Context, q resource.Import
 	}
 	s.Diagnostics.Append(s.State.SetAttribute(ctx, path.Root("id"), q.ID)...)
 	s.Diagnostics.Append(s.State.SetAttribute(ctx, path.Root("display_name"), q.ID)...)
+}
+
+func (r *deviceGroupResource) ModifyPlan(ctx context.Context, q resource.ModifyPlanRequest, s *resource.ModifyPlanResponse) {
+	if q.Plan.Raw.IsNull() {
+		return
+	}
+	var m deviceGroupModel
+	s.Diagnostics.Append(q.Plan.Get(ctx, &m)...)
+	if s.Diagnostics.HasError() || m.Members.IsNull() || m.Members.IsUnknown() {
+		return
+	}
+	for _, v := range m.Members.Elements() {
+		if v.IsUnknown() {
+			continue
+		}
+		if v.IsNull() || strings.TrimSpace(v.(types.String).ValueString()) == "" {
+			s.Diagnostics.AddError("Invalid members", "Device display names must be nonblank and non-null.")
+		}
+	}
 }

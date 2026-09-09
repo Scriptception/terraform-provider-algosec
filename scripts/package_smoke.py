@@ -57,7 +57,7 @@ with tempfile.TemporaryDirectory(prefix='package-smoke-', dir=root / '.local') a
     run('validate', '-no-color')
     schema = json.loads(run('providers', 'schema', '-json', capture=True).stdout)
     p = schema['provider_schemas']['registry.terraform.io/scriptception/algosec']
-    assert len(p['resource_schemas']) == 3 and len(p['data_source_schemas']) == 12
+    assert len(p['resource_schemas']) == 12 and len(p['data_source_schemas']) == 12
     lock = (config / '.terraform.lock.hcl').read_text()
     assert f'"{version}"' in lock
     print(f'ZIP mirror init/validate/schema passed: {archive_name}; no live calls or signature verification.')
