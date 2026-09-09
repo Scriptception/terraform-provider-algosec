@@ -2,27 +2,22 @@
 
 ## Unreleased development candidate 0.3.0-dev
 
-The working candidate exposes **4 resources, 12 data sources and 24 selected
-method/route operations**. It adds `algosec_appviz_role`, separately gated AppViz
-SaaS Early Availability role ownership; see [contract](appviz-role-contract.md).
-Published 0.2.0 counts below remain historical and installation pins are unchanged.
+The working candidate exposes **6 resources, 12 data sources and 31 selected
+method/route operations**. It adds AppViz SaaS whole-role ownership with explicit
+destructive ownership acknowledgement, A33.30 EA ALGOSEC tags and A33.20 singleton
+URL/IP assignments. See [role](appviz-role-contract.md), [tag](tag-contract.md) and
+[URL/IP](url-ip-contract.md) contracts. Published 0.2.0 counts remain historical.
 
-The [cross-product operation ledger](cross-product-operations.json) contains
-**934 discovery records: 772 REST operations and 162 unresolved SOAP service/binding
-records**. Every record carries evidence, auth/version boundary, disposition and
-remaining reason. Literal vendor labels are retained separately from selected
-canonical implementation routes; relative labels are keyed with their documented
-catalog/server base where necessary to disambiguate products' subservices. No
-SOAP binding or unresolved QName is invented. Twenty-four records map to current
-implementation; other versions of similar routes remain unverified. These are
-named-catalog discovery counts, not an overall coverage percentage.
+The [reconciled cross-product inventory](inventory-reconciliation.md) preserves
+**975 candidate records and 1,048 source observations**: 747 selected REST,
+66 unresolved REST and 162 unresolved SOAP catalog names, with zero certified
+SOAP operation QNames. Current mappings are separate from source classifications
+and discovery counts. No overall coverage percentage or live acceptance is claimed.
 
-AppViz legacy owned service/network objects and ordinary flows were revalidated
-through public A33.30 and have specific identity/read/draft contract gaps. SaaS is
-a separate stream. Remaining A33.30 tag, FireFlow direct binding and ACE/ObjectFlow
-work is listed in the [continuation ledger](durable-expansion-ledger.md).
-The original 204-page AFA inventory below is retained as the published baseline;
-it is not the broader cross-product discovery denominator.
+FireFlow direct bindings and the narrowed AppViz/ACE nominations remain active
+implementation work in the [continuation ledger](durable-expansion-ledger.md).
+Tag-hostgroup assignment has a narrow identity mapping blocker described in the
+tag contract. This is an intermediate sub-batch, not final durable-family closure.
 
 
 Published **v0.2.0** contains **3 resources, 12 data sources and 20

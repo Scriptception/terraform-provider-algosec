@@ -58,6 +58,7 @@ testacc-mutation:
 
 .PHONY: coverage-check package-smoke
 coverage-check:
+	python3 -B -m unittest discover -s scripts/inventory -p test_transform.py
 	python3 -B -m unittest discover -s scripts -p operation_inventory_test.py
 	python3 scripts/coverage_check.py
 

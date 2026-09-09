@@ -1,0 +1,80 @@
+{
+  "verified_at": "2026-09-09T06:11:32.224888+00:00",
+  "checks": {
+    "unique_operation_ids": true,
+    "all_operation_source_urls_present": true,
+    "all_20_baseline_operations_mapped": true,
+    "baseline_3_resources_12_data_sources": true,
+    "all_input_observations_accounted_for": true,
+    "no_home_paths_in_portable_json": true,
+    "no_raw_research_contract_dumps_in_payload": "allowlisted metadata fields only",
+    "canonical_page_count_and_no_missing_links": true,
+    "soap_unknown_fields_null": true,
+    "new_implementation_not_claimed_supported": true,
+    "persisted_candidate_independent_validation": true,
+    "71_saas_operation_identities_match_current_default_branch": true,
+    "no_raw_contract_example_payload_keys": true
+  },
+  "counts": {
+    "input_operation_observations": 1048,
+    "deduplicated_candidate_records": 975,
+    "rest_records": 813,
+    "rest_with_selected_route": 747,
+    "rest_unresolved_route": 66,
+    "soap_catalog_name_records": 162,
+    "certified_soap_wsdl_operation_qnames": 0,
+    "duplicate_groups": 72,
+    "merged_observation_excess": 73,
+    "same_page_multi_record_review_groups": 32,
+    "catalog_pages": 1021,
+    "catalog_pages_with_operation_evidence": 664,
+    "catalog_pages_without_operation_row": 357,
+    "operation_like_unrepresented_pages": 2,
+    "explicit_afa_unresolved_enumerations": 7,
+    "excluded_internal_appviz_saas_service_operations": 7,
+    "published_baseline_operations": 20,
+    "published_baseline_resources": 3,
+    "published_baseline_data_sources": 12,
+    "by_version": {
+      "rolling-saas": 152,
+      "a32.60": 235,
+      "a33.20": 273,
+      "a33.30": 315
+    },
+    "by_product_version": {
+      "ACE | rolling-saas": 64,
+      "AFA / Horizon Security Analyzer | a32.60": 144,
+      "AFA / Horizon Security Analyzer | a33.20": 179,
+      "AFA / Horizon Security Analyzer | a33.30": 206,
+      "AppViz | a32.60": 56,
+      "AppViz | a33.20": 56,
+      "AppViz | a33.30": 56,
+      "AppViz | rolling-saas": 70,
+      "FireFlow | a32.60": 31,
+      "FireFlow | a33.20": 34,
+      "FireFlow | a33.30": 49,
+      "ObjectFlow | rolling-saas": 17,
+      "Shared ASMS | a32.60": 4,
+      "Shared ASMS | a33.20": 4,
+      "Shared ASMS | a33.30": 4,
+      "Shared SaaS authentication | rolling-saas": 1
+    },
+    "recovered_missing_research_routes": 15,
+    "by_classification_nonexclusive": {
+      "managed_lifecycle_candidate": 209,
+      "reference_gap": 162,
+      "discovery": 424,
+      "operational": 148,
+      "helper": 45
+    },
+    "rest_route_records_are_executable_contract_certifications": false
+  },
+  "files": {
+    "inventory-candidate.json": "633ed7d3ee97f2df4b829a379ae817c31d9b5026e49778753874c88fac505ce5",
+    "audit-details.json": "769faccc67f595dafcc1470097ee99f165eacc0bbccf44136e1593d4d7bf84bd",
+    "saas-provenance.json": "275474217ed8fd6ffbe0e02b500666ece852b8d9a44890a8ceb83f07fc29d523",
+    "audit-report.md": "caf4ac9ce3b4128a6a54e2d0ddba94a24ed5e8139d58e30ca39d85c3176d520d",
+    "recovered-operation-rows.json": "2216278590d3579b80a04402a2ce49ccf2a49f76d2ae004533b877f83fc2580c",
+    "url-resolution.json": "f7920fd25e91d87d44429b8d70ac2c14167365d40020233ebd57cb80b28853b1"
+  }
+}

@@ -25,6 +25,8 @@ var ErrNotFound = errors.New("object absent from complete inventory")
 var ErrContract = errors.New("API response does not match the documented contract")
 
 type Options struct {
+	ExperimentalURLIPs                 bool
+	ExperimentalTags                   bool
 	AppVizURL, AppVizToken             string
 	ExperimentalAppVizRoles            bool
 	ExperimentalTrustedRules           bool
@@ -34,6 +36,9 @@ type Options struct {
 	Insecure, ReadOnly                 bool
 }
 type Client struct {
+	URLIPs                      *URLIPClient
+	AppVizWholeRoleOwnership    bool
+	Tags                        *TagClient
 	AppViz                      *AppVizClient
 	experimentalTrustedRules    bool
 	experimentalDeviceGroups    bool
@@ -100,7 +105,10 @@ func New(o Options) (*Client, error) {
 	tr := http.DefaultTransport.(*http.Transport).Clone()
 	tr.TLSClientConfig = &tls.Config{MinVersion: tls.VersionTLS12, InsecureSkipVerify: o.Insecure} // explicit opt-in only
 	tr.ResponseHeaderTimeout = o.Timeout
-	return &Client{AppViz: appviz, loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}, nil
+	c := &Client{AppViz: appviz, loginGate: make(chan struct{}, 1), base: strings.TrimRight(o.URL, "/"), http: &http.Client{Transport: tr, Timeout: o.Timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}, username: o.Username, password: o.Password, session: o.SessionID, readOnly: o.ReadOnly, experimentalDeviceGroups: o.ExperimentalDeviceGroups, experimentalTrustedRules: o.ExperimentalTrustedRules}
+	c.Tags = NewTagClient(c, o.ExperimentalTags)
+	c.URLIPs = NewURLIPClient(c, o.ExperimentalURLIPs)
+	return c, nil
 }
 func validSession(s string) bool {
 	for _, r := range s {

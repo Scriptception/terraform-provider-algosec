@@ -1,0 +1,424 @@
+{
+  "scope": "Second-review nominations only; not implementation acceptance or final durable-family closure.",
+  "decision_sources": [
+    {
+      "artifact": "second-review/appviz-candidates.md",
+      "sha256": "e8907e709ed29baf47a670838a586d8f2112ab9081ba49be50b0a27436038109"
+    },
+    {
+      "artifact": "second-review/other-candidates.md",
+      "sha256": "019a04d090706263ceced015c1ddbb248527d5e2f7ab7ae6344d8606b31a6e11"
+    },
+    {
+      "artifact": "FINAL-COVERAGE-INVARIANT.md",
+      "sha256": "985186077236b5896b7512971ba338f91295c6c26fc6b2faaecf7a62106622fc"
+    }
+  ],
+  "nominations": [
+    {
+      "nomination_id": "appviz_role_action_binding",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/appviz-candidates.md",
+      "scope": "Own only exact role/action tuple using parent-preserving add/remove; do not DELETE or reconstruct role.",
+      "remaining_acceptance_requirements": [
+        "Choose explicit selected-action read/absence policy; exact positive acknowledgement; vulnerability implication safeguards; exclusive tuple ownership; typed fixture/protocol tests."
+      ],
+      "broader_scope_not_solved": "Whole-role LDAP/description/import limitations do not block this delta.",
+      "operation_selectors": [
+        {
+          "id": "op-76d7c2058e2a188a",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/BusinessFlow/rest/v1/settings/permissions/role",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/7r93tg1xsbeqf-retrieve-role-permissions-by-name"
+          ]
+        },
+        {
+          "id": "op-3bfb82d0446fc7dc",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/BusinessFlow/rest/v1/settings/permissions/role",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/4wo7alllbgaph-update-role-permissions-and-users"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "appviz_role_application_revision_binding",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/appviz-candidates.md",
+      "scope": "Own role plus positive application REVISION ID, not stable application ID; string add versus integer read/remove.",
+      "remaining_acceptance_requirements": [
+        "Complete typed grant-list choice; exact target acknowledgement; replacement-only permission changes; no competing whole-role ownership; typed fixture/protocol tests."
+      ],
+      "broader_scope_not_solved": "Stable-application successor mapping and application lifecycle remain unsolved, not required for fixed revision grant.",
+      "operation_selectors": [
+        {
+          "id": "op-76d7c2058e2a188a",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/BusinessFlow/rest/v1/settings/permissions/role",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/7r93tg1xsbeqf-retrieve-role-permissions-by-name"
+          ]
+        },
+        {
+          "id": "op-3bfb82d0446fc7dc",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/BusinessFlow/rest/v1/settings/permissions/role",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/4wo7alllbgaph-update-role-permissions-and-users"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "appviz_service_custom_field_binding",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/appviz-candidates.md",
+      "scope": "Own existing service ID and one string custom field through setCustomFields/clearCustomFields; no parent CRUD or content edits.",
+      "remaining_acceptance_requirements": [
+        "Explicit experimental stable-service-ID and complete customFields read choice; serviceID equality; reject selected links/duplicates; preserve other fields; exact acknowledgement and readback."
+      ],
+      "broader_scope_not_solved": "Service protocol/port content read equivalence remains blocked; custom-field ownership does not claim service-content ownership.",
+      "operation_selectors": [
+        {
+          "id": "op-39fb1a7c991adebf",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/BusinessFlow/rest/v1/network_services/{id}",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/vnn6kdnzxebpm-retrieve-network-service-by-id"
+          ]
+        },
+        {
+          "id": "op-2b7a4489f7102872",
+          "product": "AppViz",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/BusinessFlow/rest/v1/network_services/{id}",
+          "source_urls": [
+            "https://api-docs.algosec.com/api/v1/projects/cHJqOjE1ODIzNg/nodes/glp3ra9n40m2j-edit-network-service-object"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_cd_notification_emails",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Own whole notification email set for one aws/azure/gcp provider; destroy explicitly clears only emails.",
+      "remaining_acceptance_requirements": [
+        "Empty preflight or explicit import; exact documented acknowledgement and set readback; exclusive set owner; preserve protection fields and other providers."
+      ],
+      "broader_scope_not_solved": "Full protection/CD-settings reset remains unsolved; no PUT or protection toggles authorized.",
+      "operation_selectors": [
+        {
+          "id": "op-a1d3144b87a7cfda",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/e4by78wj36yqp-get-cd-mitigation-configuration"
+          ]
+        },
+        {
+          "id": "op-9c5dc31382dfa138",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "PATCH",
+          "route": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/0fop00rbo1jtv-update-cd-mitigation-configuration"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_jira_integration",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Tenant singleton, replacement-only, explicit nonempty issue type/priority; write-only documented converted token.",
+      "remaining_acceptance_requirements": [
+        "Plan-time validation before disruptive replacement; 409 never adopts; exact create/delete acknowledgements; GET data:{} absence; disclose lost alert-ticket associations."
+      ],
+      "broader_scope_not_solved": "No PATCH invented; default omission and association retention not guaranteed. Official guide resolves the token-conversion blocker.",
+      "operation_selectors": [
+        {
+          "id": "op-a339f3e541b2012f",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/prevasio/api/v1/configurations/integrations/jira",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/9qel3er0lwyna-get-jira-configuration"
+          ]
+        },
+        {
+          "id": "op-80c897d674793960",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/prevasio/api/v1/configurations/integrations/jira",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/owlrnpuhg6c18-create-jira-configuration"
+          ]
+        },
+        {
+          "id": "op-6399dd3aee0564e3",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "DELETE",
+          "route": "/prevasio/api/v1/configurations/integrations/jira",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/cjon09rnk8332-delete-jira-configuration"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_custom_threat_entry",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Replacement-only exact threat_type/list_type/destination tuple; always selected nonempty destination on DELETE.",
+      "remaining_acceptance_requirements": [
+        "Enumerate and validate every page; exact identity; reject duplicates/preexisting entries; require target acknowledgement; explicit experimental concurrency/normalization limits."
+      ],
+      "broader_scope_not_solved": "Do not promise concurrency-safe insertion or normalized aliases; missing PATCH is not a lifecycle blocker.",
+      "operation_selectors": [
+        {
+          "id": "op-8d37b854dcaa0bf9",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/prevasio/api/v1/threat-management/details",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/gy2nwb0ekgdpq-get-detailed-list-data-for-threat-type"
+          ]
+        },
+        {
+          "id": "op-6b289cf1ea4d5ab1",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/prevasio/api/v1/threat-management/details",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/sp0xl325r7rhb-add-a-new-item-to-a-custom-threat-list"
+          ]
+        },
+        {
+          "id": "op-718d314df14c3f42",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "DELETE",
+          "route": "/prevasio/api/v1/threat-management/details",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/j09s7757tcg1p-delete-item-s-from-a-custom-threat-list"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_manual_aws_registration",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Own manual aws registration/name only; explicit typed write-only bootstrap fields are submission-only, not drift-managed.",
+      "remaining_acceptance_requirements": [
+        "Unified-onboarding tenant; positive create accountKey mapped to inventory identity; manual provenance; 409 never adopts; name-only PATCH; explicit replacement trigger for bootstrap changes; external cloud IAM/key management excluded."
+      ],
+      "broader_scope_not_solved": "Full cloud access/credential drift remains unobservable; narrow registration/name lifecycle is nominated, not broadly blocked.",
+      "operation_selectors": [
+        {
+          "id": "op-31ca5c846d30ccc8",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/api/algosaas/accounts/v1/account",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts"
+          ]
+        },
+        {
+          "id": "op-42441e1c7d2644f3",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/api/algosaas/accounts/v1/account/aws",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/700ea656af479-onboard-a-single-aws-account"
+          ]
+        },
+        {
+          "id": "op-15b5f4135ed333b8",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "PATCH",
+          "route": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/46ac658f69d17-update-an-aws-account-name"
+          ]
+        },
+        {
+          "id": "op-a27118ed0dc0cb80",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "DELETE",
+          "route": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/a52cb60d0e71a-delete-an-aws-account"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_manual_azure_registration",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Own manual azure registration/name only; explicit typed write-only bootstrap fields are submission-only, not drift-managed.",
+      "remaining_acceptance_requirements": [
+        "Unified-onboarding tenant; positive create accountKey mapped to inventory identity; manual provenance; 409 never adopts; name-only PATCH; explicit replacement trigger for bootstrap changes; external cloud IAM/key management excluded."
+      ],
+      "broader_scope_not_solved": "Full cloud access/credential drift remains unobservable; narrow registration/name lifecycle is nominated, not broadly blocked.",
+      "operation_selectors": [
+        {
+          "id": "op-31ca5c846d30ccc8",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/api/algosaas/accounts/v1/account",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts"
+          ]
+        },
+        {
+          "id": "op-279301d864587f7c",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/api/algosaas/accounts/v1/account/azure",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/433b9a550df17-onboard-a-single-azure-subscription"
+          ]
+        },
+        {
+          "id": "op-0357ee62bf13a7e4",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "PATCH",
+          "route": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/165717337a77d-update-an-azure-subscription"
+          ]
+        },
+        {
+          "id": "op-d9e1a8fa2d7f1dc0",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "DELETE",
+          "route": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/5743a2429ad66-delete-an-azure-subscription"
+          ]
+        }
+      ]
+    },
+    {
+      "nomination_id": "ace_manual_gcp_registration",
+      "version_scope": "rolling-saas",
+      "status": "experimental_candidate_nominated_not_implemented",
+      "report_artifact": "second-review/other-candidates.md",
+      "scope": "Own manual gcp registration/name only; explicit typed write-only bootstrap fields are submission-only, not drift-managed.",
+      "remaining_acceptance_requirements": [
+        "Unified-onboarding tenant; positive create accountKey mapped to inventory identity; manual provenance; 409 never adopts; name-only PATCH; explicit replacement trigger for bootstrap changes; external cloud IAM/key management excluded."
+      ],
+      "broader_scope_not_solved": "Full cloud access/credential drift remains unobservable; narrow registration/name lifecycle is nominated, not broadly blocked.",
+      "operation_selectors": [
+        {
+          "id": "op-31ca5c846d30ccc8",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "GET",
+          "route": "/api/algosaas/accounts/v1/account",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts"
+          ]
+        },
+        {
+          "id": "op-364c0410e73c8820",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "POST",
+          "route": "/api/algosaas/accounts/v1/account/gcp",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/fb7ea5acbb779-onboard-a-single-gcp-project"
+          ]
+        },
+        {
+          "id": "op-35426cff4b3e9077",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "PATCH",
+          "route": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/7d9f3d77dfe5c-update-a-gcp-project"
+          ]
+        },
+        {
+          "id": "op-28c9e4f65a9ae325",
+          "product": "ACE",
+          "version": "rolling-saas",
+          "protocol": "REST",
+          "method": "DELETE",
+          "route": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+          "source_urls": [
+            "https://api-docs.algosec.com/docs/ace/153b4761af20e-delete-a-gcp-project"
+          ]
+        }
+      ]
+    }
+  ],
+  "final_coverage_closure": "not_satisfied_by_this_inventory; parent must augment implementation mappings and resolve every durable family per FINAL-COVERAGE-INVARIANT.md",
+  "mapping_freeze": "Only original 24 native implementation claims; tags/FireFlow/isolated ACE work deliberately not imported."
+}

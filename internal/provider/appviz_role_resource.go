@@ -79,12 +79,12 @@ func (appVizApplicationsValidator) ValidateMap(_ context.Context, q validator.Ma
 	}
 }
 func (r *appVizRoleResource) Schema(_ context.Context, _ resource.SchemaRequest, s *resource.SchemaResponse) {
-	s.Schema = schema.Schema{Description: "Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Description and LDAP linkage are not managed because the public GET omits them. Use dedicated roles with no external writers.", Attributes: map[string]schema.Attribute{
+	s.Schema = schema.Schema{Description: "Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Requires appviz_whole_role_ownership=true: import transfers destructive whole-role ownership. Delete/replacement removes unreadable description and LDAP linkage; neither is preserved. Use dedicated roles with no external writers.", Attributes: map[string]schema.Attribute{
 		"id":                      schema.StringAttribute{Computed: true, Description: "Exact case-sensitive role name; also the import identifier."},
 		"name":                    schema.StringAttribute{Required: true, Description: "Case-sensitive role name. Changes replace.", Validators: []validator.String{appVizNameValidator{}}, PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()}},
 		"enabled":                 schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(true), Description: "Whether the role is enabled. Defaults true. Changes replace because the documented update does not set enabled.", PlanModifiers: []planmodifier.Bool{boolplanmodifier.RequiresReplace()}},
 		"users":                   schema.SetAttribute{Optional: true, Computed: true, ElementType: types.StringType, Default: setdefault.StaticValue(types.SetValueMust(types.StringType, []attr.Value{})), Description: "Complete set of existing user names assigned to this role; defaults empty."},
-		"permissions":             schema.SetAttribute{Optional: true, Computed: true, ElementType: types.StringType, Default: setdefault.StaticValue(types.SetValueMust(types.StringType, []attr.Value{})), Description: "Complete set of allowed global permission names. Defaults empty. The server validates permission availability."},
+		"permissions":             schema.SetAttribute{Optional: true, Computed: true, ElementType: types.StringType, Default: setdefault.StaticValue(types.SetValueMust(types.StringType, []attr.Value{})), Description: "Complete set of allowed global permission names. Defaults empty. The server validates permission availability. refreshVulnerability requires explicit viewVulnerability ownership; refresh continues to confer effective viewing."},
 		"application_permissions": schema.MapAttribute{Optional: true, Computed: true, ElementType: types.StringType, Default: mapdefault.StaticValue(types.MapValueMust(types.StringType, map[string]attr.Value{})), Description: "Application revision IDs mapped to view or edit. Defaults empty. Changes replace to avoid guessing the order of same-application permission removal and addition.", Validators: []validator.Map{appVizApplicationsValidator{}}, PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()}},
 	}}
 }
@@ -95,6 +95,10 @@ func (r *appVizRoleResource) Configure(_ context.Context, q resource.ConfigureRe
 	c, ok := q.ProviderData.(*client.Client)
 	if !ok {
 		s.Diagnostics.AddError("Unexpected provider data", "Expected AlgoSec client.")
+		return
+	}
+	if !c.AppVizWholeRoleOwnership {
+		s.Diagnostics.AddError("Whole-role ownership acknowledgement required", "Set appviz_whole_role_ownership=true to acknowledge that deletion/replacement, including imported roles, destroys unreadable description and LDAP linkage. Use dedicated exclusively owned roles.")
 		return
 	}
 	r.c = c.AppViz
@@ -138,6 +142,45 @@ func (r *appVizRoleResource) ModifyPlan(ctx context.Context, q resource.ModifyPl
 	s.Diagnostics.Append(q.Plan.Get(ctx, &m)...)
 	if s.Diagnostics.HasError() {
 		return
+	}
+	// Unknown values are omitted; the known portion is a lower bound on the
+	// actual serialized create request, including Go's HTML/Unicode escaping.
+	known := client.AppVizRole{Name: m.Name.ValueString(), Enabled: m.Enabled.ValueBool(), Users: []string{}, Permissions: []string{}, Applications: map[string]string{}}
+	if m.Enabled.IsUnknown() {
+		known.Enabled = true
+	}
+	for _, pair := range []struct {
+		set    types.Set
+		target *[]string
+	}{{m.Users, &known.Users}, {m.Permissions, &known.Permissions}} {
+		for _, value := range pair.set.Elements() {
+			if !value.IsNull() && !value.IsUnknown() {
+				*pair.target = append(*pair.target, value.(types.String).ValueString())
+			}
+		}
+	}
+	for key, value := range m.Applications.Elements() {
+		if !value.IsNull() {
+			permission := "view"
+			if !value.IsUnknown() {
+				permission = value.(types.String).ValueString()
+			}
+			known.Applications[key] = permission
+		}
+	}
+	if err := client.ValidateAppVizRoleCreateSize(known); err != nil {
+		s.Diagnostics.AddError("Invalid role payload", err.Error())
+	}
+	permissionsKnown := !m.Permissions.IsUnknown()
+	for _, value := range m.Permissions.Elements() {
+		if value.IsUnknown() {
+			permissionsKnown = false
+		}
+	}
+	if permissionsKnown {
+		if err := client.ValidateAppVizPermissionClosure(known.Permissions); err != nil {
+			s.Diagnostics.AddError("Invalid role permission dependency", err.Error())
+		}
 	}
 	for _, set := range []types.Set{m.Users, m.Permissions} {
 		if set.IsNull() || set.IsUnknown() {

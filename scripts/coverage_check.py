@@ -21,10 +21,29 @@ for version, count in [('a32.60', 85), ('a33.20', 119)]:
         assert p['url'].endswith('/' + p['page']) and p['reason'] and not p['live_verified']
         assert 'resource_blocks' in p and 'curl_url_evidence' in p
 ops = d['implemented_operations']
-assert len(ops) == len({(o['method'], o['actual_route_template']) for o in ops}) == 24
-assert collections.Counter(o['version_scope'] for o in ops) == {'a32.60': 12, 'a33.20': 8, 'saas-2026-09-09': 4}
+assert len(ops) == len({(o['method'], o['actual_route_template']) for o in ops}) == 31
+assert collections.Counter(o['version_scope'] for o in ops) == {'a32.60': 12, 'a33.20': 10, 'a33.30': 5, 'saas-2026-09-09': 4}
 surfaces = set()
 for o in ops:
+    if o.get('product') in {'AFA tags', 'AFA URL/IP'}:
+        assert o['method'] in {'GET','POST','PUT','DELETE'} and not o['live_verified']
+        source = (root/o['source_file']).read_text()
+        assert o['source_route_expression'] in re.sub(r'\s+', '', source)
+        receiver = 'TagClient' if o['product'] == 'AFA tags' else 'URLIPClient'
+        start = re.search(r'func \(t \*' + receiver + r'\) ' + o['client_function'] + r'\(',source).start()
+        body = source[start:].split('\nfunc ',1)[0]
+        if receiver == 'TagClient':
+            assert 't.request(ctx, "'+o['method']+'",' in body
+            assert '/en/horizon/a33.30/horizon-help/' in o['documentation_url']
+        else:
+            assert 'method := "DELETE"' in body and 'method = "PUT"' in body and 't.c.do(ctx, method,' in body
+            assert '/en/asms/a33.20/asms-help/' in o['documentation_url']
+        api = re.search(r'const api = "([^"]+)"',(root/'internal/client/client.go').read_text())[1]
+        variables = {'api':api,'categoryPath':api+'/plugins/panorama/URLCategory/','part':'{tagId}','categoryPart':'{category}','urlPart':'{url}'}
+        resolved = ''.join(json.loads(token) if token.startswith('"') else variables[token] for token in o['source_route_expression'].split('+'))
+        assert resolved == o['actual_route_template']
+        surfaces.update(o['surfaces'])
+        continue
     if o.get('product') == 'AppViz SaaS':
         assert o['documentation_url'].startswith('https://api-docs.algosec.com/docs/appvizsaas-api-docs/')
         source = (root / o['source_file']).read_text()
@@ -75,11 +94,11 @@ for kind, folder in [('resource', 'resources'), ('data', 'data-sources')]:
     for file in (root / 'docs' / folder).glob('*.md'):
         expected.add(f'{kind}.algosec_{file.stem}')
 assert surfaces == expected, (surfaces ^ expected)
-assert len([s for s in surfaces if s.startswith('resource.')]) == 4
+assert len([s for s in surfaces if s.startswith('resource.')]) == 6
 assert len([s for s in surfaces if s.startswith('data.')]) == 12
 # Verify registration count independently of generated docs.
 provider = (root / 'internal/provider/provider.go').read_text()
-assert len(re.findall(r'New\w+Resource,?', provider)) == 4
+assert len(re.findall(r'New\w+Resource,?', provider)) == 6
 assert len(re.findall(r'New\w+DataSource,?', provider)) == 12
 serialized = json.dumps(d)
 assert '/home/hermes/' not in serialized and '<html' not in serialized
@@ -107,7 +126,7 @@ if '--write' in sys.argv:
     file.write_text(want)
 else:
     assert text == want, 'Page tables differ: run python3 scripts/coverage_check.py --write'
-print('Coverage consistent: 85 + 119 pages; 24 selected method/routes; 4 resources / 12 data sources.')
+print('Coverage consistent: 85 + 119 pages; 31 selected method/routes; 6 resources / 12 data sources.')
 
 from operation_inventory import validate
 summary = validate(json.loads((root / 'docs/cross-product-operations.json').read_text()), root)

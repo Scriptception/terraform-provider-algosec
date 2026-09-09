@@ -56,9 +56,12 @@ provider "algosec" {
 
 - `appviz_saas_token` (String, Sensitive) AppViz SaaS Bearer token. Prefer ALGOSEC_APPVIZ_SAAS_TOKEN to avoid configuration/plan persistence. Never refreshed, logged, or stored in resource state.
 - `appviz_saas_url` (String) Separate AppViz SaaS HTTPS origin. Environment: ALGOSEC_APPVIZ_SAAS_URL. Not the legacy on-premises AppViz API. TLS verification is always required.
+- `appviz_whole_role_ownership` (Boolean) Explicitly acknowledge destructive whole-role ownership, including imported roles: delete/replacement removes unreadable description and LDAP linkage. Defaults false. Required by algosec_appviz_role in addition to its experimental gate; use dedicated exclusively owned roles.
 - `experimental_appviz_roles` (Boolean) Enable AppViz SaaS Early Availability roles. Defaults false; vendor EA, synthetic-contract tested only. Separate from AFA and legacy AppViz authentication.
 - `experimental_device_groups` (Boolean) EXPERIMENTAL ASMS A33.20 Early Availability device groups. Defaults to false. AlgoSec does not recommend these APIs for production. Requires complete administrator inventory visibility.
+- `experimental_tags` (Boolean) Enable experimental A33.30 vendor Early Availability ALGOSEC tags. Defaults false. Complete administrator visibility, exclusive writers and short-page pagination contract required; no live acceptance.
 - `experimental_trusted_rules` (Boolean) Enable experimental A33.20 trusted-rule assignments. Defaults false. Public-contract tested only; complete administrator device/rule visibility required. This provider gate is separate from vendor Early Availability device groups.
+- `experimental_url_ip_memberships` (Boolean) Enable A33.20 experimental singleton URL/IP memberships. Defaults false; separate from whole-category ownership and other experimental flags. Never overlap whole-category or concurrent tuple ownership. No live acceptance.
 - `insecure` (Boolean) Disable TLS verification explicitly. Defaults to false. Install the appliance CA in the system trust store instead when possible.
 - `password` (String, Sensitive) ASMS login password. Prefer ALGOSEC_PASSWORD to avoid configuration/plan persistence.
 - `read_only` (Boolean) Refuse all administration writes. Defaults to true; set false to manage resources. Authentication may establish an API session.
@@ -87,3 +90,9 @@ for CA trust, category prerequisites, disposable mutations, import/destroy and l
 Immutable v0.2.0 source: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
 tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`. Subsequent documentation HEAD
 is not the release source. See [release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830).
+
+Unreleased expansion also includes [A33.30 EA ALGOSEC tags](tag-contract.md) and
+[A33.20 singleton URL/IP assignments](url-ip-contract.md), each separately gated.
+Whole AppViz role import/replacement requires `appviz_whole_role_ownership=true`
+and destroys unreadable description/LDAP linkage. Current discovery and selected
+implementation are tracked separately in the [reconciled inventory](inventory-reconciliation.md).

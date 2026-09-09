@@ -3,12 +3,12 @@
 page_title: "algosec_appviz_role Resource - algosec"
 subcategory: ""
 description: |-
-  Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Description and LDAP linkage are not managed because the public GET omits them. Use dedicated roles with no external writers.
+  Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Requires appviz_whole_role_ownership=true: import transfers destructive whole-role ownership. Delete/replacement removes unreadable description and LDAP linkage; neither is preserved. Use dedicated roles with no external writers.
 ---
 
 # algosec_appviz_role (Resource)
 
-Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Description and LDAP linkage are not managed because the public GET omits them. Use dedicated roles with no external writers.
+Manages an AppViz SaaS Early Availability role, including complete user membership and allowed global/application permission sets. Requires experimental_appviz_roles=true and separate SaaS bearer authentication. Public-schema tested only; no live acceptance. Import existing roles explicitly. Name, enabled and application permission changes replace, temporarily removing the role; do not use create_before_destroy for same-name replacement. Requires appviz_whole_role_ownership=true: import transfers destructive whole-role ownership. Delete/replacement removes unreadable description and LDAP linkage; neither is preserved. Use dedicated roles with no external writers.
 
 ## Example Usage
 
@@ -16,8 +16,9 @@ Manages an AppViz SaaS Early Availability role, including complete user membersh
 # Requires the unreleased development provider; published 0.2.0 lacks this resource.
 # Configure ALGOSEC_APPVIZ_SAAS_URL and ALGOSEC_APPVIZ_SAAS_TOKEN in the environment.
 provider "algosec" {
-  experimental_appviz_roles = true
-  read_only                 = false
+  experimental_appviz_roles   = true
+  appviz_whole_role_ownership = true
+  read_only                   = false
 }
 
 resource "algosec_appviz_role" "example" {
@@ -41,7 +42,7 @@ resource "algosec_appviz_role" "example" {
 
 - `application_permissions` (Map of String) Application revision IDs mapped to view or edit. Defaults empty. Changes replace to avoid guessing the order of same-application permission removal and addition.
 - `enabled` (Boolean) Whether the role is enabled. Defaults true. Changes replace because the documented update does not set enabled.
-- `permissions` (Set of String) Complete set of allowed global permission names. Defaults empty. The server validates permission availability.
+- `permissions` (Set of String) Complete set of allowed global permission names. Defaults empty. The server validates permission availability. refreshVulnerability requires explicit viewVulnerability ownership; refresh continues to confer effective viewing.
 - `users` (Set of String) Complete set of existing user names assigned to this role; defaults empty.
 
 ### Read-Only

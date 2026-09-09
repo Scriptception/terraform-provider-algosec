@@ -7,6 +7,26 @@ history remain unchanged. No appliance calls, credentials, Vault, remote changes
 tags, signing, publication or policy changes occurred. Public documentation and
 local synthetic HTTPS are the only API evidence used.
 
+## Current tag/URL and review-fix sub-batch
+
+Current surface: **6 resources, 12 data sources, 31 selected method/route operations**.
+Added `algosec_tag` and `algosec_url_ip_membership`; see their
+[tag](tag-contract.md) and [URL/IP](url-ip-contract.md) contracts. Tag-hostgroup
+assignment has the narrow identity mapping blocker described there.
+
+Independent first-batch security/protocol reports were read. Actual RED tests
+reproduced S1 (published DELETE wrapper), P1 (known oversized replacement deletes
+the old role), and P2 (disabled ambient SaaS configuration breaks AFA). Fixes and
+regressions are retained. Whole-role destructive ownership now requires explicit
+provider acknowledgement; permission implication and known-payload checks run
+before replacement. Existing baseline safety fixes remain intact.
+
+This is an intermediate coherent sub-batch. Final frozen-source independent review
+is pending, and FireFlow plus narrowed AppViz/ACE durable subsets remain work.
+No completion or live acceptance is implied by current implementation counts.
+[Executed sub-batch gates](durable-expansion-batch2-verification.md) passed on
+Terraform 1.16.1 and 1.11.0; final independent review remains pending.
+
 ## First coherent batch
 
 - Implemented **`algosec_appviz_role`**: separately gated AppViz SaaS EA role,
@@ -25,25 +45,20 @@ local synthetic HTTPS are the only API evidence used.
 
 ## Discovery versus implementation
 
-[Cross-product inventory](cross-product-operations.json): **934 records**, comprising
-**772 REST operation records and 162 unresolved SOAP service/binding records**.
-Per product: AFA 525, legacy AppViz 141, FireFlow 114, AppViz SaaS 71, ACE 65,
-ObjectFlow 18. SOAP local names without certified operation QName remain unresolved;
-even documented QNames without a service/binding are not executable SOAP contracts.
-All records carry source URLs, retrieval, auth/version boundary and disposition.
-Selected canonical routes exist only for implemented mappings. Raw route labels,
-contradictory examples and documented server/base context are separate fields.
-Relative labels are keyed with documented catalog/server path context to avoid
-collapsing unrelated `/new`, `/{id}` or `/login` operations. No route normalization
-silently repairs vendor spelling, case, embedded newlines or slashes.
+[Cross-product inventory](cross-product-operations.json): **975 candidate records**,
+with **747 selected REST, 66 unresolved REST, 162 unresolved SOAP catalog names**
+and **1,048 source observations**. Zero SOAP operation QNames are certified.
+Original IDs, literal labels, source pointers and version/auth provenance remain
+unchanged. The additive `current_implementation` overlay maps 31 selected
+operations; historical audit classifications are not current support claims.
+See [reconciliation](inventory-reconciliation.md). The provisional first-batch
+934-record inventory is retained only as frozen input metadata.
 
-The ledger maps 24 implementation records; other-version equivalents remain
-unverified. Imported parent/researcher catalogs are discovery evidence, not an
-independent lifecycle approval. The original 204-page AFA baseline is retained
-separately. Graph discovery reached 1021 official pages in the parent's corpus,
-but this batch does not claim all graph-linked operations are reconciled into the
-934-record inventory. AppViz SaaS service-level auth and model nodes are separate
-from its 71 operation nodes. No overall coverage percentage is claimed.
+The original 204-page AFA baseline is retained separately. Graph discovery reached
+1,021 official pages; neither page nor operation-record counts are a managed
+resource coverage percentage. The 71 public SaaS operation identities remain
+separate from 210 cached nodes and seven internal export exclusions. Shared
+operations are deduplicated without transferring compatibility across versions.
 
 Public version discovery reached **A33.30 Horizon Foundation**, under
 `https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/`.
@@ -64,8 +79,9 @@ legacy versions, and directly retrieved SaaS public schemas and role metadata.
 | AppViz SaaS application/flow and legacy child metadata (contacts/labels/custom fields) | Unassessed | Richer SaaS schemas recovered; inspect each specific draft/child lifecycle. Existing legacy container blockers are not proof that every child binding is blocked. |
 | AFA whole users/roles | Evidence-blocked current public read mapping | Fresh A33.30 [roles GET](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/retrieving_roles.htm) still has malformed fields/query session; [write](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/roles_create_post.htm) enableGlobalTrustTraffic is not proved equivalent to EnableGlobalCustomization. Need complete readable permissions, safe auth and secret-free user password inputs. |
 | AFA devices: direct brands, managers/children, cloud connectors, file devices | Evidence-blocked complete refresh | Fresh [detail](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/device-details.htm) has no complete configuration response schema; [write](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/device-add_edit1.htm) templates/testMode are not live readback. Reopen per brand with authoritative managed nonsecret fields, positive identity and child/delete ownership. |
-| AFA A33.30 ALGOSEC tags | Implementation candidate; next batch | [Create](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-create-post.htm), [list](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-all-tags-get.htm): parent dossier proposes explicit object-create/array-read/empty-ack choices, numeric-ID import and association-loaded delete guard. Review pagination exhaustion, contradictions and risk references before code. Do not blanket block due missing appliance. |
-| AFA tag-hostgroup assignment | Unassessed mapping | Need stable deviceDataId/canonized hostgroup versus write deviceTreeName mapping and includeAssociations=true; no whole relation ownership. |
+| AFA A33.30 ALGOSEC tags | Implemented experimental | [Selected contract](tag-contract.md); short-page pagination, ID refresh/import and association-loaded delete guard. |
+| AFA A33.20 URL/IP singleton | Implemented experimental | [Selected contract](url-ip-contract.md); exact delta acknowledgement; no overlapping whole-category ownership. |
+| AFA tag-hostgroup assignment | Evidence-blocked identity mapping | [Narrow blocker](tag-contract.md#hostgroup-association-boundary): establish allowed-device ID to deviceDataId and canonical hostgroup read before creating an absent tuple. |
 | FireFlow A33.30 direct role permission/member bindings | Implementation candidates; next batch | Independently re-fetched [permission GET](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-get.htm) and [POST](https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-post.htm), plus members GET/POST. Separate FireFlow_Session auth, singleton delta, explicit Success ack and direct/inherited reads support bounded binding work. Parent dossiers available; implement with ownership regressions. |
 | FireFlow whole roles/users and SOAP custom-field assignments | Evidence-blocked full lifecycle | No whole-role DELETE; user mutation not established. Mixed REST/SOAP custom fields require certified identity/auth/namespace/binding and safe value ownership. Do not invent role delete or infer SOAP binding. |
 | FireFlow tickets, sub-ticket configurations and object change requests | Workflow boundary | Ticket configuration is reversible but scoped to a change request, not global durable configuration. Submission/status is not authoritative deployed network/service CRUD. Keep workflows out of managed resources. |
@@ -75,7 +91,7 @@ legacy versions, and directly retrieved SaaS public schemas and role metadata.
 
 ## Verification evidence
 
-External directory: `/home/hermes/algosec-expansion-evidence/implementation`.
+External logs are retained in the operator-provided implementation evidence directory.
 Actual RED logs: `01-client-red.log` (missing typed API), `02-protocol-red.log`
 (missing provider surface), `03-baseline-red.log` (all three destructive baseline
 regressions reproduced), `04-trailing-json-red.log` (extra JSON accepted),
@@ -99,7 +115,9 @@ These are local synthetic tests, never appliance acceptance.
    next-batch direction. Broad expansion is **not complete**: unassessed/candidate
    rows above are real remaining work, not evidence-blocked by fiat.
 3. Next implementation priorities: A33.30 FireFlow singleton role permission/member
-   bindings, AFA tags, then remaining AppViz SaaS/ACE/ObjectFlow candidates. Read
+   bindings, then AppViz role/action, application-revision and service custom-field
+   bindings; ACE notification emails, Jira, threat entries and manual cloud-account
+   registration subsets. Read
    external `afa/{tag-implementation-contract,current-actionable-addendum}.md`,
    `appviz/`, `fireflow-boundaries/`, and any `map-urt/` dossier. Treat them as
    evidence; independently verify official contracts before coding.
@@ -112,9 +130,8 @@ These are local synthetic tests, never appliance acceptance.
 6. Use the supplied tools, no system installs:
 
    ```sh
-   export PATH=/home/hermes/algosec-provider-work/tools/go/bin:/home/hermes/algosec-provider-work/tools:$PATH
+   # Source the operator-provided tool environment; keep host paths external.
    export CGO_ENABLED=1
-   export CC='/home/hermes/algosec-provider-work/tools/zig-x86_64-linux-0.16.0/zig cc'
    make fmt generate
    python3 scripts/coverage_check.py --write
    make fmt-check test vet vuln docs-check smoke coverage-check actionlint package-smoke

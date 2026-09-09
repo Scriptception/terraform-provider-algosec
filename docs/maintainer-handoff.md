@@ -6,7 +6,7 @@ For `feat/durable-api-expansion`, start with the
 [durable expansion ledger](durable-expansion-ledger.md) and
 [AppViz SaaS role contract](appviz-role-contract.md). Development VERSION is
 `0.3.0-dev`; published 0.2.0 pins and historical evidence below remain unchanged.
-This candidate has four resources, twelve data sources and twenty-four selected
+This candidate has six resources, twelve data sources and thirty-one selected
 operations. No publication or live acceptance is authorized by this handoff.
 
 

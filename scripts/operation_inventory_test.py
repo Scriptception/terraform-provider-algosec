@@ -27,3 +27,21 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(validate({'operations':[a,b]})['rest_operations'],2)
 
 if __name__=='__main__':unittest.main()
+
+class ReconciledInventoryTests(unittest.TestCase):
+    def test_current_mapping_and_source_accounting(self):
+        import json
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[1]
+        doc = json.loads((root/'docs/cross-product-operations.json').read_text())
+        result = validate(doc, root)
+        self.assertEqual(result['input_observations'], sum(len(o['research_rows']) for o in doc['operations']))
+        self.assertEqual(result['implemented_operations'], len(json.loads((root/'docs/api-inventory.json').read_text())['implemented_operations']))
+        for mutation in ['drop_source', 'drop_mapping', 'wrong_version', 'invent_function']:
+            with self.subTest(mutation=mutation):
+                bad = copy.deepcopy(doc)
+                if mutation == 'drop_source': bad['operations'][0]['research_rows'].pop()
+                if mutation == 'drop_mapping': bad['current_implementation'].pop()
+                if mutation == 'wrong_version': bad['current_implementation'][-1]['version_scope'] = 'a32.60'
+                if mutation == 'invent_function': bad['current_implementation'][-1]['client_function'] = 'Invented'
+                with self.assertRaises(ValueError): validate(bad, root)

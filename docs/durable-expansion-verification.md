@@ -1,5 +1,7 @@
 # Durable expansion batch 1 verification
 
+Historical first-batch snapshot; see [subsequent review fixes and tag/URL gates](durable-expansion-batch2-verification.md) for current counts and remaining work.
+
 2026-09-09, `feat/durable-api-expansion`, based on
 `c0ffbdb5bbda0b762acf37ebaf0cae66c481c924`; unreleased `0.3.0-dev`.
 One writer. No appliance, real credentials, Vault, tags, signing, remote changes
@@ -31,7 +33,7 @@ is not comprehensive provider completion. See the [continuation ledger](durable-
 ## Actual failing regressions and fixes
 
 External evidence directory:
-`/home/hermes/algosec-expansion-evidence/implementation/`.
+the operator-provided external implementation evidence directory.
 
 | Evidence | Actual failure before implementation/fix | Final behavior |
 |---|---|---|

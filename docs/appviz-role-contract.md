@@ -2,7 +2,7 @@
 
 `algosec_appviz_role` implements the public SaaS Permissions API Controller,
 retrieved 2026-09-09. Vendor **Early Availability**, explicitly enabled with
-`experimental_appviz_roles=true`. This is neither the legacy BusinessFlow
+`experimental_appviz_roles=true` and `appviz_whole_role_ownership=true`. This is neither the legacy BusinessFlow
 A32.60/A33.20/A33.30 contract nor an AFA role. No live acceptance is claimed.
 
 ## Official evidence and chosen wire contract
@@ -75,7 +75,7 @@ must not use same-name `create_before_destroy`.
 Delete preflights the complete role and refuses unexpected drift. The published
 DELETE schema is a generic `body/statusCode/statusCodeValue` wrapper; its example
 contains placeholder `100 CONTINUE` and zero. The implementation requires a
-well-formed wrapper with nonempty statusCode and statusCodeValue 200, then requires
+well-formed wrapper with nonempty statusCode and no contradictory failure status, then requires
 GET's documented role-not-found 404. It does not treat the placeholder example or
 HTTP success alone as deletion proof. Malformed acknowledgements, dependency
 errors and successful responses followed by a surviving role retain state.
@@ -100,3 +100,22 @@ visibility, default permissions, duplicate-name create behavior, application
 revision IDs, delta updates, dependency deletion, and SaaS version compatibility
 in separately authorized disposable live acceptance. No such calls are authorized
 or claimed in this batch.
+
+## Reviewed hardening in the unreleased candidate
+
+Whole-role ownership now requires the provider policy acknowledgement
+`appviz_whole_role_ownership=true`, including imports. Delete and replacement
+intentionally remove unreadable description and LDAP linkage. Empty readable user
+membership does not establish local-role provenance or metadata preservation.
+Use dedicated exclusively owned roles; future singleton bindings preserve parents.
+
+Known create-payload bytes are validated during planning with the actual JSON
+serializer, including escaped characters and known portions beside unknown values.
+The create-time 8 MiB guard remains. `refreshVulnerability` requires explicit
+`viewVulnerability` ownership in desired permissions; removing view while keeping
+refresh cannot revoke effective viewing. No other implication is invented.
+
+The published DELETE wrapper placeholder (`100 CONTINUE`, numeric zero) permits
+an exact absence GET, but is not positive deletion acknowledgement. Recognized
+failure statuses are rejected. Only the documented role-not-found GET completes
+deletion; permission errors and surviving roles retain state.

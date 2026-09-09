@@ -144,6 +144,7 @@ func TestProtocolAppVizRoleLifecycle(t *testing.T) {
  appviz_saas_url = %q
  appviz_saas_token = "synthetic-token"
  experimental_appviz_roles = true
+ appviz_whole_role_ownership = true
  read_only = false
 }
 resource "algosec_appviz_role" "test" {

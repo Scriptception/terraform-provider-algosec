@@ -5612,7 +5612,8 @@
       "surfaces": [
         "data.algosec_url_categories",
         "data.algosec_url_category",
-        "resource.algosec_url_category"
+        "resource.algosec_url_category",
+        "resource.algosec_url_ip_membership"
       ],
       "source_route_expression": "categoryPath"
     },
@@ -5917,7 +5918,7 @@
         "resource.algosec_appviz_role"
       ],
       "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/7r93tg1xsbeqf",
-      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE requires documented wrapper with statusCodeValue 200 and subsequent GET absence. No live compatibility claim.",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
       "live_verified": false
     },
     {
@@ -5932,7 +5933,7 @@
         "resource.algosec_appviz_role"
       ],
       "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/4wo7alllbgaph",
-      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE requires documented wrapper with statusCodeValue 200 and subsequent GET absence. No live compatibility claim.",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
       "live_verified": false
     },
     {
@@ -5947,7 +5948,7 @@
         "resource.algosec_appviz_role"
       ],
       "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/mkgujbmi04j1h",
-      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE requires documented wrapper with statusCodeValue 200 and subsequent GET absence. No live compatibility claim.",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
       "live_verified": false
     },
     {
@@ -5962,7 +5963,112 @@
         "resource.algosec_appviz_role"
       ],
       "documentation_url": "https://api-docs.algosec.com/docs/appvizsaas-api-docs/nfm3d9hk4k4i2",
-      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE requires documented wrapper with statusCodeValue 200 and subsequent GET absence. No live compatibility claim.",
+      "response_choice": "SaaS Early Availability role contract: typed complete readable permission sets; only create-returned role establishes ownership; exact GET 404 proves absence. DELETE validates the documented wrapper, rejects contradictory failure status and requires subsequent exact GET absence; placeholder inner status is not acknowledgement. No live compatibility claim.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/afa/api/v1/tags",
+      "client_function": "List",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-all-tags-get.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "POST",
+      "actual_route_template": "/afa/api/v1/tags",
+      "client_function": "Create",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-create-post.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "GET",
+      "actual_route_template": "/afa/api/v1/tags/details",
+      "client_function": "Associations",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/details\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tag-details-get.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "PUT",
+      "actual_route_template": "/afa/api/v1/tags/{tagId}/name",
+      "client_function": "Rename",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/\"+part+\"/name\"",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tagid-name-put.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA tags",
+      "version_scope": "a33.30",
+      "method": "DELETE",
+      "actual_route_template": "/afa/api/v1/tags/{tagId}",
+      "client_function": "Delete",
+      "source_file": "internal/client/tags.go",
+      "source_route_expression": "api+\"/tags/\"+part",
+      "surfaces": [
+        "resource.algosec_tag"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/tags-tag-delete.htm",
+      "response_choice": "A33.30 vendor EA: object create positive numeric ID, unfiltered paginated array (short-page termination); association-loaded detail bound to same ID; operation-specific exact 200 empty rename/delete; full ID refresh.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA URL/IP",
+      "version_scope": "a33.20",
+      "method": "PUT",
+      "actual_route_template": "/afa/api/v1/plugins/panorama/URLCategory/{category}/URL/{url}/IP/",
+      "client_function": "Change",
+      "source_file": "internal/client/url_ip.go",
+      "source_route_expression": "categoryPath+categoryPart+\"/URL/\"+urlPart+\"/IP/\"",
+      "surfaces": [
+        "resource.algosec_url_ip_membership"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/url-categories_put_ip.htm",
+      "response_choice": "Explicit singleton IP array; typed full category map acknowledgment must contain exact category/URL and expected IP membership; readback required, no whole-category ownership.",
+      "live_verified": false
+    },
+    {
+      "product": "AFA URL/IP",
+      "version_scope": "a33.20",
+      "method": "DELETE",
+      "actual_route_template": "/afa/api/v1/plugins/panorama/URLCategory/{category}/URL/{url}/IP/",
+      "client_function": "Change",
+      "source_file": "internal/client/url_ip.go",
+      "source_route_expression": "categoryPath+categoryPart+\"/URL/\"+urlPart+\"/IP/\"",
+      "surfaces": [
+        "resource.algosec_url_ip_membership"
+      ],
+      "documentation_url": "https://techdocs.algosec.com/en/asms/a33.20/asms-help/content/api-guide/url-categories_delete_ip.htm",
+      "response_choice": "Explicit singleton IP array; typed full category map acknowledgment must contain exact category/URL and expected IP membership; readback required, no whole-category ownership.",
       "live_verified": false
     }
   ]

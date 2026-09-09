@@ -142,6 +142,14 @@ func ValidateAppVizName(s string) error {
 	}
 	return nil
 }
+
+// The only documented implication selected here: refresh confers viewing.
+func ValidateAppVizPermissionClosure(permissions []string) error {
+	if slices.Contains(permissions, "refreshVulnerability") && !slices.Contains(permissions, "viewVulnerability") {
+		return errors.New("refreshVulnerability requires explicitly owning viewVulnerability; viewing cannot be revoked while refresh remains")
+	}
+	return nil
+}
 func ValidateAppVizRole(r AppVizRole) error {
 	if e := ValidateAppVizName(r.Name); e != nil {
 		return e
@@ -232,8 +240,35 @@ func appPermissions(m map[string]string) []appPermission {
 	slices.SortFunc(a, func(a, b appPermission) int { return strings.Compare(a.ID, b.ID) })
 	return a
 }
+
+// Share the exact wire representation with planning: JSON escaping affects size.
+func appVizRoleCreatePayload(r AppVizRole) any {
+	return struct {
+		Name         string          `json:"name"`
+		Enabled      bool            `json:"enabled"`
+		Users        []string        `json:"users"`
+		Permissions  []string        `json:"authorizedViewsAndActions"`
+		Applications []appPermission `json:"authorizedApplications"`
+	}{r.Name, r.Enabled, append([]string{}, r.Users...), append([]string{}, r.Permissions...), appPermissions(r.Applications)}
+}
+func ValidateAppVizRoleCreateSize(r AppVizRole) error {
+	raw, err := json.Marshal(appVizRoleCreatePayload(r))
+	if err != nil {
+		return ErrContract
+	}
+	if len(raw) > maxBody {
+		return errors.New("API request exceeds 8 MiB limit")
+	}
+	return nil
+}
 func (c *AppVizClient) CreateRole(ctx context.Context, r AppVizRole) (*AppVizRole, error) {
 	if e := ValidateAppVizRole(r); e != nil {
+		return nil, e
+	}
+	if e := ValidateAppVizPermissionClosure(r.Permissions); e != nil {
+		return nil, e
+	}
+	if e := ValidateAppVizRoleCreateSize(r); e != nil {
 		return nil, e
 	}
 	if _, e := c.Role(ctx, r.Name); !errors.Is(e, ErrNotFound) {
@@ -242,13 +277,7 @@ func (c *AppVizClient) CreateRole(ctx context.Context, r AppVizRole) (*AppVizRol
 		}
 		return nil, errors.New("AppViz role already exists; import it explicitly")
 	}
-	in := struct {
-		Name         string          `json:"name"`
-		Enabled      bool            `json:"enabled"`
-		Users        []string        `json:"users"`
-		Permissions  []string        `json:"authorizedViewsAndActions"`
-		Applications []appPermission `json:"authorizedApplications"`
-	}{r.Name, r.Enabled, append([]string{}, r.Users...), append([]string{}, r.Permissions...), appPermissions(r.Applications)}
+	in := appVizRoleCreatePayload(r)
 	raw, e := c.request(ctx, "POST", appVizRolePath+"/new", nil, in)
 	if e != nil {
 		return nil, e
@@ -289,6 +318,9 @@ func nameDelta(old, next []string) namesChange {
 }
 func (c *AppVizClient) UpdateRole(ctx context.Context, old, next AppVizRole) (*AppVizRole, error) {
 	if e := ValidateAppVizRole(next); e != nil {
+		return nil, e
+	}
+	if e := ValidateAppVizPermissionClosure(next.Permissions); e != nil {
 		return nil, e
 	}
 	if old.Name != next.Name || old.Enabled != next.Enabled || !reflect.DeepEqual(old.Applications, next.Applications) {
@@ -339,9 +371,32 @@ func (c *AppVizClient) DeleteRole(ctx context.Context, old AppVizRole) error {
 	}
 	dec := json.NewDecoder(bytes.NewReader(raw))
 	dec.DisallowUnknownFields()
-	if dec.Decode(&ack) != nil || ack.Code == nil || *ack.Code == "" || ack.Value == nil || *ack.Value != 200 || len(ack.Body) == 0 {
+	if dec.Decode(&ack) != nil || ack.Code == nil || *ack.Code == "" || ack.Value == nil || (*ack.Value != 0 && (*ack.Value < 100 || *ack.Value >= 300)) || len(ack.Body) == 0 {
 		return ErrContract
 	}
+	// The body is untyped, but explicit failure indicators cannot be ignored.
+	var body map[string]json.RawMessage
+	if json.Unmarshal(ack.Body, &body) == nil {
+		for key, value := range body {
+			text := strings.TrimSpace(string(value))
+			switch strings.ToLower(key) {
+			case "success", "status":
+				if text == "false" || strings.EqualFold(text, `"Failure"`) || strings.EqualFold(text, `"Error"`) {
+					return ErrContract
+				}
+			case "error", "errors":
+				if text != "null" && text != "{}" && text != "[]" && text != `""` {
+					return ErrContract
+				}
+			}
+		}
+	}
+	code := strings.ToUpper(*ack.Code)
+	if strings.HasPrefix(code, "3") || strings.HasPrefix(code, "4") || strings.HasPrefix(code, "5") || strings.Contains(code, "ERROR") || strings.Contains(code, "FAIL") {
+		return ErrContract
+	}
+	// The published wrapper uses statusCodeValue=0 / "100 CONTINUE". These
+	// placeholder fields are not a deletion acknowledgement; exact GET decides.
 	// The generic deletion wrapper is not an ownership acknowledgement. Require the
 	// operation-specific GET's documented 404 before discarding already-owned state.
 	_, e = c.Role(ctx, old.Name)
