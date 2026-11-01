@@ -103,20 +103,48 @@ func (r *urlCategoryResource) ValidateConfig(ctx context.Context, q resource.Val
 	if s.Diagnostics.HasError() || m.URLs.IsUnknown() || m.URLs.IsNull() {
 		return
 	}
-	// Nested unknown values are valid during planning; validate known values only.
-	for _, v := range m.URLs.Elements() {
+	validateKnownCategoryURLs(m.URLs, &s.Diagnostics)
+}
+func validateKnownCategoryURLs(value types.Map, d *diag.Diagnostics) {
+	if value.IsUnknown() || value.IsNull() {
+		return
+	}
+	known := map[string][]string{}
+	for name, v := range value.Elements() {
+		known[name] = []string{}
 		if v.IsUnknown() {
-			return
+			continue
 		}
-		set := v.(types.Set)
-		for _, ip := range set.Elements() {
+		if v.IsNull() {
+			d.AddError("Invalid URL IP set", "Every URL must have a non-null set of IP addresses.")
+			continue
+		}
+		for _, ip := range v.(types.Set).Elements() {
 			if ip.IsUnknown() {
-				return
+				continue
 			}
+			if ip.IsNull() {
+				d.AddError("Invalid URL IP set", "IP values must be non-null individual IPv4 or IPv6 addresses")
+				continue
+			}
+			known[name] = append(known[name], ip.(types.String).ValueString())
 		}
 	}
-	categoryFrom(ctx, m, &s.Diagnostics)
+	if e := client.ValidateURLs(known); e != nil {
+		d.AddError("Invalid URL map", e.Error())
+	}
 }
+func (r *urlCategoryResource) ModifyPlan(ctx context.Context, q resource.ModifyPlanRequest, s *resource.ModifyPlanResponse) {
+	if q.Plan.Raw.IsNull() {
+		return
+	}
+	var m categoryModel
+	s.Diagnostics.Append(q.Plan.Get(ctx, &m)...)
+	if !s.Diagnostics.HasError() {
+		validateKnownCategoryURLs(m.URLs, &s.Diagnostics)
+	}
+}
+
 func (r *urlCategoryResource) Create(ctx context.Context, q resource.CreateRequest, s *resource.CreateResponse) {
 	var m categoryModel
 	s.Diagnostics.Append(q.Plan.Get(ctx, &m)...)
@@ -137,7 +165,7 @@ func (r *urlCategoryResource) Create(ctx context.Context, q resource.CreateReque
 		return
 	}
 	if err = r.c.CreateCategory(ctx, m.Name.ValueString(), v); err != nil {
-		s.Diagnostics.AddError("Cannot create category", err.Error())
+		s.Diagnostics.AddError("Category create not confirmed", err.Error()+" Inspect the remote category and verify ownership before importing or retrying; no ownership was recorded.")
 		return
 	}
 	// Persist recoverable identity before read-back, even if read-back subsequently fails.
@@ -211,7 +239,7 @@ func (r *urlCategoryResource) Update(ctx context.Context, q resource.UpdateReque
 			s.Diagnostics.AddError("Cannot check rename target", err.Error())
 			return
 		}
-		if err = r.c.RenameCategory(ctx, old.ID.ValueString(), m.Name.ValueString()); err != nil {
+		if err = r.c.RenameCategory(ctx, old.ID.ValueString(), m.Name.ValueString(), previous); err != nil {
 			s.Diagnostics.AddError("Cannot rename category", err.Error())
 			return
 		}

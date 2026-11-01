@@ -1,103 +1,198 @@
-# Final contract revision verification (0.1.2)
+# Release verification
 
-Target: ASMS / Firewall Analyzer A32.60 public REST contracts plus separately
-gated experimental A33.20 Early Availability device groups. Final schema: two
-resources (`url_category`, `device_group`) and twelve data sources. All API fixtures are
-**synthetic**; no appliance acceptance or Registry installation has been claimed.
+## Published v0.2.0: direct Registry installation verified
 
-The implementation was built in an initially empty, uncommitted repository.
-Reference checkouts were read-only. Source research, tool downloads, checksums and
-command logs are in `/home/hermes/algosec-provider-work/` on the build host.
+Published [v0.2.0 in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0)
+and as a [signed GitHub release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.2.0).
+The release contains **3 resources, 12 data sources and 20 method/route operations**.
 
-## Tool provenance
+- Immutable tag `v0.2.0`: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
+  tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`.
+  [Release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830)
+  passed for that exact commit. Subsequent documentation HEAD is not the immutable
+  release source; these publication notes do not change the tag or release assets.
+- Eight platform archives were built. Nine files (archives plus manifest) were
+  checksummed, and the detached signature verified with shared fingerprint
+  `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`.
+- All 12 uploaded assets were downloaded and hash-verified. The downloaded Linux
+  amd64 archive passed package smoke testing; execution was Linux amd64 only.
+  Cross-building other platforms does not establish execution on them.
+- Registry archive hash matched the release. Direct-only init in isolated
+  HOME/config/data, without mirrors or plugin cache, passed on Terraform 1.11.0
+  and 1.16.1 and verified signature key `AB71E7968334DF52`. Validate and schema
+  loading passed on both versions: 3 resources and 12 data sources.
+- Evidence in the maintainer's work directory: `registry-0.2.0-verification.json`,
+  `release-download-0.2.0-verification.json`, `signed-release-0.2.0-report.json`
+  and `release-0.2.0-source-ci.json`. Isolation, exact Terraform version mapping
+  and execution scope are also confirmed by the maintainer's release handoff.
 
-- Go 1.26.8 linux/amd64: official go.dev download checksum verified.
-- Terraform 1.16.1 and 1.11.0 linux/amd64: official releases.hashicorp.com SHA256SUMS
-  verified before extraction.
-- GoReleaser 2.18.1: official GitHub release SHA256 checksums verified.
-- govulncheck 1.8.0 and Go module dependencies: downloaded through Go's checksum
-  database; dependencies pinned in go.mod/go.sum and tools/go.mod/tools/go.sum.
-- Final race runs use the existing Zig 0.16.0 compiler (`zig cc`), CGO_ENABLED=1.
-  No GCC packaging or system package installation was performed in this revision.
-- actionlint 1.7.12 is pinned in Makefile and executed through the Go checksum database.
-- Terraform 1.11.0 was already available; this revision independently compared its
-  binary with the official ZIP after verifying the published SHA256SUMS.
+No appliance calls or live acceptance were performed. Device groups and trusted
+rules retain separate experimental opt-ins. [Historical implementation verification](public-expansion-verification.md)
+records synthetic tests of the preceding development candidate, not live acceptance.
+Historical development evidence and older release records below remain separate.
 
-## Local checks
+## Historical v0.1.4: public Registry installation verified
 
-Verified on 2026-09-09 with Go 1.26.8. Unit and protocol tests include schema retrieval, create/update/import/refresh/delete, external
-removal and drift, read-only refusal, missing/null/unknown configuration, URL/IP
-validation, escaped identifiers, authentication, TLS verification, redirect
-refusal, bounded bodies, pagination errors, context cancellation and diagnostic
-redaction. Device response credentials are explicitly discarded.
+Published [v0.1.4](https://registry.terraform.io/providers/Scriptception/algosec/0.1.4)
+from commit `172f6e77cb0476a981b3cbb08ace3d2975ecbd3b` after
+[exact-commit CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34309853152)
+passed. Provider code and dependencies are unchanged from v0.1.3.
 
-### Executed gates
+- Full local `make generate release-check` passed; clean tagged GoReleaser v2.18.1
+  build produced eight platform archives.
+- Signed with shared Vault-held key `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`,
+  matching Registry key `11617`; detached signature independently verified.
+- All 12 GitHub assets were downloaded and SHA256-compared before publication;
+  downloaded Linux archive passed mirror-backed init, validate and schema loading.
+- Registry indexed v0.1.4. Its Linux archive hash matches the downloaded release.
+- Fresh direct-only init, with isolated HOME/data/config and no mirror or plugin
+  cache, verified signature key `AB71E7968334DF52` on Terraform 1.11.0 and 1.16.1.
+  Validate and schema loading passed: 2 resources, 12 data sources. Lockfiles include
+  the matching Registry ZIP checksum. No appliance calls or live acceptance.
+- Evidence under the maintainer's work directory: `registry-0.1.4-verification.json`,
+  `release-download-0.1.4-verification.json`, `signed-release-0.1.4-report.json`,
+  `release-0.1.4-gates.log`, direct-init logs and lockfiles.
+- v0.1.3 tag/assets remain unchanged. Historical onboarding limitations below
+  describe that earlier release, not the verified historical v0.1.4 availability or verified v0.2.0 publication.
 
-- `go test ./...`: passed; live tests skipped.
-- `TF_ACC=0 TF_ACC_TERRAFORM_PATH=.../tools/terraform go test -race -count=1 -timeout=10m ./...`
-  with `CGO_ENABLED=1` and the existing Zig compiler: passed on Terraform 1.16.1
-  (final provider package 80.077s). Includes synthetic group CLI/protocol lifecycle,
-  rename replacement, disabled gates, partial-state recovery and category tests.
-- Same uncached full suite without race on `.../tools/terraform-1.11.0`: passed
-  (final provider package 35.243s).
-- `make fmt-check vet`: passed. `go mod verify` in root and tools: both passed.
-- `make vuln`: root and tfplugindocs tool dependency scans reported no vulnerabilities.
-- `make generate` and `make docs-check`: generated docs/examples reproduce exactly.
-- Compiled `scripts/smoke.py` with Terraform 1.16.1 and 1.11.0: schema is exactly
-  2 resources / 12 data sources, validate passes, plan has exactly two creates.
-  No refresh or apply occurs.
-- `make actionlint`: passed with pinned actionlint v1.7.12, validating both workflows.
-  Release workflow already had the pinned GoReleaser v2.18.1 check/install step
-  before `make release-check`; retained that ordering.
-- `goreleaser check`: passed. `goreleaser release --snapshot --skip=sign --clean --parallelism=2`:
-  builds all eight OS/architecture ZIPs (Darwin, FreeBSD, Linux, Windows; amd64/arm64),
-  plus checksums and manifest metadata, without signing or publishing.
-  All eight archive checksums and the manifest checksum were independently verified.
-  The extracted Linux amd64 snapshot binary also passed schema/validate/plan smoke
-  on both Terraform versions.
-  Since this repository has no commits or tags, the snapshot version is honestly
-  `0.0.0-SNAPSHOT-none`, not a tagged 0.1.1 release.
-- The ownership correction changes the group create client and its callback timing test, and adds focused provider regressions. Other imported extension code, parent module files and category resource implementation were not replaced.
+## Historical 0.1.3 candidate verification
 
-Final command logs are outside the deliverable in
-`/home/hermes/algosec-provider-work/final-*.log`; checksum evidence is in
-`final-terraform-1.11-checksum.txt`. These are local results, not GitHub Actions
-execution or appliance acceptance.
+The candidate was prepared on 2026-09-09 from clean main
+`c659b5eb24f5ab5aeb662c50c7c1eb5299de509d`; its changes were subsequently reviewed,
+committed and released as recorded below. Scope was 2 resources / 12 data sources,
+17 client method/route operations including login. All API fixtures were synthetic.
+The following subsections preserve historical evidence, not current task status.
 
-## Known limits
+### Evidence and TDD
 
-The official docs contain inconsistent path capitalization, wrappers and some
-missing response examples. The precise choices and exclusions are recorded in
-[API coverage](api-coverage.md). Synthetic tests verify the implementation against
-those selected contracts, not the correctness of upstream documentation.
+The independent publication audit and captured official A32.60 create, rename and
+delete pages were read. Their URLs and selected contract choices are in
+[API coverage](api-coverage.md) and [implemented operation mapping](api-inventory.json).
+No captured HTML or raw appliance data is bundled.
 
-Live mutation tests require TF_ACC=1, ALGOSEC_ACC_MUTATION=1 and
-ALGOSEC_ACC_DISPOSABLE=1. Only category live mutation tests remain; device-group
-tests are synthetic only. Read-only live tests cannot mutate administration objects. Neither was
-run. No Vault access, live-appliance contact, external mutation, commit, tag, push,
-repository creation or publication occurred.
+- Copied the audit's `audit_category_ownership_test.go` into the maintained suite.
+  Before the fix, `go test ./internal/provider -run
+  TestAuditCategoryUnconfirmedCreateMustNotAdopt -count=1` failed all four original
+  safety cases: `{}`, `false`, message-only failure and empty categories map.
+  Each acquired state and performed a second GET, with no diagnostics.
+- Expanded the same assertions with arrays/null, malformed JSON, false status,
+  wrong name/URL membership and null URL maps. These now require diagnostics,
+  exactly one preflight GET and no newly acquired state.
+- Client regression tests cover wrong IP/URL membership, invalid IPs and positive
+  acknowledgement with reordered IP sets. Provider tests cover positively
+  acknowledged create with failed GET, ambiguous rename/delete retaining prior
+  state, and acknowledged delete requiring subsequent GET.
+- An additional rename wrong-membership regression failed before tightening rename
+  acknowledgement, then passed. Rename now requires exact prior membership under
+  the new name and absence of the old name before advancing identity.
+- Focused final GREEN command:
+  `go test ./internal/client ./internal/provider -run
+  'TestAuditCategory|TestCreateCategoryExactAcknowledgementMembership|TestMutationResponseErrors'
+  -count=1 -v` passed.
 
-Release CI and GPG signing configuration are present. Actual GitHub workflow
-execution, signing credentials, signed release publication and Registry onboarding
-remain unverified. Local snapshots skip signing and publishing.
+Raw logs remain outside the repository in the maintainer's supplied work directory:
+`category-release-red.log`, `category-rename-red.log`, and
+`category-release-green.log`. The original adversarial assertions were retained.
+The existing synthetic server already returned the selected documented categories
+maps for all three operations; comments now explain the delete response-table
+choice. No alternate write route, response retry or guessed payload was introduced.
 
-## New-group ownership correction
+### Tools and executed gates
 
-Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.
+Observed local tools: Go **1.26.8 linux/amd64**, Terraform **1.16.1** and **1.11.0**.
+Race tests used `CGO_ENABLED=1` with the supplied Zig 0.16.0 `zig cc` compiler.
+Tools were provided locally; their download provenance was not reverified during
+this preparation. Module authenticity was checked using `go mod verify` in both
+root and tools modules (both passed).
 
-The supplied regression was copied into main and failed before the fix with
-`definitively rejected create retained ownership of another actor's group`.
-Current correction evidence and exact command outputs are recorded in
-`/home/hermes/algosec-provider-work/ownership-fix-report.md`; earlier final logs above describe the preceding revision.
+| Command | Result and scope |
+|---|---|
+| `make fmt-check test vet docs-check smoke package-smoke coverage-check actionlint` | Passed on Terraform 1.16.1; final code revision. |
+| `make test smoke package-smoke TERRAFORM=terraform-1.11.0` | Passed on final code: race/protocol, compiled plan smoke and packed-ZIP init/validate/schema. |
+| `make vuln` | Passed: root reports no vulnerabilities; tfplugindocs reports no affected symbols/imported packages, with one vulnerability in a required module not called by the tool. |
+| `go mod verify` and `go -C tools mod verify` | Both passed; no module files changed. |
+| `goreleaser check` | Passed; configuration validation only. |
+| `make fmt generate` | Passed; templates/examples regenerated. Final `docs-check` confirmed exact parity. |
+| `python3 scripts/coverage_check.py` | Passed: 85 A32.60 + 119 A33.20 pages, classification totals, evidence URLs/versions, source route/method expressions, and 2/12 surface mapping. No network calls. |
+| `git diff --check` | Passed. |
 
-Post-fix gates passed on 2026-09-09: focused RED/GREEN; complete race/coverage
-unit and synthetic Terraform protocol suite on 1.16.1; uncached complete suite
-on 1.11.0; vet; fmt-check; generated docs consistency; actionlint; root/tools
-module verification; GoReleaser configuration check. Root vulnerability scan
-found none; the tools scan found no reachable vulnerabilities (one required-module
-vulnerability with no affected imported package or call path). Compiled smoke
-verified exactly 2 resources, 12 data sources and 2 planned creates on both CLIs.
-Unsigned snapshots were rebuilt with the existing snapshot command.
-All eight rebuilt ZIP checksums and the manifest checksum passed verification;
-the extracted Linux amd64 artifact contains the correction diagnostic and passed
-compiled smoke on both Terraform versions.
+`make test` runs race/coverage unit tests and actual Terraform protocol lifecycles
+against local synthetic HTTPS servers with `TF_ACC=0`. Live acceptance is skipped.
+The final 1.16.1 provider suite completed in 24.798 seconds, with provider coverage
+82.4% and client coverage 80.2%. These are software-contract tests, not proof of
+appliance compatibility.
+
+`make smoke` built the provider and verified schema, validate, and an offline plan
+with exactly two resource creates using a development override. `make package-smoke`
+packaged that actual local binary into a candidate ZIP and verified real Terraform
+init, the pinned read-only quickstart's validate, and schema loading via an isolated
+packed filesystem mirror. It performed no plan/data-source reads or appliance calls.
+The local ZIP is a smoke fixture, not a final version-stamped GoReleaser release or
+an authenticated signed artifact. The script also accepts `--archive` for parent
+verification of the exact final host ZIP.
+
+Gate logs: `release-final-gates.log`, `release-final-minimum.log`,
+`release-modules.log`, `release-tool-modules.log`, `release-goreleaser.log`.
+The vulnerability result is in `release-gates.log`. That initial combined run
+stopped at docs parity because inventory edits overlapped its snapshot; the settled
+documentation passed the subsequent final run. Initial failures are not hidden.
+These logs are local execution evidence, not GitHub Actions execution results.
+
+### Signing setup after code review
+
+For historical v0.1.3 only, the maintainer created an RSA-3072 signing key through
+the approved Vault wrapper and verified readback. This is not the current shared
+signer used by v0.1.4. Historical fingerprint:
+`71B43325624199D6C4339C17EE5515CFD4999B22`. Private key generation used an ephemeral
+tmpfs keyring; the persistent private key and passphrase remain in Vault. The
+hosted signing workflow now requires explicit `RELEASE_SIGNING_MODE=github-secrets`
+opt-in; the default release is built and signed by the Vault-backed maintainer
+process, not by copying Vault secrets into GitHub. The pending list below records
+what the earlier code-preparation run did not do; final release evidence belongs
+to the corresponding GitHub release.
+
+### Final signed release verification
+
+Published [v0.1.3](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.1.3)
+from source commit `f4c4e9e7e8af1b57e8643a4dbad9694c8d3c0aac` after
+[exact-commit CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34303349786)
+completed successfully. Post-release documentation commits do not change the tag
+or any release assets.
+
+- Re-ran local release checks and package smoke; built the clean tagged source
+  with GoReleaser v2.18.1 using `release --clean --skip=publish,sign`.
+- Verified all eight ZIPs and the protocol-6.0 Registry manifest against SHA256SUMS.
+  Signed SHA256SUMS using the Vault-held key in an ephemeral tmpfs keyring and
+  verified the detached binary signature in a separate public-only keyring.
+- Downloaded all 12 uploaded assets from the draft release and compared every byte
+  via SHA256 to the verified local assets before publishing. Public release
+  readback confirmed `isDraft=false` and all expected assets.
+- Exact Linux amd64 archive passed real mirror-backed init/validate/schema on
+  Terraform 1.11.0 and 1.16.1; the GitHub-downloaded archive passed again on 1.16.1.
+  Mirror init reports unauthenticated because Terraform does not verify Registry
+  signatures in that mode; independent GPG verification is the authentication
+  evidence. Other platforms were cross-built and archive-checked, not executed.
+- Local non-secret evidence: `signed-release-report.json`,
+  `release-download-verification.json`, `release-download-0.1.3/` under the
+  maintainer's `algosec-provider-work` directory.
+
+### Historical v0.1.3 Registry failure
+
+- Registry API returned 404/provider-not-found after GitHub publication. A fresh
+  direct-only `terraform init` with `= 0.1.3`, isolated data directory and no mirror
+  failed with provider-not-found. Those onboarding/signing blockers were resolved
+  for v0.1.4; see [current Registry verification](user-testing.md#registry-publication-verified).
+  This historical failure does not require repeating onboarding. GitHub release
+  publication alone remains insufficient proof of Registry availability.
+## Remaining live acceptance
+
+- No appliance credentials were read and no appliance was contacted. A32.60 base compatibility,
+  Panorama override prerequisites, acknowledgement shapes, delayed consistency and
+  A33.20 EA group behavior still require authorized appliance evidence.
+- Category delete's nested vendor example conflicts with its response table. The
+  selected single categories map fails closed on that malformed example; owned
+  state is retained. Preflight/acknowledgement cannot eliminate concurrent-writer
+  races without a documented conditional-create/transaction contract.
+- Read-only quickstart plan contacts the appliance and still exposes inventory to
+  plan/state despite count-only outputs. Protect state and use environment auth/TLS.
+  See [user testing and publication checklist](user-testing.md).

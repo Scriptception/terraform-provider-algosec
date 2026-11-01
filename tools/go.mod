@@ -1,6 +1,6 @@
 module github.com/Scriptception/terraform-provider-algosec/tools
 
-go 1.26.8
+go 1.26.10
 
 require github.com/hashicorp/terraform-plugin-docs v0.25.0
 
