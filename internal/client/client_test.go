@@ -192,7 +192,11 @@ func TestDefinitiveAbsence(t *testing.T) {
 	}
 }
 func TestCancellation(t *testing.T) {
-	c := fixture(t, func(w http.ResponseWriter, r *http.Request) { <-r.Context().Done() })
+	// Keep the handler blocked until the client has observed the deadline. Returning
+	// on the server context alone can race cancellation with an empty HTTP 200.
+	release := make(chan struct{})
+	c := fixture(t, func(w http.ResponseWriter, r *http.Request) { <-release })
+	defer close(release)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Millisecond)
 	defer cancel()
 	_, err := c.Categories(ctx)
