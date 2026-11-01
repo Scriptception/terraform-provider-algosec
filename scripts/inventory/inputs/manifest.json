@@ -1,0 +1,30 @@
+{
+  "inventory-candidate.json": {
+    "sha256": "633ed7d3ee97f2df4b829a379ae817c31d9b5026e49778753874c88fac505ce5",
+    "source": "algosec-expansion-evidence/inventory-reconciliation/inventory-candidate.json"
+  },
+  "audit-report.md": {
+    "sha256": "caf4ac9ce3b4128a6a54e2d0ddba94a24ed5e8139d58e30ca39d85c3176d520d",
+    "source": "algosec-expansion-evidence/inventory-reconciliation/audit-report.md"
+  },
+  "verification.json": {
+    "sha256": "428f96cd2dd1e6ed4cfb60713226e2599532122b461163a25f2e411a5f5f0756",
+    "source": "algosec-expansion-evidence/inventory-reconciliation/verification.json"
+  },
+  "url-resolution.json": {
+    "sha256": "f7920fd25e91d87d44429b8d70ac2c14167365d40020233ebd57cb80b28853b1",
+    "source": "algosec-expansion-evidence/inventory-reconciliation/url-resolution.json"
+  },
+  "saas-provenance.json": {
+    "sha256": "275474217ed8fd6ffbe0e02b500666ece852b8d9a44890a8ceb83f07fc29d523",
+    "source": "algosec-expansion-evidence/inventory-reconciliation/saas-provenance.json"
+  },
+  "native-ledger.json": {
+    "sha256": "b0e2e7e8771a698325b98df7ed23eeb5fe529d12930e6fecee72ebedc5d7e7ea",
+    "source": "terraform-provider-algosec/docs/cross-product-operations.json"
+  },
+  "second-review-nominations.json": {
+    "sha256": "a46270f465d24958573719d6ff61393dab7012300f83572093ae53b3b8989594",
+    "source": "algosec-expansion-evidence/inventory-integration/inputs/second-review-nominations.json"
+  }
+}

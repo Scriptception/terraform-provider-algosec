@@ -33,7 +33,7 @@ jobs:
           terraform_version: ${{ matrix.terraform }}
           terraform_wrapper: false
       - run: go mod verify
-      - run: make fmt-check test vet smoke actionlint
+      - run: make fmt-check test vet smoke package-smoke coverage-check actionlint
       - run: make docs-check
       - run: git diff --exit-code -- docs examples go.mod go.sum tools
   vulnerabilities:

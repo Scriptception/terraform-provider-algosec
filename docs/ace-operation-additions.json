@@ -1,0 +1,685 @@
+{
+  "integration_needed": true,
+  "note": "Portable ACE delta relative to isolated 24-operation base. Parent must merge into final inventory; 934-record historical discovery ledger is deliberately unchanged. No whole-product completion claim.",
+  "operation_delta": 18,
+  "resource_delta": 4,
+  "operations": [
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "GET",
+      "raw_route_label": "/accounts/v1/account",
+      "actual_route_template": "/api/algosaas/accounts/v1/account",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0ec92f785d625-get-all-cloud-accounts",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/0ec92f785d625",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "Accounts",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "POST",
+      "raw_route_label": "/accounts/v1/account/aws",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/700ea656af479-onboard-a-single-aws-account",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/700ea656af479",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "createAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "PATCH",
+      "raw_route_label": "/accounts/v1/account/aws/{accountId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/46ac658f69d17-update-an-aws-account-name",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/46ac658f69d17",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "RenameAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "DELETE",
+      "raw_route_label": "/accounts/v1/account/aws/{accountId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/aws/{accountId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/a52cb60d0e71a-delete-an-aws-account",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/a52cb60d0e71a",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "DeleteAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "POST",
+      "raw_route_label": "/accounts/v1/account/azure",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/433b9a550df17-onboard-a-single-azure-subscription",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/433b9a550df17",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "createAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "PATCH",
+      "raw_route_label": "/accounts/v1/account/azure/{subscriptionId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/165717337a77d-update-an-azure-subscription",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/165717337a77d",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "RenameAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "DELETE",
+      "raw_route_label": "/accounts/v1/account/azure/{subscriptionId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/azure/{subscriptionId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/5743a2429ad66-delete-an-azure-subscription",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/5743a2429ad66",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "DeleteAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "POST",
+      "raw_route_label": "/accounts/v1/account/gcp",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/fb7ea5acbb779-onboard-a-single-gcp-project",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/fb7ea5acbb779",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "createAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "PATCH",
+      "raw_route_label": "/accounts/v1/account/gcp/{projectId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/7d9f3d77dfe5c-update-a-gcp-project",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/7d9f3d77dfe5c",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "RenameAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "ACE Onboarding API",
+      "service_contract_version": "1.0.0",
+      "method": "DELETE",
+      "raw_route_label": "/accounts/v1/account/gcp/{projectId}",
+      "actual_route_template": "/api/algosaas/accounts/v1/account/gcp/{projectId}",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/api/algosaas",
+        "https://eu.app.algosec.com/api/algosaas",
+        "https://anz.app.algosec.com/api/algosaas",
+        "https://me.app.algosec.com/api/algosaas",
+        "https://uae.app.algosec.com/api/algosaas",
+        "https://ind.app.algosec.com/api/algosaas",
+        "https://sgp.app.algosec.com/api/algosaas"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/153b4761af20e-delete-a-gcp-project",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/153b4761af20e",
+      "source_file": "internal/client/ace_accounts.go",
+      "client_function": "DeleteAccount",
+      "surfaces": [
+        "resource.algosec_ace_cloud_account_registration"
+      ],
+      "tests": [
+        "TestACEAccountRegistration",
+        "TestProtocolACEAzureGCP"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Configuration API",
+      "service_contract_version": "1.0",
+      "method": "GET",
+      "raw_route_label": "/api/v1/configurations/integrations/jira",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/9qel3er0lwyna-get-jira-configuration",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/9qel3er0lwyna",
+      "source_file": "internal/client/ace_jira.go",
+      "client_function": "Jira",
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "tests": [
+        "TestACEJira",
+        "TestProtocolACEJira"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Configuration API",
+      "service_contract_version": "1.0",
+      "method": "POST",
+      "raw_route_label": "/api/v1/configurations/integrations/jira",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/owlrnpuhg6c18-create-jira-configuration",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/owlrnpuhg6c18",
+      "source_file": "internal/client/ace_jira.go",
+      "client_function": "CreateJira",
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "tests": [
+        "TestACEJira",
+        "TestProtocolACEJira"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Configuration API",
+      "service_contract_version": "1.0",
+      "method": "DELETE",
+      "raw_route_label": "/api/v1/configurations/integrations/jira",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/jira",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/cjon09rnk8332-delete-jira-configuration",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/cjon09rnk8332",
+      "source_file": "internal/client/ace_jira.go",
+      "client_function": "DeleteJira",
+      "surfaces": [
+        "resource.algosec_ace_jira_integration"
+      ],
+      "tests": [
+        "TestACEJira",
+        "TestProtocolACEJira"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Configuration API",
+      "service_contract_version": "1.0",
+      "method": "GET",
+      "raw_route_label": "/api/v1/configurations/integrations/cd-mitigation",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/e4by78wj36yqp-get-cd-mitigation-configuration",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/e4by78wj36yqp",
+      "source_file": "internal/client/ace.go",
+      "client_function": "CDEmails",
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "tests": [
+        "TestACEEmailOwnership",
+        "TestProtocolACEEmails"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Configuration API",
+      "service_contract_version": "1.0",
+      "method": "PATCH",
+      "raw_route_label": "/api/v1/configurations/integrations/cd-mitigation",
+      "actual_route_template": "/prevasio/api/v1/configurations/integrations/cd-mitigation",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/0fop00rbo1jtv-update-cd-mitigation-configuration",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/0fop00rbo1jtv",
+      "source_file": "internal/client/ace.go",
+      "client_function": "patchCDEmails",
+      "surfaces": [
+        "resource.algosec_ace_cd_notification_emails"
+      ],
+      "tests": [
+        "TestACEEmailOwnership",
+        "TestProtocolACEEmails"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Threat Management API",
+      "service_contract_version": "1.0",
+      "method": "GET",
+      "raw_route_label": "/api/v1/threat-management/details",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/gy2nwb0ekgdpq-get-detailed-list-data-for-threat-type",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/gy2nwb0ekgdpq",
+      "source_file": "internal/client/ace_threat.go",
+      "client_function": "ThreatEntry",
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "tests": [
+        "TestACEThreatOwnership",
+        "TestProtocolACEThreat"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Threat Management API",
+      "service_contract_version": "1.0",
+      "method": "POST",
+      "raw_route_label": "/api/v1/threat-management/details",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/sp0xl325r7rhb-add-a-new-item-to-a-custom-threat-list",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/sp0xl325r7rhb",
+      "source_file": "internal/client/ace_threat.go",
+      "client_function": "CreateThreatEntry",
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "tests": [
+        "TestACEThreatOwnership",
+        "TestProtocolACEThreat"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    },
+    {
+      "product": "ACE",
+      "version_scope": "rolling-saas-2026-09-09",
+      "service": "CAA Threat Management API",
+      "service_contract_version": "1.0",
+      "method": "DELETE",
+      "raw_route_label": "/api/v1/threat-management/details",
+      "actual_route_template": "/prevasio/api/v1/threat-management/details",
+      "regional_service_bases": [
+        "https://us.app.algosec.com/prevasio",
+        "https://eu.app.algosec.com/prevasio",
+        "https://anz.app.algosec.com/prevasio",
+        "https://me.app.algosec.com/prevasio",
+        "https://uae.app.algosec.com/prevasio",
+        "https://ind.app.algosec.com/prevasio",
+        "https://sgp.app.algosec.com/prevasio"
+      ],
+      "auth": "Externally supplied bearer access token; separate ACE client; no refresh/login",
+      "documentation_url": "https://api-docs.algosec.com/docs/ace/j09s7757tcg1p-delete-item-s-from-a-custom-threat-list",
+      "documentation_metadata_url": "https://api-docs.algosec.com/api/v1/projects/cHJqOjI4ODI3OQ/nodes/j09s7757tcg1p",
+      "source_file": "internal/client/ace_threat.go",
+      "client_function": "DeleteThreatEntry",
+      "surfaces": [
+        "resource.algosec_ace_threat_list_entry"
+      ],
+      "tests": [
+        "TestACEThreatOwnership",
+        "TestProtocolACEThreat"
+      ],
+      "live_verified": false,
+      "disposition": "implemented",
+      "blockers": [
+        "Separate authorized live acceptance remains outstanding; complete visibility and exclusive-writer assumptions apply."
+      ]
+    }
+  ],
+  "family_dispositions": [
+    {
+      "family": "Full cloud access configuration",
+      "disposition": "evidence_blocked",
+      "reopening_conditions": "GET omits AWS roleArn/externalId, Azure application credentials and GCP service-account credentials. Need authoritative nonsecret access read and explicit credential submission/version semantics. Registration/name-only lifecycle is implemented."
+    },
+    {
+      "family": "Whole CD protection configuration",
+      "disposition": "evidence_blocked",
+      "reopening_conditions": "Need neutral documented whole-configuration reset; email child reset is implemented."
+    },
+    {
+      "family": "CNS risk profiles",
+      "disposition": "evidence_blocked",
+      "reopening_conditions": "Need canonical typed CSV row/export equivalence, complete list shape, duplicate/overwrite contract and successful DELETE/absence."
+    },
+    {
+      "family": "Default risk-profile assignment",
+      "disposition": "evidence_blocked",
+      "reopening_conditions": "Need current-assignment read and neutral reset."
+    },
+    {
+      "family": "Risk/trigger suppression",
+      "disposition": "evidence_blocked",
+      "reopening_conditions": "Need per-assignment identity, complete status enum/read, reset and re-detection semantics."
+    },
+    {
+      "family": "Automatic onboarding and credential workflows",
+      "disposition": "workflow",
+      "reopening_conditions": "Reopen on durable object-specific current read and inverse, not job identifiers."
+    },
+    {
+      "family": "Diagnostics, scans, searches and CI downloads",
+      "disposition": "workflow_or_read_only",
+      "reopening_conditions": "Not desired configuration; reopen only with a durable public lifecycle."
+    },
+    {
+      "family": "Historical CNS Admin",
+      "disposition": "no_public_contract",
+      "reopening_conditions": "Original public export 404 and bundled internally excluded; require supported public export plus migration guidance."
+    },
+    {
+      "family": "UI-only controls",
+      "disposition": "no_public_contract",
+      "reopening_conditions": "Require published method/path/DTO/auth/read/inverse before implementation."
+    }
+  ]
+}
