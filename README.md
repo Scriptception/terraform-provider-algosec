@@ -1,22 +1,37 @@
 # Terraform Provider for AlgoSec
 
+**v0.3.0 is published:** [Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.3.0)
+and [signed release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.3.0).
+Direct signed installation passed on Terraform 1.11.0 and 1.16.1.
+See [release verification](docs/release-0.3.0-verification.md) for migration scope and limits.
+
+> Version `0.3.0` adds separately gated AppViz role,
+> A33.30 tag, A33.20 URL/IP membership, A33.30 FireFlow direct bindings and
+> rolling ACE configuration: 12 resources, 12 data sources and 53 selected
+> operations. Live compatibility remains unverified. The v0.2.0 sections below
+> retain historical baseline evidence. See the
+> [continuation ledger](docs/durable-expansion-ledger.md).
+
 An independent, unofficial Terraform Plugin Framework provider for **AlgoSec
 Firewall Analyzer / ASMS A32.60**, with explicitly experimental A33.20 device
-groups, built from public API documentation. It is not affiliated with or
+groups and trusted-rule assignments, built from public API documentation. It is not affiliated with or
 endorsed by AlgoSec.
 
-This initial implementation includes **2 resources and 12 data sources**, typed
-Go clients and schemas, import/drift handling, generated Registry docs, synthetic
-Terraform lifecycle tests, and signed-release configuration. It is **unpublished
-and has not been tested against a live appliance**. Read the
+Published `0.2.0` includes **3 resources and 12 data sources**, typed
+Go clients and schemas, **20 method/route operations**, import/drift handling, generated Registry docs, synthetic
+Terraform lifecycle tests. The [signed v0.2.0 release](https://github.com/Scriptception/terraform-provider-algosec/releases/tag/v0.2.0)
+and direct Registry installation are verified. **Live-appliance testing remains pending.** Read the
 [API coverage and contract limitations](docs/api-coverage.md) before using it.
 
-## Implemented scope
+Maintainers and fresh agent sessions: start with the [maintainer handoff](docs/maintainer-handoff.md).
+
+## Published v0.2.0 scope
 
 | Resources | Ownership and lifecycle |
 |---|---|
 | `algosec_url_category` | One Panorama URL-category override and its complete URL/IP map. Rename in place; URL/IP changes replace; destroy deletes. |
 | `algosec_device_group` | EXPERIMENTAL A33.20 EA: authoritative nonempty membership; add before remove with confirmed readback and recoverable partial state; rename replaces. |
+| `algosec_trusted_rule` | Published v0.2.0, experimental A33.20: one trust assignment; explicit import, all input changes replace, exact per-rule acknowledgements and recoverable state. Requires `experimental_trusted_rules=true`. See [contract and limits](docs/trusted-rule-contract.md). |
 
 | Data sources | Purpose |
 |---|---|
@@ -28,7 +43,7 @@ and has not been tested against a live appliance**. Read the
 | `algosec_network_objects` | Paginated device network-object search. |
 | `algosec_trusted_traffic` | Informational paginated trusted-traffic inventory; upstream may omit zero-hit entries. |
 
-User/role management, general credentialed device onboarding, trusted-traffic
+In published v0.2.0, user/role management, general credentialed device onboarding, trusted-traffic
 mutation, risk-profile mutation, rule documentation, analyses, exports, active
 changes and other one-shot operations are excluded. The coverage map gives
 endpoint-specific reasons; this is not a full ASMS administration provider.
@@ -63,7 +78,8 @@ terraform {
   required_version = ">= 1.11.0"
   required_providers {
     algosec = {
-      source = "Scriptception/algosec"
+      source  = "Scriptception/algosec"
+      version = "= 0.3.0"
     }
   }
 }
@@ -86,8 +102,9 @@ operation. Login and all administration writes are never replayed automatically.
 
 ## Local build and use
 
-This repository has not been published to the Terraform Registry. Build the
-binary and use a CLI development override:
+Install v0.3.0 with the configuration above and `terraform init`.
+For offline installation, use the [ZIP mirror instructions](docs/user-testing.md).
+For local development, build with a CLI override:
 
 ```sh
 make build
@@ -173,16 +190,43 @@ initial build.
 
 ## Releases and license
 
-`VERSION` and `CHANGELOG.md` use SemVer. The tag-triggered release workflow checks
-that the tag matches VERSION and the current tested main source, reruns gates,
-and uses a `release` environment for GPG secrets. Configure environment protection
-and approval rules before publishing. Configure
-`GPG_PRIVATE_KEY` and `PASSPHRASE` with a Registry-compatible RSA/DSA key before
-publishing. GoReleaser produces cross-platform ZIPs, a manifest, SHA256 sums and
-signed checksums. Registry onboarding and install validation remain future work.
+`VERSION` and `CHANGELOG.md` use SemVer. The maintainer's default release path
+builds the tested commit with GoReleaser, signs checksums using the key held in
+Vault, verifies the exact archives, then publishes the GitHub release. The private
+key is never stored in this repository or copied to GitHub Secrets. The public
+signing-key fingerprint for v0.1.4 onward is `BB831B4CD32200DD15EDF4E9AB71E7968334DF52`.
+
+The alternative tag-triggered GitHub signing workflow is disabled unless
+`RELEASE_SIGNING_MODE=github-secrets` is explicitly configured together with
+approved `GPG_PRIVATE_KEY`/`PASSPHRASE` environment secrets and release protection.
+Do not enable it for the Vault-only release path. Registry onboarding and v0.2.0
+installation verification are complete. Every future release still requires its
+own clean Registry installation check; GitHub publication alone is not proof of
+Registry availability.
 
 Licensed under [MPL-2.0](LICENSE). Layout, contributor workflow and release
 conventions follow the maintainer's MISP, Airlock and Mimecast providers, also
 MPL-2.0. AlgoSec documentation is linked as evidence, not bundled as upstream HTML.
 
 Group create records Terraform ownership only after a successful POST response with a validated positive acknowledgment, before inventory readback. Unconfirmed creates (HTTP or transport errors, malformed or unsuccessful acknowledgments) leave no managed state and do not adopt a visible group. If the POST outcome is ambiguous, inspect the remote group and verify ownership before importing or retrying. An acknowledged create retains recoverable identity if readback fails; successful readback still verifies exact membership. Existing-owned update/delete partial-state recovery is unchanged.
+
+## First user test: published v0.2.0
+
+Start with the [read-only quickstart](https://github.com/Scriptception/terraform-provider-algosec/tree/main/examples/quickstart),
+pinned to `= 0.2.0`, with environment-based authentication and TLS verification.
+It exposes only counts; full inventory can still enter plan/state and needs protection.
+v0.2.0 publication and direct Registry installation are verified. Run
+`terraform init`, `terraform validate`, and an authorized `terraform plan`.
+
+[v0.2.0 is published in the Terraform Registry](https://registry.terraform.io/providers/Scriptception/algosec/0.2.0).
+Direct-only installation with isolated HOME/config/data and no mirrors or plugin
+cache, Registry signature verification, validate and schema
+loading passed on Terraform 1.11.0 and 1.16.1. The shared signing key is
+`BB831B4CD32200DD15EDF4E9AB71E7968334DF52`. All 12 GitHub release assets were
+downloaded and hash-verified. Eight platform archives were built; execution was
+Linux amd64 only. No live-appliance acceptance has been performed.
+See [user testing](https://github.com/Scriptception/terraform-provider-algosec/blob/main/docs/user-testing.md)
+for CA trust, category prerequisites, disposable mutations, import/destroy and limitations.
+Immutable v0.2.0 source: commit `e017b2f0613e28b62fc5cfd16418e7609f1812f5`,
+tree `053820d4644d5c5b4fa522df54d8ca063eca44cb`. Subsequent documentation HEAD
+is not the release source. See [release-source CI](https://github.com/Scriptception/terraform-provider-algosec/actions/runs/34315231830).

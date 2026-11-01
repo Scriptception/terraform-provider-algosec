@@ -1,0 +1,269 @@
+{
+  "retrieved_at": "2026-09-09T06:06:52.281774+00:00",
+  "records": [
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/activechange_getstatus.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/activechange_getstatus.htm",
+      "status": 200,
+      "sha256": "a1f13fcb3ba0e6cfc092f86f8e5e07f5c9a89a8f7a61b7625786e9518a882db0"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/activechange_implement.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/activechange_implement.htm",
+      "status": 200,
+      "sha256": "192fe6913f5f78b4bdfbfd007ad4a216803743d6ff4bac2a0c1d4234526c72e8"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/authenticating.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/authenticating.htm",
+      "status": 200,
+      "sha256": "22c37400f5efb1a0e62b8fc1111fb434ca2b37b73ceb5cc7ab6f1549e367ce5d"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/automatching_postsearch.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/automatching_postsearch.htm",
+      "status": 200,
+      "sha256": "86d35454d2af4949e7bb5528b6a7d63561909b4dea564eefd328070f2b2f6f10"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/automatching_putmark-as-no-match.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/automatching_putmark-as-no-match.htm",
+      "status": 200,
+      "sha256": "43ab3c3d48325a75aa734d6b9ba5474d8db0247b4115d2285ba6d81da83367dc"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/automatching_putmatch_cr.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/automatching_putmatch_cr.htm",
+      "status": 200,
+      "sha256": "46e36362c0620445c47ad7e0db00fa9984666d63fbe3adea82bd46e7a4c7e6c8"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/checkifsessionisalive_request.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/checkifsessionisalive_request.htm",
+      "status": 200,
+      "sha256": "68b9721e4dc4c21259055cb09b683fcb46ba55f1db058a27c0ddd23038a0603c"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/cr-configurations-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/cr-configurations-get.htm",
+      "status": 200,
+      "sha256": "6b681aea2f3179e8dd7ed5ca3891ffaaa98a06686ddb32a4e1bf185b1583c182"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/cr-configurations-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/cr-configurations-post.htm",
+      "status": 200,
+      "sha256": "051be2d68769a0be6384a94999c8c06f02f760ead0f0587d60ebb99debcf415a"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/createatrafficchangerequest_request.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/createatrafficchangerequest_request.htm",
+      "status": 200,
+      "sha256": "889d9b944330d30bd1b6576f0d2b8a8c70d6bacaa8cbe26697ea41f07786c124"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/creating-a-multiple-device.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/creating-a-multiple-device.htm",
+      "status": 200,
+      "sha256": "91696efbc09ed3c64b4a87c6462c7473cf4dc495fbcb37ade78430b2c542b4cb"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/ff-post-modifyrule.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/ff-post-modifyrule.htm",
+      "status": 200,
+      "sha256": "f5c9d7f8fbeaf732202cfd6f53e48f4c2263f94e6ef5cee50a89eb49fef41bda"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/generic-cr_get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/generic-cr_get.htm",
+      "status": 200,
+      "sha256": "b273de3ae0beb0c35361785ee46c2c3d4ffd9412e3376eb5c8afcfa29aa47542"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/generic-cr_post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/generic-cr_post.htm",
+      "status": 200,
+      "sha256": "7c9634a0c2d166ac3cd0c000e085f82491d98f31b2b83c0c4018dca345f6bf4a"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/get_ticket.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/get_ticket.htm",
+      "status": 200,
+      "sha256": "cd3334f2c61ddca4d6745d3aa969371373a99b0432b34e696a4db36827514fc4"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/gettingpermittedrequesttemplates_request.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/gettingpermittedrequesttemplates_request.htm",
+      "status": 200,
+      "sha256": "629b88f5c6fcf8680b35bec441341ca2711cbdba0d95b20998c16382a83a3905"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/initialplan_get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/initialplan_get.htm",
+      "status": 200,
+      "sha256": "7cd19a0a31ab9187a096a059a6fb696bea11c7ecf4d1cee101e575f5e9926859"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/initialplan_postconfirm_devices.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/initialplan_postconfirm_devices.htm",
+      "status": 200,
+      "sha256": "45bcd063b4b571ad90b9a40bfcfc5e0c396a74e2ba66403d821ad810182e533f"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/initialplan_postrecalculate.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/initialplan_postrecalculate.htm",
+      "status": 200,
+      "sha256": "446b07abf6587c6c6eb1380da139e0dda3f9f881906a1bd66a698f15de009062"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/managing-the-session_1.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/managing-the-session_1.htm",
+      "status": 200,
+      "sha256": "5e9c613cb7c999840e6a2cc3c2c8bf75eecfae6451b99c7374f06812be1e7db4"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-permissions-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-permissions-get.htm",
+      "status": 200,
+      "sha256": "2c6054feaf6725c3225c74b1a2d48daafb297ff0bcc3f26706c3a99f2ac86661"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-get.htm",
+      "status": 200,
+      "sha256": "a1e32fcaac7837dadf3904a8c11c7ba4df1e948eadb87d4ffc6c3a9a50e2fa33"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-get.htm",
+      "status": 200,
+      "sha256": "2361dbb476d8b413feb39223a9d0a5789a426ca1459490881d4ce9fc2d0f8377"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-members-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-get.htm",
+      "status": 200,
+      "sha256": "27a79d02ad967f5b77765b3356897e4516b18db26f5992cd76a9e8d3f4f25d7a"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-members-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-members-post.htm",
+      "status": 200,
+      "sha256": "4a22e3bb4166e2d7874bdb9502977dbd0504047483ef07a8f8493e19cf9177c8"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-parents-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-parents-get.htm",
+      "status": 200,
+      "sha256": "e64ce703563732607bfdb626059b00be3bf8f77bbf57af712facfd1a1dc2348b"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-parents-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-parents-post.htm",
+      "status": 200,
+      "sha256": "24b07d0451580bc9e1f573dc3e616f9e1a5136a1441280773565099815477e59"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-permissions-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-get.htm",
+      "status": 200,
+      "sha256": "86dc44c9ae606d7a46a812316e583564a09bdb5739018adae50f6ab4f5427a07"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-permissions-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-permissions-post.htm",
+      "status": 200,
+      "sha256": "f0cb76cc3c6fb262fc6bda0e0a2acde5266fcdab0405ef0ec5d6d9a35c9631ae"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-id-put.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-id-put.htm",
+      "status": 200,
+      "sha256": "80e534f1dc901791be3317885209fcfd03c900b24f173207cf70a603d9c88446"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-roles-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-roles-post.htm",
+      "status": 200,
+      "sha256": "419456702a512ecb9c22fe44fb8901ad3e6ea84d9cc098b30214b2d0f358eaf4"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-users-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-users-get.htm",
+      "status": 200,
+      "sha256": "ba99eb77015d5a0ecd2d48d659426eece49a5c242280fa34131f22be3273abe0"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/mf-users-id-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/mf-users-id-get.htm",
+      "status": 200,
+      "sha256": "1530da483d478fba4e8666b4640b545f5e328bb427a8023e5a333379b89110b4"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/objectcr-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/objectcr-get.htm",
+      "status": 200,
+      "sha256": "ce2b994138727f57b9d309e7bfefbda37bf53bcebe1726a2b812b8b808b270b5"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/recertification-cr-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/recertification-cr-post.htm",
+      "status": 200,
+      "sha256": "501746a30e9e7a39c0602ffd11b44374927ab14d77e72b01cbc88a2036e38174"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/rule_removal-cr-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/rule_removal-cr-get.htm",
+      "status": 200,
+      "sha256": "fa2b625255702b4b3d295a36d7cddc82f0afce15c5a92dfefc48f4bafa930472"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/rule_removal-cr-post.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/rule_removal-cr-post.htm",
+      "status": 200,
+      "sha256": "73125236ef53f27a519aa4e676e004d0345099f436edd6cc7576c646ba1722b5"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/running-an-advanced-search.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/running-an-advanced-search.htm",
+      "status": 200,
+      "sha256": "cac1670963d57ed0bcbaf5b97f64675b583f510991e8a9841673c214fe6a762d"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/slacrdata-get.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/slacrdata-get.htm",
+      "status": 200,
+      "sha256": "11f20b8464c22ad56018c6c437af8c8a0600eb6b0446eb24f96fd238d9a6d8ef"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/updatetrafficchangerequestscustomfields_request1.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/updatetrafficchangerequestscustomfields_request1.htm",
+      "status": 200,
+      "sha256": "ea7473d201dbbf6bbd9ff09ecb5852504bfc556c982fb566a5dde36d41afaa2b"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/working-with-change-requests.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/working-with-change-requests.htm",
+      "status": 200,
+      "sha256": "3fbc71dd53485b8caaf59a5858ac8a67296ac7fdeff898a61f4f2d0bf24fe352"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/working-with-custom-fields.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/working-with-custom-fields.htm",
+      "status": 200,
+      "sha256": "7414ac88842b569dc3ebec127162b55dfae55efd76d9e2e2f7ad2c1b8a6df025"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/workorder_calculatechangereq.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/workorder_calculatechangereq.htm",
+      "status": 200,
+      "sha256": "3bf8999bde5e7d55a697184caa1ca260deca516b1e6cbad14a2e9838df2f8a50"
+    },
+    {
+      "url": "https://techdocs.algosec.com/en/asms/a33.30/asms-help/content/api-guide/workorder_getcalculationstatus.htm",
+      "resolved_url": "https://techdocs.algosec.com/en/horizon/a33.30/horizon-help/content/api-guide/workorder_getcalculationstatus.htm",
+      "status": 200,
+      "sha256": "6c9ef74ffe03e03c5931fd1ff9f6ac850c283a6ae72230d74d740af4e7697176"
+    }
+  ]
+}

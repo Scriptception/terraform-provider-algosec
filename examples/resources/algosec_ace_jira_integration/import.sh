@@ -1,0 +1,1 @@
+terraform import algosec_ace_jira_integration.alerts jira

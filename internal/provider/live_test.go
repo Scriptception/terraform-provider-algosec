@@ -2,9 +2,7 @@
 package provider
 
 import (
-	"context"
 	"fmt"
-	"github.com/Scriptception/terraform-provider-algosec/internal/client"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"os"
 	"testing"
@@ -33,23 +31,9 @@ data "algosec_devices" "live" {}`}}})
 func TestAccURLCategoryMutation(t *testing.T) {
 	liveGate(t, true)
 	name := fmt.Sprintf("tf-acc-algosec-%d", time.Now().UnixNano())
-	c, err := client.New(client.Options{URL: os.Getenv("ALGOSEC_URL"), SessionID: os.Getenv("ALGOSEC_SESSION_ID"), Username: os.Getenv("ALGOSEC_USERNAME"), Password: os.Getenv("ALGOSEC_PASSWORD")})
-	if err != nil {
-		t.Fatal(err)
-	}
-	// Cleanup covers both the original and renamed object if a test step fails.
-	t.Cleanup(func() {
-		for _, n := range []string{name, name + "-renamed"} {
-			ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-			_, e := c.Category(ctx, n)
-			if e == nil {
-				if e = c.DeleteCategory(ctx, n); e != nil {
-					t.Error("live cleanup failed:", e)
-				}
-			}
-			cancel()
-		}
-	})
+	// Terraform's test harness destroys only resources with confirmed state.
+	// Never clean up by generated name: an unconfirmed create may have collided
+	// with another actor. Ambiguous outcomes require explicit inspection/import.
 	cfg := func(n string) string {
 		return fmt.Sprintf(`provider "algosec" { read_only = false }
 resource "algosec_url_category" "live" {

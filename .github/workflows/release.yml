@@ -9,6 +9,9 @@ permissions:
 
 jobs:
   release:
+    # Default releases are signed by the maintainer's Vault-backed local process.
+    # Opt in only when separately approved GitHub signing secrets are configured.
+    if: ${{ vars.RELEASE_SIGNING_MODE == 'github-secrets' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     environment: release
@@ -37,7 +40,7 @@ jobs:
           test "${GITHUB_SHA}" = "$(git rev-parse origin/main)"
           grep -Fqx "## $(cat VERSION)" CHANGELOG.md
       - name: Validate release configuration
-        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6
+        uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
         with:
           distribution: goreleaser
           version: v2.18.1
@@ -62,7 +65,7 @@ jobs:
             *) echo "Terraform Registry provider signing requires an RSA or DSA primary key" >&2; exit 1 ;;
           esac
       - name: Publish signed release
-        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6
+        uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
         with:
           distribution: goreleaser
           version: v2.18.1
